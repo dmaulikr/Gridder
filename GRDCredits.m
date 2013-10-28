@@ -15,7 +15,7 @@
 @end
 
 @implementation GRDCredits
-@synthesize backButton;
+@synthesize backButton, scrollText;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,6 +30,7 @@
 	delegate = (GRDAppDelegate *)[[UIApplication sharedApplication] delegate];
 
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"px.png"]];
+	scrollText.backgroundColor = [UIColor clearColor];
 	[GRDWizard styleButtonAsASquare:backButton];
 }
 
@@ -41,6 +42,10 @@
 - (IBAction)backPressed:(id)sender {
 	if(delegate.soundIsActive) [delegate.soundPlayer.menuBlipSoundPlayer play];
 	[self performSegueWithIdentifier:@"returnToMenu" sender:nil];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleLightContent;
 }
 
 @end

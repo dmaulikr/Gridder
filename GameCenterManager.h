@@ -76,8 +76,6 @@
 
 + (BOOL) isGameCenterAvailable;
 
-- (void) authenticateLocalUser;
-
 - (void) reportScore: (int64_t) score forCategory: (NSString*) category;
 - (void) reloadHighScoresForCategory: (NSString*) category;
 

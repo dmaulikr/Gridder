@@ -16,7 +16,7 @@
 
 	delegate.numLives++;
 	
-	if (delegate.numLives >= 6) {
+	if (delegate.numLives >= 8) {
 		[delegate.menuVC.gameCenterManager submitAchievement:kAchievementGlutton percentComplete:100];
 	}
 	
@@ -99,8 +99,8 @@
 
 	UILabel *pointsGained = [[UILabel alloc] init];
 	
-	if (delegate.difficultyLevel == 0) pointsGained.text = [NSString stringWithFormat:@"+%d!", (500 / (delegate.millisecondsFromGridPulse + 1)) + 5 + (delegate.numRounds * 3)];
-	else if (delegate.difficultyLevel == 1) pointsGained.text = [NSString stringWithFormat:@"+%d!", (2000 / (delegate.millisecondsFromGridPulse + 1)) + 10 + (delegate.numRounds * 5)];
+	if (delegate.difficultyLevel == 0) pointsGained.text = [NSString stringWithFormat:@"+%d!", (500 / (delegate.millisecondsFromGridPulse + 1)) + 5 + (delegate.numRounds * 2)];
+	else if (delegate.difficultyLevel == 1) pointsGained.text = [NSString stringWithFormat:@"+%d!", (2000 / (delegate.millisecondsFromGridPulse + 1)) + 10 + (delegate.numRounds * 2)];
 	else if (delegate.difficultyLevel == 2) pointsGained.text = [NSString stringWithFormat:@"+%d!", (4000 / (delegate.millisecondsFromGridPulse + 1)) + 20];
 	
 	pointsGained.backgroundColor = [UIColor clearColor];

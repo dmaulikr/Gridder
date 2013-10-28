@@ -135,20 +135,6 @@
 	return (gcClass && osVersionSupported);
 }
 
-
-- (void) authenticateLocalUser
-{
-	if([GKLocalPlayer localPlayer].authenticated == NO)
-	{
-		[[GKLocalPlayer localPlayer] setAuthenticateHandler:(^(UIViewController* viewcontroller, NSError *error) {
-			[self callDelegateOnMainThread: @selector(processGameCenterAuth:) withArg: NULL error: error];
-		 })];
-	}
-}
-
-
-
-
 - (void) reloadHighScoresForCategory: (NSString*) category
 {
 	GKLeaderboard* leaderBoard= [[[GKLeaderboard alloc] init] autorelease];
@@ -212,7 +198,8 @@
 				//Achievement has already been earned so we're done.
 				achievement= NULL;
 			}
-			achievement.percentComplete= percentComplete;
+			achievement.percentComplete = percentComplete;
+			//achievement.showsCompletionBanner = YES;
 		}
 		else
 		{

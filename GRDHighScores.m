@@ -62,4 +62,9 @@
 	[self performSegueWithIdentifier:@"returnToMenu" sender:nil];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleLightContent;
+}
+
+
 @end

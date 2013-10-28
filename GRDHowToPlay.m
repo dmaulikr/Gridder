@@ -117,10 +117,16 @@
 					[delegate.soundPlayer.shatterSoundBackupPlayer play];
 				}
 			}
+			//[delegate.menuVC.gameCenterManager submitAchievement:kAchievementGlutton percentComplete:100];
+
 		default:
 			break;
 	}
 	
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleLightContent;
 }
 
 

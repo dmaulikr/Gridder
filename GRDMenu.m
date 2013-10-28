@@ -15,7 +15,7 @@
 @end
 
 @implementation GRDMenu
-@synthesize goButton, tutorialButton, creditsButton, gridderLogo, highScoresButton, soundButton, leaderboardButton, achievementsButton, gameCenterManager, currentLeaderBoard, rateButton, emailButton;
+@synthesize goButton, tutorialButton, creditsButton, gridderLogo, highScoresButton, soundButton, leaderboardButton, achievementsButton, currentLeaderBoard, rateButton, emailButton, gameCenterManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -51,7 +51,7 @@
     if ([GameCenterManager isGameCenterAvailable]) {
         self.gameCenterManager = [[GameCenterManager alloc] init];
         [self.gameCenterManager setDelegate:self];
-        [self.gameCenterManager authenticateLocalUser];
+        [self authenticateLocalUser];
     } else {
 		NSLog(@"Game Center Unavailable");
         // The current device does not support Game Center.
@@ -248,6 +248,7 @@
 }
 
 - (IBAction)showLeaderboard:(id)sender {
+	
     GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
     if (leaderboardController != NULL)
     {
@@ -296,5 +297,53 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] \
+compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+- (void)authenticateLocalUser {
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    if (SYSTEM_VERSION_LESS_THAN(@"6.0"))
+    {
+        // ios 5.x and below
+        /*[localPlayer authenticateWithCompletionHandler:^(NSError *error)
+         {
+             [self checkLocalPlayer];
+         }];*/
+    }
+    else
+    {
+        // ios 6.0 and above
+        [localPlayer setAuthenticateHandler:(^(UIViewController* viewcontroller, NSError *error) {
+            if (!error && viewcontroller)
+            {
+				[self presentViewController:viewcontroller animated:YES completion:nil];
+				
+            }
+            else
+            {
+                [self checkLocalPlayer];
+            }
+        })];
+    }
+}
+
+- (void)checkLocalPlayer
+{
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    
+    if (localPlayer.isAuthenticated)
+    {
+        /* Perform additional tasks for the authenticated player here */
+    }
+    else
+    {
+        /* Perform additional tasks for the non-authenticated player here */
+    }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleLightContent;
+}
 
 @end

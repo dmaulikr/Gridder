@@ -12,21 +12,6 @@
 @synthesize soundPlayer, millisecondsFromGridPulse, window, top5Scores, gameIsCurrentlyPaused, pulseTimer, maxMilliseconds, gameVC, menuVC, gameInProgress, numRounds, iceBreaks;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-	
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-		UIStoryboard *storyboard;
-		
-		CGSize result = [[UIScreen mainScreen] bounds].size;
-		CGFloat scale = [UIScreen mainScreen].scale;
-		result = CGSizeMake(result.width * scale, result.height * scale);
-		
-		if (result.height == 1136) {
-			storyboard = [UIStoryboard storyboardWithName:@"RetinaStoryboard2" bundle:nil];
-			UIViewController *initViewController = [storyboard instantiateInitialViewController];
-			[self.window setRootViewController:initViewController];
-		}
-	}
 	iceBreaks = 0;
 	soundPlayer = [[GRDSoundPlayer alloc] init];
 	[soundPlayer setupPlayers];

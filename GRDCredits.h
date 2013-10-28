@@ -14,6 +14,7 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UITextView *scrollText;
 
 - (IBAction)backPressed:(id)sender;
 

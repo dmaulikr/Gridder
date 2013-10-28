@@ -17,12 +17,9 @@
 
 @end
 
-@implementation GRDViewController {
-	UIColor *activeColour;
-	UIColor *inactiveColour;
-}
+@implementation GRDViewController
 
-@synthesize sqr1,sqr10,sqr11,sqr12,sqr13,sqr14,sqr15,sqr16,sqr2,sqr3,sqr4,sqr5,sqr6,sqr7,sqr8,sqr9,progressView,grd1,grd10,grd11,grd12,grd13,grd14,grd15,grd16,grd2,grd3,grd4,grd5,grd6,grd7,grd8,grd9,gridder,theSquare, transitionView, scoreLabel, livesDisplay, outline, pauseButton, pauseMenuButton, pauseTitle, gridderOutline, soundOffButton, glassSquares, onTheEdgeStreak;
+@synthesize sqr1, sqr10, sqr11, sqr12, sqr13, sqr14, sqr15, sqr16, sqr2, sqr3, sqr4, sqr5, sqr6, sqr7, sqr8, sqr9, progressView, grd1, grd10,grd11, grd12, grd13, grd14, grd15, grd16, grd2, grd3, grd4, grd5, grd6, grd7, grd8, grd9, gridder, theSquare, transitionView, scoreLabel, livesDisplay, outline, pauseButton, pauseMenuButton, pauseTitle, gridderOutline, soundOffButton, glassSquares, onTheEdgeStreak, topSquareHolder, topComponentsHolder;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -44,7 +41,10 @@
 - (void)initStyling {
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"px.png"]];
 	
-	[GRDWizard styleButtonAsASquare:pauseButton];
+	topSquareHolder.backgroundColor = [UIColor clearColor];
+	topComponentsHolder.backgroundColor = [UIColor clearColor];
+	
+	pauseButton.layer.cornerRadius = 3;
 	[GRDWizard styleButtonAsASquare:soundOffButton];
 	[GRDWizard styleButtonAsASquare:pauseMenuButton];
 	
@@ -69,7 +69,7 @@
 	pulseBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
 	pulseBar.progressTintColor = [UIColor blueColor];
 	pulseBar.center = self.view.center;
-	pulseBar.frame = CGRectMake(0, 120, 320, 10);
+	pulseBar.frame = CGRectMake(0, 150, 320, 10);
 	
 	[self.view addSubview:pulseBar];
 }
@@ -81,6 +81,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[self setUpGlassSquares];
+	[self setUpTheSquare];
 
 }
 
@@ -91,16 +92,11 @@
 	delegate.highestStreak = 0;
 	onTheEdgeStreak = 0;
 	glassLevel = 0;
-	if (delegate.difficultyLevel == 0) 	delegate.numLives = 3;
-	else if (delegate.difficultyLevel == 1) delegate.numLives = 3;
-	else if (delegate.difficultyLevel == 2) delegate.numLives = 3;
+	delegate.numLives = 3;
 	delegate.currentStreak = 0;
-	if (delegate.difficultyLevel == 0) 	self.maxMilliseconds = 800;
-	else if (delegate.difficultyLevel == 1) self.maxMilliseconds = 600;
-	else if (delegate.difficultyLevel == 2) self.maxMilliseconds = 400;
+	self.maxMilliseconds = 800;
 	self.transitionView.hidden = YES;
 	delegate.millisecondsFromGridPulse = 0;
-	[self setUpTheSquare];
 	[self setupTheGridder];
 	[self randomiseGridder];
 	
@@ -113,8 +109,50 @@
 	self.livesDisplay.text = [NSString stringWithFormat:@"%d", delegate.numLives];
 }
 
+- (IBAction)touchSquare:(id)sender {
+	if (delegate.soundIsActive) [delegate.soundPlayer.squareTouchedSoundPlayer play];
+	GRDSquare *touchedSquare = (GRDSquare *)sender;
+	
+	if(!touchedSquare.isActive) {
+		int randomPop = arc4random() % 100;
+		if(randomPop >= 0 && randomPop <= 3) {
+			[touchedSquare setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"clock-icon.png"]]];
+			delegate.millisecondsFromGridPulse--;
+			[GRDWizard gainTime:touchedSquare withGrdVC:self];
+		} else if(randomPop == 100) {
+			[touchedSquare setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"heart.png"]]];
+			[GRDWizard gainALife:self];
+		} else {
+			[touchedSquare setBackgroundColor:[UIColor whiteColor]];
+		}
+		touchedSquare.isActive = YES;
+	} else {
+		[touchedSquare setBackgroundColor:[UIColor blueColor]];
+		touchedSquare.isActive = NO;
+	}
+	if(sqr1.isActive != grd1.isActive) return;
+	if(sqr2.isActive != grd2.isActive) return;
+	if(sqr3.isActive != grd3.isActive) return;
+	if(sqr4.isActive != grd4.isActive) return;
+	if(sqr5.isActive != grd5.isActive) return;
+	if(sqr6.isActive != grd6.isActive) return;
+	if(sqr7.isActive != grd7.isActive) return;
+	if(sqr8.isActive != grd8.isActive) return;
+	if(sqr9.isActive != grd9.isActive) return;
+	if(sqr10.isActive != grd10.isActive) return;
+	if(sqr11.isActive != grd11.isActive) return;
+	if(sqr12.isActive != grd12.isActive) return;
+	if(sqr13.isActive != grd13.isActive) return;
+	if(sqr14.isActive != grd14.isActive) return;
+	if(sqr15.isActive != grd15.isActive) return;
+	if(sqr16.isActive != grd16.isActive) return;
+	
+	[self gridderPulse:YES];
+}
+
 - (void)setUpTheSquare {
 	for (int i = 0; i < [theSquare count]; i++) {
+		
 		GRDSquare *square = [theSquare objectAtIndex:i];
 		square.layer.cornerRadius = 5;
 		square.backgroundColor = [UIColor blueColor];
@@ -122,10 +160,24 @@
 		square.layer.borderWidth = 3.0;
 		square.userInteractionEnabled = YES;
 		
-		UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(squareTouched:)];
+		
+		//[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
+		[square addTarget:self action:@selector(touchSquare:) forControlEvents:UICon];
+		
+		/*UIControl *dragImageControl = [[UIControl alloc] initWithFrame:square.frame];
+		[dragImageControl addSubview:square];
+		[self.view addSubview:dragImageControl];
+		
+		[dragImageControl addTarget:self action:@selector(squareTouched:) forControlEvents:UIControlEventTouchDragInside];
+		[dragImageControl addTarget:self action:@selector(squareTouched:) forControlEvents:UIControlEventTouchUpInside];*/
+		
+		/*UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(squareTouched:)];
 		touch.numberOfTapsRequired = 1;
 		touch.numberOfTouchesRequired = 1;
-		[square addGestureRecognizer:touch];
+		[square addGestureRecognizer:touch];*/
+		
+		
+		
 		
 	}
 }
@@ -193,7 +245,7 @@
 					[square setBackgroundColor: [UIColor whiteColor]];
 				}
 			} else if (delegate.difficultyLevel == 1) {
-				if(totalActive <= 5) {
+				if(totalActive <= 4) {
 					square.isActive = YES;
 					[square setBackgroundColor: [UIColor whiteColor]];
 				}
@@ -225,6 +277,7 @@
 
 - (void)gridderPulse:(BOOL)successful {
 	delegate.numRounds++;
+	NSLog (@"NumRounds %d", delegate.numRounds);
 	delegate.inverseModeActive = NO;
 
 	self.transitionView.hidden = NO;
@@ -235,7 +288,7 @@
 	if(successful) {
 		if (delegate.numLives == 1) {
 			onTheEdgeStreak++;
-			if (onTheEdgeStreak == 8) {
+			if (onTheEdgeStreak == 10) {
 				[delegate.menuVC.gameCenterManager submitAchievement:kAchievementOnTheEdge percentComplete:100];
 			}
 		} else {
@@ -248,7 +301,10 @@
 		[GRDWizard gainPoints:self];
 		
 		delegate.currentStreak++;
-		if ((delegate.currentStreak % 15 == 0) && delegate.difficultyLevel != 0) {
+		if (delegate.numRounds > 50) {
+			NSLog(@"*****INSANITY MODE ACTIVATED");
+			delegate.difficultyLevel = 2;
+		} else if (delegate.numRounds > 10) {
 			delegate.difficultyLevel = 1;
 		}
 		
@@ -264,20 +320,20 @@
 		
 		int newScore = 0;
 		if (delegate.difficultyLevel == 0) {
-			newScore = [delegate.currentHighScore integerValue] + (50 / (delegate.millisecondsFromGridPulse + 1)+ 5 + (delegate.numRounds * 3));
+			newScore = [delegate.currentHighScore integerValue] + (50 / (delegate.millisecondsFromGridPulse + 1)+ 5 + (delegate.numRounds * 2));
 		} else if (delegate.difficultyLevel == 1) {
-			newScore = [delegate.currentHighScore integerValue] + (200 / (delegate.millisecondsFromGridPulse + 1) + 10 + (delegate.numRounds * 5));
+			newScore = [delegate.currentHighScore integerValue] + (200 / (delegate.millisecondsFromGridPulse + 1) + 10 + (delegate.numRounds * 2));
 		} else if (delegate.difficultyLevel == 2) {
 			newScore = [delegate.currentHighScore integerValue] + (400 / (delegate.millisecondsFromGridPulse + 1) + 20);
 		}
 		delegate.currentHighScore = [NSNumber numberWithInteger:newScore];
 
 		if (delegate.difficultyLevel == 0) {
-			if (self.maxMilliseconds > 300) self.maxMilliseconds -= 50;
+			if (self.maxMilliseconds > 300) self.maxMilliseconds -= 30;
 		} else if (delegate.difficultyLevel == 1) {
-			if (self.maxMilliseconds > 270) self.maxMilliseconds -= 50;
+			if (self.maxMilliseconds > 280) self.maxMilliseconds -= 30;
 		}else if (delegate.difficultyLevel == 2) {
-			if (self.maxMilliseconds > 150) self.maxMilliseconds -= 50;
+			if (self.maxMilliseconds > 250) self.maxMilliseconds -= 30;
 		}
 		
 		
@@ -419,6 +475,8 @@
 		pauseMenuButton.hidden = NO;
 		pauseTitle.hidden = NO;
 		soundOffButton.hidden = NO;
+		pauseButton.layer.borderColor = [UIColor blackColor].CGColor;
+		pauseButton.layer.borderWidth = 3.0;
 		[pauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
 		pauseButton.backgroundColor = [UIColor whiteColor];
 		[delegate.pulseTimer invalidate];
@@ -430,8 +488,11 @@
 		pauseMenuButton.hidden = YES;
 		pauseTitle.hidden = YES;
 		soundOffButton.hidden = YES;
-		[pauseButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
-		pauseButton.backgroundColor = [UIColor blueColor];
+		[pauseButton setImage:nil forState:UIControlStateNormal];
+		pauseButton.backgroundColor = [UIColor clearColor];
+		pauseButton.layer.borderColor = [UIColor clearColor].CGColor;
+		//[pauseButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
+		//pauseButton.backgroundColor = [UIColor blueColor];
 		delegate.pulseTimer  = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
 		if (delegate.soundIsActive) [delegate.soundPlayer.gameThemePlayer play];
 	}
@@ -500,6 +561,10 @@
     if(identifier != NULL) {
         [delegate.menuVC.gameCenterManager submitAchievement:identifier percentComplete:percentComplete];
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleLightContent;
 }
 
 @end

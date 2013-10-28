@@ -57,22 +57,22 @@
 			[delegate.menuVC.gameCenterManager submitAchievement:kAchievementSkillz percentComplete:100];
 			[delegate.menuVC.gameCenterManager submitAchievement:kAchievement4000Club percentComplete:100];
 			[delegate.menuVC.gameCenterManager submitAchievement:kAchievement2000Club percentComplete:100];
-		} else if (scoreForSubmission >= 4000) {
+		} else if (scoreForSubmission >= 6000) {
 			[delegate.menuVC.gameCenterManager submitAchievement:kAchievement4000Club percentComplete:100];
 				[delegate.menuVC.gameCenterManager submitAchievement:kAchievement2000Club percentComplete:100];
-		} else if (scoreForSubmission >= 2000) {
+		} else if (scoreForSubmission >= 4000) {
 			[delegate.menuVC.gameCenterManager submitAchievement:kAchievement2000Club percentComplete:100];
 		}
 	}
 	
-	if (delegate.highestStreak >= 50) {
+	if (delegate.highestStreak >= 60) {
 		[delegate.menuVC.gameCenterManager submitAchievement:kAchievementMasterStreaker percentComplete:100];
 		[delegate.menuVC.gameCenterManager submitAchievement:kAchievementHighStreaker percentComplete:100];
 		[delegate.menuVC.gameCenterManager submitAchievement:kAchievementStreaker percentComplete:100];
-	} else if (delegate.highestStreak >= 30) {
+	} else if (delegate.highestStreak >= 40) {
 		[delegate.menuVC.gameCenterManager submitAchievement:kAchievementHighStreaker percentComplete:100];
 		[delegate.menuVC.gameCenterManager submitAchievement:kAchievementStreaker percentComplete:100];
-	} else if (delegate.highestStreak >= 20) {
+	} else if (delegate.highestStreak >= 30) {
 		[delegate.menuVC.gameCenterManager submitAchievement:kAchievementStreaker percentComplete:100];
 
 	}

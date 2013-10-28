@@ -60,6 +60,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *pauseMenuButton;
 @property (strong, nonatomic) IBOutlet UIButton *soundOffButton;
 @property (strong, nonatomic) IBOutlet UIButton *pauseButton;
+@property (strong, nonatomic) IBOutlet UIView *topSquareHolder;
+@property (strong, nonatomic) IBOutlet UIView *topComponentsHolder;
 
 @property (nonatomic, strong) UIProgressView *progressView;
 
@@ -77,6 +79,7 @@
 - (IBAction)returnToMenu:(id)sender;
 - (IBAction)soundButtonTouched:(id)sender;
 - (IBAction)pauseButtonTouched:(id)sender;
+- (IBAction)touchSquare:(id)sender;
 - (void)checkForAchievements;
 
 @end

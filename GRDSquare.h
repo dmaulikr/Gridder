@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GRDSquare : UIImageView
+@interface GRDSquare : UIButton
 @property BOOL isActive;
 
 @end
