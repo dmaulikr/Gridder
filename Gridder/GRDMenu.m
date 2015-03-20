@@ -17,6 +17,10 @@
 @implementation GRDMenu
 @synthesize goButton, tutorialButton, creditsButton, gridderLogo, highScoresButton, soundButton, leaderboardButton, achievementsButton, currentLeaderBoard, rateButton, emailButton, gameCenterManager;
 
+-(BOOL)prefersStatusBarHidden{
+	return YES;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {

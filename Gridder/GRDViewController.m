@@ -38,6 +38,10 @@
 	[self initStyling];
 }
 
+-(BOOL)prefersStatusBarHidden{
+	return YES;
+}
+
 - (void)initStyling {
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"px.png"]];
 	
