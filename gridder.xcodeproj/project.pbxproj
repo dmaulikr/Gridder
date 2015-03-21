@@ -75,6 +75,7 @@
 		FA7D5AE4180539CB004011D4 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = FA7D5AE3180539CB004011D4 /* email.png */; };
 		FA7D5AE618053FB6004011D4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7D5AE518053FB5004011D4 /* MessageUI.framework */; };
 		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
+		FAF687041ABDDFED00915381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF687031ABDDFED00915381 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,6 +164,7 @@
 		FA7D5AE3180539CB004011D4 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		FA7D5AE518053FB5004011D4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
+		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +276,7 @@
 				FA1BABCD178F4F0300FEC33A /* Heart-icon.png */,
 				FA1BAC091791528500FEC33A /* clock-icon.png */,
 				FA1BAC0B1791530000FEC33A /* speaker-on.png */,
+				FAF687031ABDDFED00915381 /* Images.xcassets */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				FA1BAC411791C7CB00FEC33A /* gridder5.png in Resources */,
 				FA1BAC421791C7CB00FEC33A /* gridder6.png in Resources */,
 				FA13D1DE17FD52330009AFE9 /* menutheme.mp3 in Resources */,
+				FAF687041ABDDFED00915381 /* Images.xcassets in Resources */,
 				FA13D1E017FD6CDE0009AFE9 /* bar-chart.png in Resources */,
 				FA13D1E217FD6CE60009AFE9 /* hammer.png in Resources */,
 				FA13D1E417FD93BE0009AFE9 /* race-flag.png in Resources */,
@@ -675,6 +679,7 @@
 		FA1BABC4178D857000FEC33A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Josh Varghese (9V5366XT3X)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -695,6 +700,7 @@
 		FA1BABC5178D857000FEC33A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Josh Varghese (9V5366XT3X)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
