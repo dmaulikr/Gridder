@@ -54,8 +54,6 @@
 @property (strong, nonatomic) IBOutlet GRDSquare *grd15;
 @property (strong, nonatomic) IBOutlet GRDSquare *grd16;
 
-@property (strong, nonatomic) IBOutlet UIImageView *outline;
-@property (strong, nonatomic) IBOutlet UIImageView *gridderOutline;
 @property (strong, nonatomic) IBOutlet UILabel *pauseTitle;
 @property (strong, nonatomic) IBOutlet UIButton *pauseMenuButton;
 @property (strong, nonatomic) IBOutlet UIButton *soundOffButton;

@@ -19,16 +19,14 @@
 
 @implementation GRDViewController
 
-@synthesize sqr1, sqr10, sqr11, sqr12, sqr13, sqr14, sqr15, sqr16, sqr2, sqr3, sqr4, sqr5, sqr6, sqr7, sqr8, sqr9, progressView, grd1, grd10,grd11, grd12, grd13, grd14, grd15, grd16, grd2, grd3, grd4, grd5, grd6, grd7, grd8, grd9, gridder, theSquare, scoreLabel, livesDisplay, outline, pauseButton, pauseMenuButton, pauseTitle, gridderOutline, soundOffButton, glassSquares, onTheEdgeStreak, topSquareHolder, topComponentsHolder;
-
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	delegate = (GRDAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	delegate.gameVC = self;
-	gridder = [[NSArray alloc] initWithObjects:grd1,grd2,grd3,grd4,grd5,grd6,grd7,grd8,grd9,grd10,grd11,grd12,grd13,grd14,grd15,grd16, nil];
-	theSquare = [[NSArray alloc] initWithObjects:sqr1,sqr2,sqr3,sqr4,sqr5,sqr6,sqr7,sqr8,sqr9,sqr10,sqr11,sqr12,sqr13,sqr14,sqr15,sqr16, nil];
-	glassSquares = [[NSMutableArray alloc] initWithObjects: nil];
+	self.gridder = [[NSArray alloc] initWithObjects:self.grd1,self.grd2,self.grd3,self.grd4,self.grd5,self.grd6,self.grd7,self.grd8,self.grd9,self.grd10,self.grd11,self.grd12,self.self.grd13,self.grd14,self.grd15,self.grd16, nil];
+	self.theSquare = [[NSArray alloc] initWithObjects:self.sqr1,self.self.sqr2,self.sqr3,self.sqr4,self.sqr5,self.sqr6,self.sqr7,self.sqr8,self.sqr9,self.sqr10,self.sqr11,self.self.sqr12,self.sqr13,self.sqr14,self.sqr15,self.sqr16, nil];
+	self.glassSquares = [[NSMutableArray alloc] initWithObjects: nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(foregroundTransition)
@@ -45,35 +43,28 @@
 - (void)initStyling {
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"px.png"]];
 	
-	topSquareHolder.backgroundColor = [UIColor clearColor];
-	topComponentsHolder.backgroundColor = [UIColor clearColor];
+	self.topSquareHolder.backgroundColor = [UIColor clearColor];
+	self.topComponentsHolder.backgroundColor = [UIColor clearColor];
 	
-	pauseButton.layer.cornerRadius = 3;
-	[GRDWizard styleButtonAsASquare:soundOffButton];
-	[GRDWizard styleButtonAsASquare:pauseMenuButton];
+	self.pauseButton.layer.cornerRadius = 3;
+	[GRDWizard styleButtonAsASquare:self.soundOffButton];
+	[GRDWizard styleButtonAsASquare:self.pauseMenuButton];
 	
 	self.transitionView = [[UIView alloc] initWithFrame:self.view.frame];
 	self.transitionView.backgroundColor = [UIColor whiteColor];
 	[self.view addSubview:self.transitionView];
 	[self.view bringSubviewToFront:self.transitionView];
 	
-	pauseTitle.hidden = YES;
-	pauseMenuButton.hidden = YES;
-	soundOffButton.hidden = YES;
-	pauseMenuButton.layer.cornerRadius = 5;
-	outline.layer.cornerRadius = 6;
-	gridderOutline.layer.cornerRadius = 6;
-	outline.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"inactive.png"]];
-	gridderOutline.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"inactive.png"]];
+	self.pauseTitle.hidden = YES;
+	self.pauseMenuButton.hidden = YES;
+	self.soundOffButton.hidden = YES;
+	self.pauseMenuButton.layer.cornerRadius = 5;
 	
-	[self.view sendSubviewToBack:outline];
-	[self.view sendSubviewToBack:gridderOutline];
+	self.soundOffButton.backgroundColor = delegate.soundIsActive ? [UIColor blueColor] : [UIColor whiteColor];
 	
-	soundOffButton.backgroundColor = delegate.soundIsActive ? [UIColor blueColor] : [UIColor whiteColor];
+	self.soundOffButton.backgroundColor = delegate.soundIsActive ? [UIColor blueColor] : [UIColor whiteColor];
 	
-	soundOffButton.backgroundColor = delegate.soundIsActive ? [UIColor blueColor] : [UIColor whiteColor];
-	
-	[soundOffButton setImage:delegate.soundIsActive ? [UIImage imageNamed:@"speaker-on.png"] : [UIImage imageNamed:@"speaker-off.png"] forState:UIControlStateNormal];
+	[self.soundOffButton setImage:delegate.soundIsActive ? [UIImage imageNamed:@"speaker-on.png"] : [UIImage imageNamed:@"speaker-off.png"] forState:UIControlStateNormal];
 	
 	pulseBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
 	pulseBar.progressTintColor = [UIColor blueColor];
@@ -99,7 +90,7 @@
 	delegate.currentHighScore = [NSNumber numberWithInteger:0];
 	delegate.currentStreak = 0;
 	delegate.highestStreak = 0;
-	onTheEdgeStreak = 0;
+	self.onTheEdgeStreak = 0;
 	glassLevel = 0;
 	delegate.numLives = 3;
 	delegate.currentStreak = 0;
@@ -139,30 +130,30 @@
 		[touchedSquare setBackgroundColor:[UIColor blueColor]];
 		touchedSquare.isActive = NO;
 	}
-	if(sqr1.isActive != grd1.isActive) return;
-	if(sqr2.isActive != grd2.isActive) return;
-	if(sqr3.isActive != grd3.isActive) return;
-	if(sqr4.isActive != grd4.isActive) return;
-	if(sqr5.isActive != grd5.isActive) return;
-	if(sqr6.isActive != grd6.isActive) return;
-	if(sqr7.isActive != grd7.isActive) return;
-	if(sqr8.isActive != grd8.isActive) return;
-	if(sqr9.isActive != grd9.isActive) return;
-	if(sqr10.isActive != grd10.isActive) return;
-	if(sqr11.isActive != grd11.isActive) return;
-	if(sqr12.isActive != grd12.isActive) return;
-	if(sqr13.isActive != grd13.isActive) return;
-	if(sqr14.isActive != grd14.isActive) return;
-	if(sqr15.isActive != grd15.isActive) return;
-	if(sqr16.isActive != grd16.isActive) return;
+	if(self.sqr1.isActive != self.grd1.isActive) return;
+	if(self.sqr2.isActive != self.grd2.isActive) return;
+	if(self.sqr3.isActive != self.grd3.isActive) return;
+	if(self.sqr4.isActive != self.grd4.isActive) return;
+	if(self.sqr5.isActive != self.grd5.isActive) return;
+	if(self.sqr6.isActive != self.grd6.isActive) return;
+	if(self.sqr7.isActive != self.grd7.isActive) return;
+	if(self.sqr8.isActive != self.grd8.isActive) return;
+	if(self.sqr9.isActive != self.grd9.isActive) return;
+	if(self.sqr10.isActive != self.grd10.isActive) return;
+	if(self.sqr11.isActive != self.grd11.isActive) return;
+	if(self.sqr12.isActive != self.grd12.isActive) return;
+	if(self.sqr13.isActive != self.grd13.isActive) return;
+	if(self.sqr14.isActive != self.grd14.isActive) return;
+	if(self.sqr15.isActive != self.grd15.isActive) return;
+	if(self.sqr16.isActive != self.grd16.isActive) return;
 	
 	[self gridderPulse:YES];
 }
 
 - (void)setUpTheSquare {
-	for (int i = 0; i < [theSquare count]; i++) {
+	for (int i = 0; i < [self.theSquare count]; i++) {
 		
-		GRDSquare *square = [theSquare objectAtIndex:i];
+		GRDSquare *square = [self.theSquare objectAtIndex:i];
 		square.layer.cornerRadius = 5;
 		square.backgroundColor = [UIColor blueColor];
 		square.layer.borderColor = [UIColor blackColor].CGColor;
@@ -192,8 +183,8 @@
 }
 
 - (void)setUpGlassSquares {
-	for (int i = 0; i < [theSquare count]; i++) {
-		GRDSquare *square = [theSquare objectAtIndex:i];
+	for (int i = 0; i < [self.theSquare count]; i++) {
+		GRDSquare *square = [self.theSquare objectAtIndex:i];
 		GRDGlassSquare *glassSquare = [[GRDGlassSquare alloc] initWithFrame:CGRectMake(square.frame.origin.x, square.frame.origin.y, square.frame.size.width, square.frame.size.height + 20)];
 		glassSquare.image = [UIImage imageNamed:@"Ice1.png"];
 				
@@ -212,14 +203,14 @@
 		touch.numberOfTouchesRequired = 1;
 		[glassSquare addGestureRecognizer:touch];
 		
-		[glassSquares insertObject:glassSquare atIndex:i];
+		[self.glassSquares insertObject:glassSquare atIndex:i];
 	}
 }
 
 
 - (void)setupTheGridder {
-	for (int i = 0; i < [gridder count]; i++) {
-		GRDSquare *square = [gridder objectAtIndex:i];
+	for (int i = 0; i < [self.gridder count]; i++) {
+		GRDSquare *square = [self.gridder objectAtIndex:i];
 		square.backgroundColor = [UIColor blueColor];
 		square.layer.borderColor = [UIColor blackColor].CGColor;
 		square.layer.borderWidth = 2.0;
@@ -240,8 +231,8 @@
 - (void)randomiseGridder {
 	int totalActive = 0;
 
-	for (int i = 0; i < [gridder count]; i++) { // Randomise The Gridder
-		GRDSquare *square = [gridder objectAtIndex:i];
+	for (int i = 0; i < [self.gridder count]; i++) { // Randomise The Gridder
+		GRDSquare *square = [self.gridder objectAtIndex:i];
 		int flip = arc4random() % 2;
 		if(flip == 0) {
 			square.isActive = NO;
@@ -272,13 +263,13 @@
 	if (glassLevel > 0) {
 		if (arc4random() % 2 == 1) {
 			for (int i = 0; i < glassLevel; i++) {
-				GRDGlassSquare *glassSquare = [glassSquares objectAtIndex:arc4random() % [glassSquares count]];
+				GRDGlassSquare *glassSquare = [self.glassSquares objectAtIndex:arc4random() % [self.glassSquares count]];
 				glassSquare.hidden = NO;
 			}
 		}
 	}
-	for (int o = 0; o < [theSquare count]; o++) { // Reset The Square
-		GRDSquare *square = [theSquare objectAtIndex:o];
+	for (int o = 0; o < [self.theSquare count]; o++) { // Reset The Square
+		GRDSquare *square = [self.theSquare objectAtIndex:o];
 		square.isActive = NO;
 		[square setBackgroundColor: [UIColor blueColor]];
 	}
@@ -296,12 +287,12 @@
 	
 	if(successful) {
 		if (delegate.numLives == 1) {
-			onTheEdgeStreak++;
-			if (onTheEdgeStreak == 10) {
+			self.onTheEdgeStreak++;
+			if (self.onTheEdgeStreak == 10) {
 				[delegate.menuVC.gameCenterManager submitAchievement:kAchievementOnTheEdge percentComplete:100];
 			}
 		} else {
-			onTheEdgeStreak = 0;
+			self.onTheEdgeStreak = 0;
 		}
 		
 		delegate.soundPlayer.pulseSuccessSoundPlayer.currentTime = 0;
@@ -436,70 +427,64 @@
 		[touchedSquare setBackgroundColor:[UIColor blueColor]];
 		touchedSquare.isActive = NO;
 	}
-		if(sqr1.isActive != grd1.isActive) return;
-		if(sqr2.isActive != grd2.isActive) return;
-		if(sqr3.isActive != grd3.isActive) return;
-		if(sqr4.isActive != grd4.isActive) return;
-		if(sqr5.isActive != grd5.isActive) return;
-		if(sqr6.isActive != grd6.isActive) return;
-		if(sqr7.isActive != grd7.isActive) return;
-		if(sqr8.isActive != grd8.isActive) return;
-		if(sqr9.isActive != grd9.isActive) return;
-		if(sqr10.isActive != grd10.isActive) return;
-		if(sqr11.isActive != grd11.isActive) return;
-		if(sqr12.isActive != grd12.isActive) return;
-		if(sqr13.isActive != grd13.isActive) return;
-		if(sqr14.isActive != grd14.isActive) return;
-		if(sqr15.isActive != grd15.isActive) return;
-		if(sqr16.isActive != grd16.isActive) return;
+		if(self.sqr1.isActive != self.grd1.isActive) return;
+		if(self.sqr2.isActive != self.grd2.isActive) return;
+		if(self.sqr3.isActive != self.grd3.isActive) return;
+		if(self.sqr4.isActive != self.grd4.isActive) return;
+		if(self.sqr5.isActive != self.grd5.isActive) return;
+		if(self.sqr6.isActive != self.grd6.isActive) return;
+		if(self.sqr7.isActive != self.grd7.isActive) return;
+		if(self.sqr8.isActive != self.grd8.isActive) return;
+		if(self.sqr9.isActive != self.grd9.isActive) return;
+		if(self.sqr10.isActive != self.grd10.isActive) return;
+		if(self.sqr11.isActive != self.grd11.isActive) return;
+		if(self.sqr12.isActive != self.grd12.isActive) return;
+		if(self.sqr13.isActive != self.grd13.isActive) return;
+		if(self.sqr14.isActive != self.grd14.isActive) return;
+		if(self.sqr15.isActive != self.grd15.isActive) return;
+		if(self.sqr16.isActive != self.grd16.isActive) return;
 	
 	[self gridderPulse:YES];
 }
 
-- (void)foregroundTransition {	
-	[self.view bringSubviewToFront:outline];
-	[self.view bringSubviewToFront:gridderOutline];
-	[self.view bringSubviewToFront:pauseMenuButton];
-	[self.view bringSubviewToFront:pauseTitle];
-	[self.view bringSubviewToFront:soundOffButton];
+- (void)foregroundTransition {
+	[self.view bringSubviewToFront:self.pauseMenuButton];
+	[self.view bringSubviewToFront:self.pauseTitle];
+	[self.view bringSubviewToFront:self.soundOffButton];
 	delegate.gameIsCurrentlyPaused = YES;
-	pauseMenuButton.hidden = NO;
-	pauseTitle.hidden = NO;
-	soundOffButton.hidden = NO;
-	[pauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
-	pauseButton.backgroundColor = [UIColor whiteColor];
+	self.pauseMenuButton.hidden = NO;
+	self.pauseTitle.hidden = NO;
+	self.soundOffButton.hidden = NO;
+	[self.pauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+	self.pauseButton.backgroundColor = [UIColor whiteColor];
 	[delegate.pulseTimer invalidate];
 }
 
 - (IBAction)pauseButtonTouched:(id)sender {
 	if (delegate.soundIsActive) [delegate.soundPlayer.menuBlip2SoundPlayer play];
 	if (!delegate.gameIsCurrentlyPaused) {
-		[self.view bringSubviewToFront:outline];
-		[self.view bringSubviewToFront:gridderOutline];
-		[self.view bringSubviewToFront:pauseMenuButton];
-		[self.view bringSubviewToFront:pauseTitle];
-		[self.view bringSubviewToFront:soundOffButton];
-		[self.view bringSubviewToFront:pauseButton];
+		[self.view bringSubviewToFront:self.pauseMenuButton];
+		[self.view bringSubviewToFront:self.pauseTitle];
+		[self.view bringSubviewToFront:self.soundOffButton];
+		[self.view bringSubviewToFront:self.pauseButton];
 		delegate.gameIsCurrentlyPaused = YES;
-		pauseMenuButton.hidden = NO;
-		pauseTitle.hidden = NO;
-		soundOffButton.hidden = NO;
-		pauseButton.layer.borderColor = [UIColor blackColor].CGColor;
-		pauseButton.layer.borderWidth = 3.0;
-		[pauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
-		pauseButton.backgroundColor = [UIColor whiteColor];
+		self.pauseMenuButton.hidden = NO;
+		self.pauseTitle.hidden = NO;
+		self.soundOffButton.hidden = NO;
+		self.pauseButton.layer.borderColor = [UIColor blackColor].CGColor;
+		self.pauseButton.layer.borderWidth = 3.0;
+		[self.pauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
+		self.pauseButton.backgroundColor = [UIColor whiteColor];
 		[delegate.pulseTimer invalidate];
 		if (delegate.soundIsActive) [delegate.soundPlayer.gameThemePlayer pause];
 	} else if (delegate.gameIsCurrentlyPaused) {
-		[self.view sendSubviewToBack:outline];
-		[self.view sendSubviewToBack:gridderOutline];
 		delegate.gameIsCurrentlyPaused = NO;
-		pauseMenuButton.hidden = YES;
-		pauseTitle.hidden = YES;
-		soundOffButton.hidden = YES;
-		[pauseButton setImage:nil forState:UIControlStateNormal];
-		pauseButton.backgroundColor = [UIColor clearColor];
-		pauseButton.layer.borderColor = [UIColor clearColor].CGColor;
+		self.pauseMenuButton.hidden = YES;
+		self.pauseTitle.hidden = YES;
+		self.soundOffButton.hidden = YES;
+		[self.pauseButton setImage:nil forState:UIControlStateNormal];
+		self.pauseButton.backgroundColor = [UIColor clearColor];
+		self.pauseButton.layer.borderColor = [UIColor clearColor].CGColor;
 		//[pauseButton setImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
 		//pauseButton.backgroundColor = [UIColor blueColor];
 		delegate.pulseTimer  = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
@@ -532,12 +517,12 @@
 	[delegate.soundPlayer.menuBlipSoundPlayer play];
 	if (delegate.soundIsActive) {
 		delegate.soundIsActive = NO;
-		[soundOffButton setImage:[UIImage imageNamed:@"speaker-off.png"] forState:UIControlStateNormal];
-		soundOffButton.backgroundColor = [UIColor whiteColor];
+		[self.soundOffButton setImage:[UIImage imageNamed:@"speaker-off.png"] forState:UIControlStateNormal];
+		self.soundOffButton.backgroundColor = [UIColor whiteColor];
 	} else {
 		delegate.soundIsActive = YES;
-		[soundOffButton setImage:[UIImage imageNamed:@"speaker-on.png"] forState:UIControlStateNormal];
-		soundOffButton.backgroundColor = [UIColor blueColor];
+		[self.soundOffButton setImage:[UIImage imageNamed:@"speaker-on.png"] forState:UIControlStateNormal];
+		self.soundOffButton.backgroundColor = [UIColor blueColor];
 	}
 }
 

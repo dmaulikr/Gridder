@@ -601,10 +601,10 @@ TESTING Ed Walters</string>
                         <viewControllerLayoutGuide type="bottom" id="NYY-lZ-GQU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1080"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZtI-sD-oKa" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZtI-sD-oKa" customClass="GRDSquare">
                                 <rect key="frame" x="23" y="181" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -612,7 +612,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="width" constant="70" id="hzA-8A-X50"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mve-jy-IZ6" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mve-jy-IZ6" customClass="GRDSquare">
                                 <rect key="frame" x="91" y="181" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -620,7 +620,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="height" constant="70" id="nKP-6t-pLN"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-Lk-rud" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-Lk-rud" customClass="GRDSquare">
                                 <rect key="frame" x="227" y="181" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -628,7 +628,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="width" constant="70" id="edj-09-44s"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMW-vT-XXf" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fMW-vT-XXf" customClass="GRDSquare">
                                 <rect key="frame" x="159" y="181" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -636,7 +636,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="height" constant="70" id="aUd-zK-b6b"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gmY-IG-HEc" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gmY-IG-HEc" customClass="GRDSquare">
                                 <rect key="frame" x="23" y="249" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -644,7 +644,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="width" constant="70" id="P9P-RO-RzR"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Msh-EH-k9E" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msh-EH-k9E" customClass="GRDSquare">
                                 <rect key="frame" x="91" y="249" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -652,7 +652,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="width" constant="70" id="y5k-Fr-Xdr"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9q-nY-Ybw" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v9q-nY-Ybw" customClass="GRDSquare">
                                 <rect key="frame" x="227" y="249" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -660,7 +660,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="height" constant="70" id="WLN-bI-1kR"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2BP-mb-MfY" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2BP-mb-MfY" customClass="GRDSquare">
                                 <rect key="frame" x="159" y="249" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -668,7 +668,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="width" constant="70" id="p1k-87-Jsa"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phn-yS-whR" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phn-yS-whR" customClass="GRDSquare">
                                 <rect key="frame" x="23" y="317" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -676,7 +676,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="width" constant="70" id="vJq-qT-ZSz"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p25-O1-FP9" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p25-O1-FP9" customClass="GRDSquare">
                                 <rect key="frame" x="91" y="317" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -684,7 +684,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="height" constant="70" id="N1E-ZI-BgD"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zf7-uj-W0c" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zf7-uj-W0c" customClass="GRDSquare">
                                 <rect key="frame" x="227" y="317" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -692,7 +692,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="width" constant="70" id="Fnq-2u-k5w"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKe-yZ-ks8" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SKe-yZ-ks8" customClass="GRDSquare">
                                 <rect key="frame" x="159" y="317" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -700,7 +700,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="width" constant="70" id="eXD-yM-Dl4"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAz-dZ-bU6" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kAz-dZ-bU6" customClass="GRDSquare">
                                 <rect key="frame" x="23" y="384" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -708,7 +708,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="height" constant="70" id="mal-Lk-btn"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qpg-CA-aMv" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qpg-CA-aMv" customClass="GRDSquare">
                                 <rect key="frame" x="91" y="384" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -716,7 +716,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="height" constant="70" id="o3S-c0-fIu"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IG-AK-pIj" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8IG-AK-pIj" customClass="GRDSquare">
                                 <rect key="frame" x="227" y="384" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -724,7 +724,7 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="height" constant="70" id="jqr-7s-Elr"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQT-bO-QBl" customClass="GRDSquare">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQT-bO-QBl" customClass="GRDSquare">
                                 <rect key="frame" x="159" y="384" width="70" height="70"/>
                                 <color key="backgroundColor" red="0.1437570806" green="0.25125488200000001" blue="0.53017893149999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -733,7 +733,7 @@ TESTING Ed Walters</string>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHE-S6-cDj" userLabel="Top Components Holder">
-                                <rect key="frame" x="23" y="15" width="277" height="116"/>
+                                <rect key="frame" x="23" y="315" width="277" height="116"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naE-mx-WlC">
                                         <rect key="frame" x="14" y="9" width="42" height="21"/>
@@ -773,7 +773,7 @@ TESTING Ed Walters</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOk-xn-mmP" userLabel="Top Square Holder">
-                                <rect key="frame" x="127" y="15" width="66" height="71"/>
+                                <rect key="frame" x="127" y="315" width="66" height="71"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znW-6t-ZOE">
                                         <rect key="frame" x="1" y="2" width="66" height="66"/>
@@ -973,15 +973,7 @@ TESTING Ed Walters</string>
                                     <constraint firstItem="1Wj-iN-1JS" firstAttribute="top" secondItem="VOk-xn-mmP" secondAttribute="top" constant="50" id="yGe-4B-YCd"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aN-yu-ceZ" userLabel="Grid Background">
-                                <rect key="frame" x="0.0" y="157" width="320" height="323"/>
-                                <color key="backgroundColor" red="0.13067628658577626" green="0.31566999425897468" blue="0.61249369959677424" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="323" id="QoG-Ed-gAb"/>
-                                    <constraint firstAttribute="width" constant="320" id="xdx-eO-axz"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="- PAUSE -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRs-xO-7Ul">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="- PAUSE -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRs-xO-7Ul">
                                 <rect key="frame" x="88" y="186" width="142" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Jhe-4S-JlR"/>
@@ -991,7 +983,7 @@ TESTING Ed Walters</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYJ-yv-jg0">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYJ-yv-jg0">
                                 <rect key="frame" x="119" y="254" width="80" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1010,7 +1002,7 @@ TESTING Ed Walters</string>
                                     <action selector="returnToMenu:" destination="2" eventType="touchUpInside" id="zyC-9X-Y4F"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEn-DS-3mI" userLabel="Sound Off Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEn-DS-3mI" userLabel="Sound Off Button">
                                 <rect key="frame" x="119" y="332" width="80" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1062,11 +1054,9 @@ TESTING Ed Walters</string>
                             <constraint firstAttribute="centerY" secondItem="VOk-xn-mmP" secondAttribute="centerY" constant="189.5" id="XAC-rI-Brm"/>
                             <constraint firstItem="gmY-IG-HEc" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="229" id="b4P-mU-x3H"/>
                             <constraint firstAttribute="centerX" secondItem="jBo-Lk-rud" secondAttribute="centerX" constant="-102" id="cQH-A5-6Ce"/>
-                            <constraint firstAttribute="centerX" secondItem="9aN-yu-ceZ" secondAttribute="centerX" id="ddo-EF-mEb"/>
                             <constraint firstAttribute="centerX" secondItem="v9q-nY-Ybw" secondAttribute="centerX" constant="-102" id="e8R-Tk-QhO"/>
                             <constraint firstAttribute="centerX" secondItem="fMW-vT-XXf" secondAttribute="centerX" constant="-34" id="eaF-YZ-Lmi"/>
                             <constraint firstAttribute="centerX" secondItem="Qpg-CA-aMv" secondAttribute="centerX" constant="34" id="eoK-hl-0Tu"/>
-                            <constraint firstItem="9aN-yu-ceZ" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="137" id="gxP-Dg-Lth"/>
                             <constraint firstAttribute="centerX" secondItem="zf7-uj-W0c" secondAttribute="centerX" constant="-102" id="hjd-GS-v4G"/>
                             <constraint firstItem="Qpg-CA-aMv" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="364" id="i0C-Ow-sEq"/>
                             <constraint firstItem="Msh-EH-k9E" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="229" id="jUM-nM-GpI"/>
@@ -1079,6 +1069,12 @@ TESTING Ed Walters</string>
                             <constraint firstAttribute="centerX" secondItem="gmY-IG-HEc" secondAttribute="centerX" constant="102" id="zfO-Ya-nJo"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="1080"/>
                     <connections>
                         <outlet property="grd1" destination="SGI-4U-bBL" id="GDI-pK-Yl1"/>
                         <outlet property="grd10" destination="7iv-li-eZX" id="BqI-yg-o3I"/>
@@ -1096,9 +1092,7 @@ TESTING Ed Walters</string>
                         <outlet property="grd7" destination="VOF-dI-xkV" id="tIC-0W-Qb5"/>
                         <outlet property="grd8" destination="BD6-eq-8Mx" id="L1b-ax-n9c"/>
                         <outlet property="grd9" destination="he8-QU-lGC" id="Tvz-sC-pUT"/>
-                        <outlet property="gridderOutline" destination="znW-6t-ZOE" id="mfg-zs-gzC"/>
                         <outlet property="livesDisplay" destination="naE-mx-WlC" id="85j-aZ-Te6"/>
-                        <outlet property="outline" destination="9aN-yu-ceZ" id="ewI-vZ-BC6"/>
                         <outlet property="pauseButton" destination="Qco-lh-ra1" id="Vxr-D0-kWx"/>
                         <outlet property="pauseMenuButton" destination="SYJ-yv-jg0" id="uSs-Dr-3E7"/>
                         <outlet property="pauseTitle" destination="RRs-xO-7Ul" id="nz3-tU-QfC"/>
