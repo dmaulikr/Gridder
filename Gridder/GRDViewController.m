@@ -19,7 +19,7 @@
 
 @implementation GRDViewController
 
-@synthesize sqr1, sqr10, sqr11, sqr12, sqr13, sqr14, sqr15, sqr16, sqr2, sqr3, sqr4, sqr5, sqr6, sqr7, sqr8, sqr9, progressView, grd1, grd10,grd11, grd12, grd13, grd14, grd15, grd16, grd2, grd3, grd4, grd5, grd6, grd7, grd8, grd9, gridder, theSquare, transitionView, scoreLabel, livesDisplay, outline, pauseButton, pauseMenuButton, pauseTitle, gridderOutline, soundOffButton, glassSquares, onTheEdgeStreak, topSquareHolder, topComponentsHolder;
+@synthesize sqr1, sqr10, sqr11, sqr12, sqr13, sqr14, sqr15, sqr16, sqr2, sqr3, sqr4, sqr5, sqr6, sqr7, sqr8, sqr9, progressView, grd1, grd10,grd11, grd12, grd13, grd14, grd15, grd16, grd2, grd3, grd4, grd5, grd6, grd7, grd8, grd9, gridder, theSquare, scoreLabel, livesDisplay, outline, pauseButton, pauseMenuButton, pauseTitle, gridderOutline, soundOffButton, glassSquares, onTheEdgeStreak, topSquareHolder, topComponentsHolder;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -51,6 +51,11 @@
 	pauseButton.layer.cornerRadius = 3;
 	[GRDWizard styleButtonAsASquare:soundOffButton];
 	[GRDWizard styleButtonAsASquare:pauseMenuButton];
+	
+	self.transitionView = [[UIView alloc] initWithFrame:self.view.frame];
+	self.transitionView.backgroundColor = [UIColor whiteColor];
+	[self.view addSubview:self.transitionView];
+	[self.view bringSubviewToFront:self.transitionView];
 	
 	pauseTitle.hidden = YES;
 	pauseMenuButton.hidden = YES;

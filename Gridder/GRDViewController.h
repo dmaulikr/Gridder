@@ -68,7 +68,7 @@
 @property (nonatomic, strong) NSArray *gridder;
 @property (nonatomic, strong) NSArray *theSquare;
 @property (nonatomic, strong) NSMutableArray *glassSquares;
-@property (strong, nonatomic) IBOutlet UIImageView *transitionView;
+@property (strong, nonatomic) UIView *transitionView;
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutlet UILabel *livesDisplay;
 @property (nonatomic) NSInteger onTheEdgeStreak;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="eWS-dc-88q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="eWS-dc-88q">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--How To Play-->
@@ -104,7 +104,6 @@ You should also watch out for ice... </string>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0M-Cq-B6m" userLabel="HighScores Container">
                                 <rect key="frame" x="20" y="119" width="280" height="246"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="- HIGH SCORES -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsF-G0-sWL">
                                         <rect key="frame" x="23" y="7" width="232" height="34"/>
@@ -539,7 +538,6 @@ You should also watch out for ice... </string>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jH7-Pi-EYk">
                                 <rect key="frame" x="40" y="127" width="240" height="343"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="lt8-QB-1rv"/>
@@ -736,7 +734,6 @@ TESTING Ed Walters</string>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHE-S6-cDj" userLabel="Top Components Holder">
                                 <rect key="frame" x="23" y="15" width="277" height="116"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naE-mx-WlC">
                                         <rect key="frame" x="14" y="9" width="42" height="21"/>
@@ -777,7 +774,6 @@ TESTING Ed Walters</string>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOk-xn-mmP" userLabel="Top Square Holder">
                                 <rect key="frame" x="127" y="15" width="66" height="71"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znW-6t-ZOE">
                                         <rect key="frame" x="1" y="2" width="66" height="66"/>
@@ -977,14 +973,6 @@ TESTING Ed Walters</string>
                                     <constraint firstItem="1Wj-iN-1JS" firstAttribute="top" secondItem="VOk-xn-mmP" secondAttribute="top" constant="50" id="yGe-4B-YCd"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6T-Jk-JPf" userLabel="Transition Pulse">
-                                <rect key="frame" x="0.0" y="-327" width="320" height="890"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="YN9-HJ-x4a"/>
-                                    <constraint firstAttribute="height" constant="890" id="hYn-oe-VCG"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aN-yu-ceZ" userLabel="Grid Background">
                                 <rect key="frame" x="0.0" y="157" width="320" height="323"/>
                                 <color key="backgroundColor" red="0.13067628658577626" green="0.31566999425897468" blue="0.61249369959677424" alpha="1" colorSpace="calibratedRGB"/>
@@ -1044,7 +1032,6 @@ TESTING Ed Walters</string>
                         </subviews>
                         <color key="backgroundColor" red="0.24914944559999999" green="0.24914944559999999" blue="0.24914944559999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="AiV-Cg-cqc" firstAttribute="top" secondItem="y6T-Jk-JPf" secondAttribute="bottom" constant="-543" id="09w-Gb-Onf"/>
                             <constraint firstAttribute="trailing" secondItem="VOk-xn-mmP" secondAttribute="trailing" constant="127" id="0X0-dk-Ct5"/>
                             <constraint firstAttribute="centerX" secondItem="8IG-AK-pIj" secondAttribute="centerX" constant="-102" id="57X-Ql-AGW"/>
                             <constraint firstItem="zf7-uj-W0c" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="297" id="5iY-Gf-zHc"/>
@@ -1052,7 +1039,6 @@ TESTING Ed Walters</string>
                             <constraint firstItem="jBo-Lk-rud" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="161" id="7XB-kX-eFd"/>
                             <constraint firstAttribute="centerX" secondItem="mve-jy-IZ6" secondAttribute="centerX" constant="34" id="7dy-KO-EQC"/>
                             <constraint firstItem="SKe-yZ-ks8" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="297" id="9ab-Bv-mbc"/>
-                            <constraint firstItem="AiV-Cg-cqc" firstAttribute="top" secondItem="y6T-Jk-JPf" secondAttribute="bottom" constant="-543" id="AYa-pu-jvo"/>
                             <constraint firstAttribute="centerX" secondItem="ZtI-sD-oKa" secondAttribute="centerX" constant="102" id="Aam-q7-4CX"/>
                             <constraint firstItem="p25-O1-FP9" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="297" id="EBv-ig-yop"/>
                             <constraint firstItem="fMW-vT-XXf" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="161" id="EMj-3i-WIg"/>
@@ -1074,7 +1060,6 @@ TESTING Ed Walters</string>
                             <constraint firstItem="2BP-mb-MfY" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="229" id="SC2-qi-Cgt"/>
                             <constraint firstAttribute="centerX" secondItem="JHE-S6-cDj" secondAttribute="centerX" constant="-1.5" id="Wdv-ns-ycX"/>
                             <constraint firstAttribute="centerY" secondItem="VOk-xn-mmP" secondAttribute="centerY" constant="189.5" id="XAC-rI-Brm"/>
-                            <constraint firstAttribute="centerX" secondItem="y6T-Jk-JPf" secondAttribute="centerX" id="Zpt-Me-lCr"/>
                             <constraint firstItem="gmY-IG-HEc" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" constant="229" id="b4P-mU-x3H"/>
                             <constraint firstAttribute="centerX" secondItem="jBo-Lk-rud" secondAttribute="centerX" constant="-102" id="cQH-A5-6Ce"/>
                             <constraint firstAttribute="centerX" secondItem="9aN-yu-ceZ" secondAttribute="centerX" id="ddo-EF-mEb"/>
@@ -1137,7 +1122,6 @@ TESTING Ed Walters</string>
                         <outlet property="sqr9" destination="Phn-yS-whR" id="Bfz-Y5-a0q"/>
                         <outlet property="topComponentsHolder" destination="JHE-S6-cDj" id="oFc-AE-fAC"/>
                         <outlet property="topSquareHolder" destination="VOk-xn-mmP" id="vQu-g6-egT"/>
-                        <outlet property="transitionView" destination="y6T-Jk-JPf" id="tOw-IU-eH5"/>
                         <segue destination="S0d-ek-GIW" kind="modal" identifier="gameOver" modalTransitionStyle="flipHorizontal" id="AwH-EG-SNL"/>
                         <segue destination="eWS-dc-88q" kind="modal" identifier="returnToMenu" modalTransitionStyle="flipHorizontal" id="etr-QF-oi9"/>
                     </connections>
@@ -1181,7 +1165,6 @@ TESTING Ed Walters</string>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cui-v7-ADY" userLabel="GameOver Components">
                                 <rect key="frame" x="20" y="120" width="280" height="267"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Score:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2b-c6-mQ4">
                                         <rect key="frame" x="20" y="80" width="219" height="21"/>
@@ -1266,6 +1249,6 @@ TESTING Ed Walters</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uYY-UV-sbw"/>
+        <segue reference="etr-QF-oi9"/>
     </inferredMetricsTieBreakers>
 </document>
