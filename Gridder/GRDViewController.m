@@ -25,8 +25,10 @@
 	
 	delegate.gameVC = self;
 	self.primeSquares = [[NSMutableArray alloc] init];
+	self.lesserSquares = [[NSMutableArray alloc] init];
 	[self generateGrid:0 withYOffset:0 withCount:1];
-	self.lesserSquares = [[NSMutableArray alloc] initWithObjects:self.grd1,self.grd2,self.grd3,self.grd4,self.grd5,self.grd6,self.grd7,self.grd8,self.grd9,self.grd10,self.grd11,self.grd12,self.self.grd13,self.grd14,self.grd15,self.grd16, nil];
+	[self generateSmallGrid:0 withYOffset:0 withCount:1];
+	
 	self.glassSquares = [[NSMutableArray alloc] initWithObjects: nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -70,11 +72,24 @@
 }
 
 - (void)generateSmallGrid:(NSInteger)xOffset withYOffset:(NSInteger)yOffset withCount:(NSInteger)count {
-	UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / 13, self.view.bounds.size.width / 13)];
+	GRDSquare *square = [[[NSBundle mainBundle] loadNibNamed:@"GRDSquare"
+													   owner:self
+													 options:nil] lastObject];
 	
-	square.image = [UIImage imageNamed:@"Square3"];
+	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / 13, self.view.bounds.size.width / 13);
+	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
+	square.layer.shadowRadius = 20.0f;
+	square.layer.shadowOpacity = .9;
+	square.layer.shadowOffset = CGSizeZero;
+	square.layer.masksToBounds = NO;
+	square.tag = count;
+	square.layer.cornerRadius = 5;
+	square.backgroundColor = [UIColor blueColor];
+	square.layer.borderColor = [UIColor blackColor].CGColor;
+	square.layer.borderWidth = 3.0;
 	
-	//[smallGridHolder addSubview:square];
+	[self.topSquareHolder addSubview:square];
+	[self.lesserSquares addObject:square];
 	
 	if (count % 4 == 0) {
 		if(count >= 16) return;
@@ -146,7 +161,6 @@
 	self.maxMilliseconds = 800;
 	self.transitionView.hidden = YES;
 	delegate.millisecondsFromGridPulse = 0;
-	[self setupTheGridder];
 	[self randomiseGridder];
 	
 	delegate.pulseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
@@ -179,24 +193,10 @@
 		[touchedSquare setBackgroundColor:[UIColor blueColor]];
 		touchedSquare.isActive = NO;
 	}
-	if([GRDWizard squareForPosition:1 fromSuperview:self.gridPrime].isActive != self.grd1.isActive) return;
-	if([GRDWizard squareForPosition:2 fromSuperview:self.gridPrime].isActive != self.grd2.isActive) return;
-	if([GRDWizard squareForPosition:3 fromSuperview:self.gridPrime].isActive != self.grd3.isActive) return;
-	if([GRDWizard squareForPosition:4 fromSuperview:self.gridPrime].isActive != self.grd4.isActive) return;
-	if([GRDWizard squareForPosition:5 fromSuperview:self.gridPrime].isActive != self.grd5.isActive) return;
-	if([GRDWizard squareForPosition:6 fromSuperview:self.gridPrime].isActive != self.grd6.isActive) return;
-	if([GRDWizard squareForPosition:7 fromSuperview:self.gridPrime].isActive != self.grd7.isActive) return;
-	if([GRDWizard squareForPosition:8 fromSuperview:self.gridPrime].isActive != self.grd8.isActive) return;
-	if([GRDWizard squareForPosition:9 fromSuperview:self.gridPrime].isActive != self.grd9.isActive) return;
-	if([GRDWizard squareForPosition:10 fromSuperview:self.gridPrime].isActive != self.grd10.isActive) return;
-	if([GRDWizard squareForPosition:11 fromSuperview:self.gridPrime].isActive != self.grd11.isActive) return;
-	if([GRDWizard squareForPosition:12 fromSuperview:self.gridPrime].isActive != self.grd12.isActive) return;
-	if([GRDWizard squareForPosition:13 fromSuperview:self.gridPrime].isActive != self.grd13.isActive) return;
-	if([GRDWizard squareForPosition:14 fromSuperview:self.gridPrime].isActive != self.grd14.isActive) return;
-	if([GRDWizard squareForPosition:15 fromSuperview:self.gridPrime].isActive != self.grd15.isActive) return;
-	if([GRDWizard squareForPosition:16 fromSuperview:self.gridPrime].isActive != self.grd16.isActive) return;
 	
-	[self gridderPulse:YES];
+	if ([GRDWizard gridComparisonMatches:self.gridPrime compareWithSuperview2:self.topSquareHolder]) {
+		[self gridderPulse:YES];
+	}
 }
 
 
@@ -224,17 +224,6 @@
 		[self.glassSquares insertObject:glassSquare atIndex:i];
 	}
 }
-
-
-- (void)setupTheGridder {
-	for (int i = 0; i < [self.lesserSquares count]; i++) {
-		GRDSquare *square = [self.lesserSquares objectAtIndex:i];
-		square.backgroundColor = [UIColor blueColor];
-		square.layer.borderColor = [UIColor blackColor].CGColor;
-		square.layer.borderWidth = 2.0;
-	}
-}
-
 
 - (void)timerFireMethod:(NSTimer *)theTimer {
 	delegate.millisecondsFromGridPulse += 10;
@@ -445,24 +434,10 @@
 		[touchedSquare setBackgroundColor:[UIColor blueColor]];
 		touchedSquare.isActive = NO;
 	}
-		if([GRDWizard squareForPosition:1 fromSuperview:self.gridPrime].isActive != self.grd1.isActive) return;
-		if([GRDWizard squareForPosition:2 fromSuperview:self.gridPrime].isActive != self.grd2.isActive) return;
-		if([GRDWizard squareForPosition:3 fromSuperview:self.gridPrime].isActive != self.grd3.isActive) return;
-		if([GRDWizard squareForPosition:4 fromSuperview:self.gridPrime].isActive != self.grd4.isActive) return;
-		if([GRDWizard squareForPosition:5 fromSuperview:self.gridPrime].isActive != self.grd5.isActive) return;
-		if([GRDWizard squareForPosition:6 fromSuperview:self.gridPrime].isActive != self.grd6.isActive) return;
-		if([GRDWizard squareForPosition:7 fromSuperview:self.gridPrime].isActive != self.grd7.isActive) return;
-		if([GRDWizard squareForPosition:8 fromSuperview:self.gridPrime].isActive != self.grd8.isActive) return;
-		if([GRDWizard squareForPosition:9 fromSuperview:self.gridPrime].isActive != self.grd9.isActive) return;
-		if([GRDWizard squareForPosition:10 fromSuperview:self.gridPrime].isActive != self.grd10.isActive) return;
-		if([GRDWizard squareForPosition:11 fromSuperview:self.gridPrime].isActive != self.grd11.isActive) return;
-		if([GRDWizard squareForPosition:12 fromSuperview:self.gridPrime].isActive != self.grd12.isActive) return;
-		if([GRDWizard squareForPosition:13 fromSuperview:self.gridPrime].isActive != self.grd13.isActive) return;
-		if([GRDWizard squareForPosition:14 fromSuperview:self.gridPrime].isActive != self.grd14.isActive) return;
-		if([GRDWizard squareForPosition:15 fromSuperview:self.gridPrime].isActive != self.grd15.isActive) return;
-		if([GRDWizard squareForPosition:16 fromSuperview:self.gridPrime].isActive != self.grd16.isActive) return;
-	
-	[self gridderPulse:YES];
+
+	if ([GRDWizard gridComparisonMatches:self.gridPrime compareWithSuperview2:self.topSquareHolder]) {
+		[self gridderPulse:YES];
+	}
 }
 
 - (void)foregroundTransition {

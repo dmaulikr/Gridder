@@ -11,6 +11,16 @@
 
 @implementation GRDWizard
 
++ (BOOL)gridComparisonMatches:(UIView *)superview1 compareWithSuperview2:(UIView *)superview2 {
+	for (int x = 1; x < 16; x++) {
+		if ([GRDWizard squareForPosition:x fromSuperview:superview1].isActive != [GRDWizard squareForPosition:x fromSuperview:superview2].isActive) {
+			return NO;
+		}
+	}
+	
+	return YES;
+}
+
 + (GRDSquare *)squareForPosition:(NSInteger)pos fromSuperview:(UIView *)superView {
 	for (GRDSquare *square in [superView subviews]) {
 		if ([square isKindOfClass:[GRDSquare class]]) {

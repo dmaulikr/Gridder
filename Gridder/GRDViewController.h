@@ -19,24 +19,8 @@
 	GRDAppDelegate *delegate;
 	UIProgressView *pulseBar;
 }
-@property (strong, nonatomic) IBOutlet UIView *gridPrime;
 
-@property (strong, nonatomic) IBOutlet GRDSquare *grd1;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd2;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd3;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd4;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd5;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd6;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd7;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd8;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd9;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd10;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd11;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd12;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd13;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd14;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd15;
-@property (strong, nonatomic) IBOutlet GRDSquare *grd16;
+@property (strong, nonatomic) IBOutlet UIView *gridPrime;
 
 @property (strong, nonatomic) IBOutlet UIButton *pauseMenuButton;
 @property (strong, nonatomic) IBOutlet UIButton *soundOffButton;
