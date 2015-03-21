@@ -13,6 +13,7 @@
 @class GRDViewController;
 @interface GRDWizard : NSObject
 
++ (GRDSquare *)squareForPosition:(NSInteger)pos fromSuperview:(UIView *)superView;
 + (void)gainALife:(GRDViewController *)grdVC;
 + (void)loseALife:(GRDViewController *)grdVC;
 + (void)gainStreak:(GRDViewController *)grdVC;

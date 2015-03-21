@@ -19,23 +19,7 @@
 	GRDAppDelegate *delegate;
 	UIProgressView *pulseBar;
 }
-
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr1;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr2;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr3;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr4;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr5;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr6;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr7;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr8;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr9;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr10;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr11;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr12;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr13;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr14;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr15;
-@property (strong, nonatomic) IBOutlet GRDSquare *sqr16;
+@property (strong, nonatomic) IBOutlet UIView *gridPrime;
 
 @property (strong, nonatomic) IBOutlet GRDSquare *grd1;
 @property (strong, nonatomic) IBOutlet GRDSquare *grd2;
@@ -54,7 +38,6 @@
 @property (strong, nonatomic) IBOutlet GRDSquare *grd15;
 @property (strong, nonatomic) IBOutlet GRDSquare *grd16;
 
-@property (strong, nonatomic) IBOutlet UILabel *pauseTitle;
 @property (strong, nonatomic) IBOutlet UIButton *pauseMenuButton;
 @property (strong, nonatomic) IBOutlet UIButton *soundOffButton;
 @property (strong, nonatomic) IBOutlet UIButton *pauseButton;
@@ -63,8 +46,8 @@
 
 @property (nonatomic, strong) UIProgressView *progressView;
 
-@property (nonatomic, strong) NSArray *gridder;
-@property (nonatomic, strong) NSArray *theSquare;
+@property (nonatomic, strong) NSMutableArray *lesserSquares;
+@property (nonatomic, strong) NSMutableArray *primeSquares;
 @property (nonatomic, strong) NSMutableArray *glassSquares;
 @property (strong, nonatomic) UIView *transitionView;
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;

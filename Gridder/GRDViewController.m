@@ -24,8 +24,9 @@
 	delegate = (GRDAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	delegate.gameVC = self;
-	self.gridder = [[NSArray alloc] initWithObjects:self.grd1,self.grd2,self.grd3,self.grd4,self.grd5,self.grd6,self.grd7,self.grd8,self.grd9,self.grd10,self.grd11,self.grd12,self.self.grd13,self.grd14,self.grd15,self.grd16, nil];
-	self.theSquare = [[NSArray alloc] initWithObjects:self.sqr1,self.self.sqr2,self.sqr3,self.sqr4,self.sqr5,self.sqr6,self.sqr7,self.sqr8,self.sqr9,self.sqr10,self.sqr11,self.self.sqr12,self.sqr13,self.sqr14,self.sqr15,self.sqr16, nil];
+	self.primeSquares = [[NSMutableArray alloc] init];
+	[self generateGrid:0 withYOffset:0 withCount:1];
+	self.lesserSquares = [[NSMutableArray alloc] initWithObjects:self.grd1,self.grd2,self.grd3,self.grd4,self.grd5,self.grd6,self.grd7,self.grd8,self.grd9,self.grd10,self.grd11,self.grd12,self.self.grd13,self.grd14,self.grd15,self.grd16, nil];
 	self.glassSquares = [[NSMutableArray alloc] initWithObjects: nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -35,6 +36,56 @@
 	
 	[self initStyling];
 }
+
+- (void)generateGrid:(NSInteger)xOffset withYOffset:(NSInteger)yOffset withCount:(NSInteger)count {
+	GRDSquare *square = [[[NSBundle mainBundle] loadNibNamed:@"GRDSquare"
+													  owner:self
+													options:nil] lastObject];
+	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / 4, self.view.bounds.size.width / 4);
+	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
+	square.layer.shadowRadius = 20.0f;
+	square.layer.shadowOpacity = .9;
+	square.layer.shadowOffset = CGSizeZero;
+	square.layer.masksToBounds = NO;
+	square.tag = count;
+	square.layer.cornerRadius = 5;
+	square.backgroundColor = [UIColor blueColor];
+	square.layer.borderColor = [UIColor blackColor].CGColor;
+	square.layer.borderWidth = 3.0;
+	square.userInteractionEnabled = YES;
+	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
+	
+	[self.gridPrime addSubview:square];
+	
+	[self.primeSquares addObject:square];
+	
+	if (count % 4 == 0) {
+		if(count >= 16) return;
+		yOffset += square.bounds.size.height;
+		[self generateGrid:0 withYOffset:yOffset withCount:count + 1];
+		return;
+	}
+	
+	[self generateGrid:xOffset + self.view.bounds.size.width / 4 withYOffset:yOffset withCount:count + 1];
+}
+
+- (void)generateSmallGrid:(NSInteger)xOffset withYOffset:(NSInteger)yOffset withCount:(NSInteger)count {
+	UIImageView *square = [[UIImageView alloc] initWithFrame:CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / 13, self.view.bounds.size.width / 13)];
+	
+	square.image = [UIImage imageNamed:@"Square3"];
+	
+	//[smallGridHolder addSubview:square];
+	
+	if (count % 4 == 0) {
+		if(count >= 16) return;
+		yOffset += square.bounds.size.height;
+		[self generateSmallGrid:0 withYOffset:yOffset withCount:count + 1];
+		return;
+	}
+	
+	[self generateSmallGrid:xOffset + self.view.bounds.size.width / 13 withYOffset:yOffset withCount:count + 1];
+}
+
 
 -(BOOL)prefersStatusBarHidden{
 	return YES;
@@ -55,7 +106,6 @@
 	[self.view addSubview:self.transitionView];
 	[self.view bringSubviewToFront:self.transitionView];
 	
-	self.pauseTitle.hidden = YES;
 	self.pauseMenuButton.hidden = YES;
 	self.soundOffButton.hidden = YES;
 	self.pauseMenuButton.layer.cornerRadius = 5;
@@ -81,7 +131,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[self setUpGlassSquares];
-	[self setUpTheSquare];
 
 }
 
@@ -130,61 +179,30 @@
 		[touchedSquare setBackgroundColor:[UIColor blueColor]];
 		touchedSquare.isActive = NO;
 	}
-	if(self.sqr1.isActive != self.grd1.isActive) return;
-	if(self.sqr2.isActive != self.grd2.isActive) return;
-	if(self.sqr3.isActive != self.grd3.isActive) return;
-	if(self.sqr4.isActive != self.grd4.isActive) return;
-	if(self.sqr5.isActive != self.grd5.isActive) return;
-	if(self.sqr6.isActive != self.grd6.isActive) return;
-	if(self.sqr7.isActive != self.grd7.isActive) return;
-	if(self.sqr8.isActive != self.grd8.isActive) return;
-	if(self.sqr9.isActive != self.grd9.isActive) return;
-	if(self.sqr10.isActive != self.grd10.isActive) return;
-	if(self.sqr11.isActive != self.grd11.isActive) return;
-	if(self.sqr12.isActive != self.grd12.isActive) return;
-	if(self.sqr13.isActive != self.grd13.isActive) return;
-	if(self.sqr14.isActive != self.grd14.isActive) return;
-	if(self.sqr15.isActive != self.grd15.isActive) return;
-	if(self.sqr16.isActive != self.grd16.isActive) return;
+	if([GRDWizard squareForPosition:1 fromSuperview:self.gridPrime].isActive != self.grd1.isActive) return;
+	if([GRDWizard squareForPosition:2 fromSuperview:self.gridPrime].isActive != self.grd2.isActive) return;
+	if([GRDWizard squareForPosition:3 fromSuperview:self.gridPrime].isActive != self.grd3.isActive) return;
+	if([GRDWizard squareForPosition:4 fromSuperview:self.gridPrime].isActive != self.grd4.isActive) return;
+	if([GRDWizard squareForPosition:5 fromSuperview:self.gridPrime].isActive != self.grd5.isActive) return;
+	if([GRDWizard squareForPosition:6 fromSuperview:self.gridPrime].isActive != self.grd6.isActive) return;
+	if([GRDWizard squareForPosition:7 fromSuperview:self.gridPrime].isActive != self.grd7.isActive) return;
+	if([GRDWizard squareForPosition:8 fromSuperview:self.gridPrime].isActive != self.grd8.isActive) return;
+	if([GRDWizard squareForPosition:9 fromSuperview:self.gridPrime].isActive != self.grd9.isActive) return;
+	if([GRDWizard squareForPosition:10 fromSuperview:self.gridPrime].isActive != self.grd10.isActive) return;
+	if([GRDWizard squareForPosition:11 fromSuperview:self.gridPrime].isActive != self.grd11.isActive) return;
+	if([GRDWizard squareForPosition:12 fromSuperview:self.gridPrime].isActive != self.grd12.isActive) return;
+	if([GRDWizard squareForPosition:13 fromSuperview:self.gridPrime].isActive != self.grd13.isActive) return;
+	if([GRDWizard squareForPosition:14 fromSuperview:self.gridPrime].isActive != self.grd14.isActive) return;
+	if([GRDWizard squareForPosition:15 fromSuperview:self.gridPrime].isActive != self.grd15.isActive) return;
+	if([GRDWizard squareForPosition:16 fromSuperview:self.gridPrime].isActive != self.grd16.isActive) return;
 	
 	[self gridderPulse:YES];
 }
 
-- (void)setUpTheSquare {
-	for (int i = 0; i < [self.theSquare count]; i++) {
-		
-		GRDSquare *square = [self.theSquare objectAtIndex:i];
-		square.layer.cornerRadius = 5;
-		square.backgroundColor = [UIColor blueColor];
-		square.layer.borderColor = [UIColor blackColor].CGColor;
-		square.layer.borderWidth = 3.0;
-		square.userInteractionEnabled = YES;
-		
-		
-		[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
-		//[square addTarget:self action:@selector(touchSquare:) forControlEvents:UICon];
-		
-		/*UIControl *dragImageControl = [[UIControl alloc] initWithFrame:square.frame];
-		[dragImageControl addSubview:square];
-		[self.view addSubview:dragImageControl];
-		
-		[dragImageControl addTarget:self action:@selector(squareTouched:) forControlEvents:UIControlEventTouchDragInside];
-		[dragImageControl addTarget:self action:@selector(squareTouched:) forControlEvents:UIControlEventTouchUpInside];*/
-		
-		/*UITapGestureRecognizer *touch = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(squareTouched:)];
-		touch.numberOfTapsRequired = 1;
-		touch.numberOfTouchesRequired = 1;
-		[square addGestureRecognizer:touch];*/
-		
-		
-		
-		
-	}
-}
 
 - (void)setUpGlassSquares {
-	for (int i = 0; i < [self.theSquare count]; i++) {
-		GRDSquare *square = [self.theSquare objectAtIndex:i];
+	for (int i = 0; i < [self.primeSquares count]; i++) {
+		GRDSquare *square = [self.primeSquares objectAtIndex:i];
 		GRDGlassSquare *glassSquare = [[GRDGlassSquare alloc] initWithFrame:CGRectMake(square.frame.origin.x, square.frame.origin.y, square.frame.size.width, square.frame.size.height + 20)];
 		glassSquare.image = [UIImage imageNamed:@"Ice1.png"];
 				
@@ -209,8 +227,8 @@
 
 
 - (void)setupTheGridder {
-	for (int i = 0; i < [self.gridder count]; i++) {
-		GRDSquare *square = [self.gridder objectAtIndex:i];
+	for (int i = 0; i < [self.lesserSquares count]; i++) {
+		GRDSquare *square = [self.lesserSquares objectAtIndex:i];
 		square.backgroundColor = [UIColor blueColor];
 		square.layer.borderColor = [UIColor blackColor].CGColor;
 		square.layer.borderWidth = 2.0;
@@ -231,8 +249,8 @@
 - (void)randomiseGridder {
 	int totalActive = 0;
 
-	for (int i = 0; i < [self.gridder count]; i++) { // Randomise The Gridder
-		GRDSquare *square = [self.gridder objectAtIndex:i];
+	for (int i = 0; i < [self.lesserSquares count]; i++) { // Randomise The Gridder
+		GRDSquare *square = [self.lesserSquares objectAtIndex:i];
 		int flip = arc4random() % 2;
 		if(flip == 0) {
 			square.isActive = NO;
@@ -268,8 +286,8 @@
 			}
 		}
 	}
-	for (int o = 0; o < [self.theSquare count]; o++) { // Reset The Square
-		GRDSquare *square = [self.theSquare objectAtIndex:o];
+	for (int o = 0; o < [self.primeSquares count]; o++) { // Reset The Square
+		GRDSquare *square = [self.primeSquares objectAtIndex:o];
 		square.isActive = NO;
 		[square setBackgroundColor: [UIColor blueColor]];
 	}
@@ -427,33 +445,31 @@
 		[touchedSquare setBackgroundColor:[UIColor blueColor]];
 		touchedSquare.isActive = NO;
 	}
-		if(self.sqr1.isActive != self.grd1.isActive) return;
-		if(self.sqr2.isActive != self.grd2.isActive) return;
-		if(self.sqr3.isActive != self.grd3.isActive) return;
-		if(self.sqr4.isActive != self.grd4.isActive) return;
-		if(self.sqr5.isActive != self.grd5.isActive) return;
-		if(self.sqr6.isActive != self.grd6.isActive) return;
-		if(self.sqr7.isActive != self.grd7.isActive) return;
-		if(self.sqr8.isActive != self.grd8.isActive) return;
-		if(self.sqr9.isActive != self.grd9.isActive) return;
-		if(self.sqr10.isActive != self.grd10.isActive) return;
-		if(self.sqr11.isActive != self.grd11.isActive) return;
-		if(self.sqr12.isActive != self.grd12.isActive) return;
-		if(self.sqr13.isActive != self.grd13.isActive) return;
-		if(self.sqr14.isActive != self.grd14.isActive) return;
-		if(self.sqr15.isActive != self.grd15.isActive) return;
-		if(self.sqr16.isActive != self.grd16.isActive) return;
+		if([GRDWizard squareForPosition:1 fromSuperview:self.gridPrime].isActive != self.grd1.isActive) return;
+		if([GRDWizard squareForPosition:2 fromSuperview:self.gridPrime].isActive != self.grd2.isActive) return;
+		if([GRDWizard squareForPosition:3 fromSuperview:self.gridPrime].isActive != self.grd3.isActive) return;
+		if([GRDWizard squareForPosition:4 fromSuperview:self.gridPrime].isActive != self.grd4.isActive) return;
+		if([GRDWizard squareForPosition:5 fromSuperview:self.gridPrime].isActive != self.grd5.isActive) return;
+		if([GRDWizard squareForPosition:6 fromSuperview:self.gridPrime].isActive != self.grd6.isActive) return;
+		if([GRDWizard squareForPosition:7 fromSuperview:self.gridPrime].isActive != self.grd7.isActive) return;
+		if([GRDWizard squareForPosition:8 fromSuperview:self.gridPrime].isActive != self.grd8.isActive) return;
+		if([GRDWizard squareForPosition:9 fromSuperview:self.gridPrime].isActive != self.grd9.isActive) return;
+		if([GRDWizard squareForPosition:10 fromSuperview:self.gridPrime].isActive != self.grd10.isActive) return;
+		if([GRDWizard squareForPosition:11 fromSuperview:self.gridPrime].isActive != self.grd11.isActive) return;
+		if([GRDWizard squareForPosition:12 fromSuperview:self.gridPrime].isActive != self.grd12.isActive) return;
+		if([GRDWizard squareForPosition:13 fromSuperview:self.gridPrime].isActive != self.grd13.isActive) return;
+		if([GRDWizard squareForPosition:14 fromSuperview:self.gridPrime].isActive != self.grd14.isActive) return;
+		if([GRDWizard squareForPosition:15 fromSuperview:self.gridPrime].isActive != self.grd15.isActive) return;
+		if([GRDWizard squareForPosition:16 fromSuperview:self.gridPrime].isActive != self.grd16.isActive) return;
 	
 	[self gridderPulse:YES];
 }
 
 - (void)foregroundTransition {
 	[self.view bringSubviewToFront:self.pauseMenuButton];
-	[self.view bringSubviewToFront:self.pauseTitle];
 	[self.view bringSubviewToFront:self.soundOffButton];
 	delegate.gameIsCurrentlyPaused = YES;
 	self.pauseMenuButton.hidden = NO;
-	self.pauseTitle.hidden = NO;
 	self.soundOffButton.hidden = NO;
 	[self.pauseButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
 	self.pauseButton.backgroundColor = [UIColor whiteColor];
@@ -464,12 +480,10 @@
 	if (delegate.soundIsActive) [delegate.soundPlayer.menuBlip2SoundPlayer play];
 	if (!delegate.gameIsCurrentlyPaused) {
 		[self.view bringSubviewToFront:self.pauseMenuButton];
-		[self.view bringSubviewToFront:self.pauseTitle];
 		[self.view bringSubviewToFront:self.soundOffButton];
 		[self.view bringSubviewToFront:self.pauseButton];
 		delegate.gameIsCurrentlyPaused = YES;
 		self.pauseMenuButton.hidden = NO;
-		self.pauseTitle.hidden = NO;
 		self.soundOffButton.hidden = NO;
 		self.pauseButton.layer.borderColor = [UIColor blackColor].CGColor;
 		self.pauseButton.layer.borderWidth = 3.0;
@@ -480,7 +494,6 @@
 	} else if (delegate.gameIsCurrentlyPaused) {
 		delegate.gameIsCurrentlyPaused = NO;
 		self.pauseMenuButton.hidden = YES;
-		self.pauseTitle.hidden = YES;
 		self.soundOffButton.hidden = YES;
 		[self.pauseButton setImage:nil forState:UIControlStateNormal];
 		self.pauseButton.backgroundColor = [UIColor clearColor];

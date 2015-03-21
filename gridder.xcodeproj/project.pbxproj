@@ -74,6 +74,7 @@
 		FA7D5AE21805189E004011D4 /* graduation-cap.png in Resources */ = {isa = PBXBuildFile; fileRef = FA7D5AE11805189E004011D4 /* graduation-cap.png */; };
 		FA7D5AE4180539CB004011D4 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = FA7D5AE3180539CB004011D4 /* email.png */; };
 		FA7D5AE618053FB6004011D4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7D5AE518053FB5004011D4 /* MessageUI.framework */; };
+		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -161,6 +162,7 @@
 		FA7D5AE11805189E004011D4 /* graduation-cap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graduation-cap.png"; sourceTree = "<group>"; };
 		FA7D5AE3180539CB004011D4 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		FA7D5AE518053FB5004011D4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +316,7 @@
 				FA5D28F419A0F0F600075314 /* GRDAppDelegate.h */,
 				FA5D28F519A0F0F600075314 /* GRDAppDelegate.m */,
 				FA1BABBB178D857000FEC33A /* MainStoryboard.storyboard */,
+				FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				FA1BAC241791ADB300FEC33A /* pulse.wav in Resources */,
 				FA1BAC271791ADEB00FEC33A /* px.png in Resources */,
 				FA1BAC281791ADEB00FEC33A /* px@2X.png in Resources */,
+				FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */,
 				FA1BAC2A1791AE0100FEC33A /* gridBG.png in Resources */,
 				FA1BAC2D1791AE2A00FEC33A /* pause.png in Resources */,
 				FA1BAC2E1791AE2A00FEC33A /* play.png in Resources */,

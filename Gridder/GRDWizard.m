@@ -11,6 +11,18 @@
 
 @implementation GRDWizard
 
++ (GRDSquare *)squareForPosition:(NSInteger)pos fromSuperview:(UIView *)superView {
+	for (GRDSquare *square in [superView subviews]) {
+		if ([square isKindOfClass:[GRDSquare class]]) {
+			if (square.tag == pos) {
+				return square;
+			}
+		}
+	}
+	
+	return nil;
+}
+
 + (void)gainALife:(GRDViewController *)grdVC {
 	GRDAppDelegate *delegate = (GRDAppDelegate *)[[UIApplication sharedApplication] delegate];
 
