@@ -29,8 +29,8 @@
 	delegate.gameVC = self;
 	self.greaterGridCollection = [[NSMutableArray alloc] init];
 	self.lesserGridCollection = [[NSMutableArray alloc] init];
-	[self generateGrid:0 withYOffset:0 withCount:1];
-	[self generateSmallGrid:0 withYOffset:0 withCount:1];
+	[self generateGreaterGridWithXOffset:0 withYOffset:0 fromCount:1];
+	[self generateLesserGridWithXOffset:0 withYOffset:0 fromCount:1];
 	
 	self.glassSquares = [[NSMutableArray alloc] initWithObjects: nil];
 	
@@ -42,108 +42,9 @@
 	self.greaterGrid.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width);
 	self.lesserGrid.frame = CGRectMake(0, 0, (self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE) * 4, (self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE) * 4);
 
-	[self initStyling];
+	[self setupGUI];
 }
 
-- (void)generateGrid:(NSInteger)xOffset withYOffset:(NSInteger)yOffset withCount:(NSInteger)count {
-	GRDSquare *square = [[[NSBundle mainBundle] loadNibNamed:@"GRDSquare"
-													  owner:self
-													options:nil] lastObject];
-	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / GREATERGRID_SQUARE_SIZE, self.view.bounds.size.width / GREATERGRID_SQUARE_SIZE);
-	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
-	square.layer.shadowRadius = 20.0f;
-	square.layer.shadowOpacity = .9;
-	square.layer.shadowOffset = CGSizeZero;
-	square.layer.masksToBounds = NO;
-	square.tag = count;
-	square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor blueColor];
-	square.layer.borderColor = [UIColor blackColor].CGColor;
-	square.layer.borderWidth = 3.0;
-	square.userInteractionEnabled = YES;
-	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
-	
-	[self.greaterGrid addSubview:square];
-	
-	[self.greaterGridCollection addObject:square];
-	
-	if (count % 4 == 0) {
-		if(count >= 16) return;
-		yOffset += square.bounds.size.height;
-		[self generateGrid:0 withYOffset:yOffset withCount:count + 1];
-		return;
-	}
-	
-	[self generateGrid:xOffset + self.view.bounds.size.width / 4 withYOffset:yOffset withCount:count + 1];
-}
-
-- (void)generateSmallGrid:(NSInteger)xOffset withYOffset:(NSInteger)yOffset withCount:(NSInteger)count {
-	GRDSquare *square = [[[NSBundle mainBundle] loadNibNamed:@"GRDSquare"
-													   owner:self
-													 options:nil] lastObject];
-	
-	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE, self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE);
-	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
-	square.layer.shadowRadius = 20.0f;
-	square.layer.shadowOpacity = .9;
-	square.layer.shadowOffset = CGSizeZero;
-	square.layer.masksToBounds = NO;
-	square.tag = count;
-	square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor blueColor];
-	square.layer.borderColor = [UIColor blackColor].CGColor;
-	square.layer.borderWidth = 3.0;
-	
-	[self.lesserGrid addSubview:square];
-	[self.lesserGridCollection addObject:square];
-	
-	if (count % 4 == 0) {
-		if(count >= 16) return;
-		yOffset += square.bounds.size.height;
-		[self generateSmallGrid:0 withYOffset:yOffset withCount:count + 1];
-		return;
-	}
-	
-	[self generateSmallGrid:xOffset + self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE withYOffset:yOffset withCount:count + 1];
-}
-
-
--(BOOL)prefersStatusBarHidden{
-	return YES;
-}
-
-- (void)initStyling {
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"px.png"]];
-	
-	self.lesserGrid.backgroundColor = [UIColor clearColor];
-	self.topComponentsHolder.backgroundColor = [UIColor clearColor];
-	
-	self.pauseButton.layer.cornerRadius = 3;
-	[GRDWizard styleButtonAsASquare:self.soundOffButton];
-	[GRDWizard styleButtonAsASquare:self.pauseMenuButton];
-	
-	self.transitionView = [[UIView alloc] initWithFrame:self.view.frame];
-	self.transitionView.backgroundColor = [UIColor whiteColor];
-	[self.view addSubview:self.transitionView];
-	[self.view bringSubviewToFront:self.transitionView];
-	
-	self.pauseMenuButton.hidden = YES;
-	self.soundOffButton.hidden = YES;
-	self.pauseMenuButton.layer.cornerRadius = 5;
-	
-	self.soundOffButton.backgroundColor = delegate.soundIsActive ? [UIColor blueColor] : [UIColor whiteColor];
-	
-	self.soundOffButton.backgroundColor = delegate.soundIsActive ? [UIColor blueColor] : [UIColor whiteColor];
-	
-	[self.soundOffButton setImage:delegate.soundIsActive ? [UIImage imageNamed:@"speaker-on.png"] : [UIImage imageNamed:@"speaker-off.png"] forState:UIControlStateNormal];
-	
-	pulseBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-	pulseBar.progressTintColor = [UIColor blueColor];
-	pulseBar.center = self.view.center;
-	pulseBar.frame = CGRectMake(0, 150, 320, 10);
-	
-	[self.view addSubview:pulseBar];
-}
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -551,8 +452,108 @@
     }
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-	return UIStatusBarStyleLightContent;
+#pragma mark -
+#pragma mark UI Functions
+#pragma mark -
+
+- (void)generateGreaterGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
+	GRDSquare *square = [[[NSBundle mainBundle] loadNibNamed:@"GRDSquare"
+													   owner:self
+													 options:nil] lastObject];
+	
+	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / GREATERGRID_SQUARE_SIZE, self.view.bounds.size.width / GREATERGRID_SQUARE_SIZE);
+	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
+	square.layer.shadowRadius = 20.0f;
+	square.layer.shadowOpacity = .9;
+	square.layer.shadowOffset = CGSizeZero;
+	square.layer.masksToBounds = NO;
+	square.tag = count;
+	square.layer.cornerRadius = 5;
+	square.backgroundColor = [UIColor blueColor];
+	square.layer.borderColor = [UIColor blackColor].CGColor;
+	square.layer.borderWidth = 3.0;
+	square.userInteractionEnabled = YES;
+	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
+	
+	[self.greaterGrid addSubview:square];
+	[self.greaterGridCollection addObject:square];
+	
+	if (count % 4 == 0) {
+		if(count >= 16) return;
+		yOffset += square.bounds.size.height;
+		[self generateGreaterGridWithXOffset:0 withYOffset:yOffset fromCount:count + 1];
+		return;
+	}
+	
+	[self generateGreaterGridWithXOffset:xOffset + self.view.bounds.size.width / 4 withYOffset:yOffset fromCount:count + 1];
 }
+
+- (void)generateLesserGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
+	GRDSquare *square = [[[NSBundle mainBundle] loadNibNamed:@"GRDSquare"
+													   owner:self
+													 options:nil] lastObject];
+	
+	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE, self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE);
+	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
+	square.layer.shadowRadius = 20.0f;
+	square.layer.shadowOpacity = .9;
+	square.layer.shadowOffset = CGSizeZero;
+	square.layer.masksToBounds = NO;
+	square.tag = count;
+	square.layer.cornerRadius = 5;
+	square.backgroundColor = [UIColor blueColor];
+	square.layer.borderColor = [UIColor blackColor].CGColor;
+	square.layer.borderWidth = 3.0;
+	
+	[self.lesserGrid addSubview:square];
+	[self.lesserGridCollection addObject:square];
+	
+	if (count % 4 == 0) {
+		if(count >= 16) return;
+		yOffset += square.bounds.size.height;
+		[self generateLesserGridWithXOffset:0 withYOffset:yOffset fromCount:count + 1];
+		return;
+	}
+	
+	[self generateLesserGridWithXOffset:xOffset + self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE withYOffset:yOffset fromCount:count + 1];
+}
+
+- (void)setupGUI {
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"px.png"]];
+	
+	self.lesserGrid.backgroundColor = [UIColor clearColor];
+	self.topComponentsHolder.backgroundColor = [UIColor clearColor];
+	
+	self.pauseButton.layer.cornerRadius = 3;
+	[GRDWizard styleButtonAsASquare:self.soundOffButton];
+	[GRDWizard styleButtonAsASquare:self.pauseMenuButton];
+	
+	self.transitionView = [[UIView alloc] initWithFrame:self.view.frame];
+	self.transitionView.backgroundColor = [UIColor whiteColor];
+	[self.view addSubview:self.transitionView];
+	[self.view bringSubviewToFront:self.transitionView];
+	
+	self.pauseMenuButton.hidden = YES;
+	self.soundOffButton.hidden = YES;
+	self.pauseMenuButton.layer.cornerRadius = 5;
+	
+	self.soundOffButton.backgroundColor = delegate.soundIsActive ? [UIColor blueColor] : [UIColor whiteColor];
+	
+	self.soundOffButton.backgroundColor = delegate.soundIsActive ? [UIColor blueColor] : [UIColor whiteColor];
+	
+	[self.soundOffButton setImage:delegate.soundIsActive ? [UIImage imageNamed:@"speaker-on.png"] : [UIImage imageNamed:@"speaker-off.png"] forState:UIControlStateNormal];
+	
+	pulseBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+	pulseBar.progressTintColor = [UIColor blueColor];
+	pulseBar.center = self.view.center;
+	pulseBar.frame = CGRectMake(0, 150, 320, 10);
+	
+	[self.view addSubview:pulseBar];
+}
+
+- (BOOL)prefersStatusBarHidden{
+	return YES;
+}
+
 
 @end
