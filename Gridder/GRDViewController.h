@@ -20,18 +20,19 @@
 	UIProgressView *pulseBar;
 }
 
-@property (strong, nonatomic) IBOutlet UIView *gridPrime;
+@property (strong, nonatomic) IBOutlet UIView *greaterGrid;
+@property (strong, nonatomic) IBOutlet UIView *lesserGrid;
+@property (nonatomic, strong) NSMutableArray *lesserGridCollection;
+@property (nonatomic, strong) NSMutableArray *greaterGridCollection;
 
 @property (strong, nonatomic) IBOutlet UIButton *pauseMenuButton;
 @property (strong, nonatomic) IBOutlet UIButton *soundOffButton;
 @property (strong, nonatomic) IBOutlet UIButton *pauseButton;
-@property (strong, nonatomic) IBOutlet UIView *topSquareHolder;
 @property (strong, nonatomic) IBOutlet UIView *topComponentsHolder;
 
 @property (nonatomic, strong) UIProgressView *progressView;
 
-@property (nonatomic, strong) NSMutableArray *lesserSquares;
-@property (nonatomic, strong) NSMutableArray *primeSquares;
+
 @property (nonatomic, strong) NSMutableArray *glassSquares;
 @property (strong, nonatomic) UIView *transitionView;
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;

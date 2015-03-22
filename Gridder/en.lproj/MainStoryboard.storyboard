@@ -602,13 +602,13 @@ TESTING Ed Walters</string>
                         <viewControllerLayoutGuide type="bottom" id="NYY-lZ-GQU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="980"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JHE-S6-cDj" userLabel="Top Components Holder">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHE-S6-cDj" userLabel="Top Components Holder">
                                 <rect key="frame" x="27" y="433" width="277" height="116"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naE-mx-WlC">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naE-mx-WlC">
                                         <rect key="frame" x="14" y="9" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="42" id="u2r-4B-RAE"/>
@@ -645,49 +645,8 @@ TESTING Ed Walters</string>
                                     <constraint firstAttribute="centerX" secondItem="naE-mx-WlC" secondAttribute="centerX" constant="103.5" id="flc-pc-rsu"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VOk-xn-mmP" userLabel="Top Square Holder">
-                                <rect key="frame" x="219" y="395" width="66" height="71"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="znW-6t-ZOE">
-                                        <rect key="frame" x="1" y="2" width="66" height="66"/>
-                                        <color key="backgroundColor" red="0.2112280198" green="0.386420861" blue="0.81224798389999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="66" id="K8M-KV-ObF"/>
-                                            <constraint firstAttribute="width" constant="66" id="rCW-T0-jrj"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qco-lh-ra1" userLabel="Pause Button">
-                                        <rect key="frame" x="3" y="0.0" width="63" height="68"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="68" id="3om-SX-k5y"/>
-                                            <constraint firstAttribute="width" constant="63" id="vOO-De-7iv"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="pauseButtonTouched:" destination="2" eventType="touchUpInside" id="hSw-D7-KI6"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="66" id="LSU-VH-TGM"/>
-                                    <constraint firstAttribute="centerX" secondItem="znW-6t-ZOE" secondAttribute="centerX" constant="-1" id="aFu-tb-pcs"/>
-                                    <constraint firstAttribute="centerY" secondItem="Qco-lh-ra1" secondAttribute="centerY" constant="1.5" id="alR-sZ-1Qr"/>
-                                    <constraint firstItem="znW-6t-ZOE" firstAttribute="top" secondItem="VOk-xn-mmP" secondAttribute="top" constant="2" id="ncr-OZ-Eig"/>
-                                    <constraint firstAttribute="height" constant="71" id="oua-Eh-qoJ"/>
-                                    <constraint firstAttribute="centerX" secondItem="Qco-lh-ra1" secondAttribute="centerX" constant="-1.5" id="t6O-mz-cBU"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYJ-yv-jg0">
-                                <rect key="frame" x="34" y="335" width="80" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SYJ-yv-jg0">
+                                <rect key="frame" x="27" y="331" width="80" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="B7C-9I-gi9"/>
@@ -705,8 +664,8 @@ TESTING Ed Walters</string>
                                     <action selector="returnToMenu:" destination="2" eventType="touchUpInside" id="zyC-9X-Y4F"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEn-DS-3mI" userLabel="Sound Off Button">
-                                <rect key="frame" x="131" y="335" width="80" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vEn-DS-3mI" userLabel="Sound Off Button">
+                                <rect key="frame" x="224" y="331" width="80" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="f84-M4-O1y"/>
@@ -724,36 +683,84 @@ TESTING Ed Walters</string>
                                     <action selector="soundButtonTouched:" destination="2" eventType="touchUpInside" id="izZ-DZ-OLn"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndv-c7-rpV" userLabel="gridPrime">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="260"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ndv-c7-rpV" userLabel="Greater Grid">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="260" id="Cgk-kA-r3W"/>
+                                    <constraint firstAttribute="height" constant="320" id="Cgk-kA-r3W"/>
                                     <constraint firstAttribute="width" constant="320" id="TZh-Zq-pLL"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOk-xn-mmP" userLabel="Lesser Grid">
+                                <rect key="frame" x="89" y="330" width="142" height="142"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znW-6t-ZOE">
+                                        <rect key="frame" x="1" y="2" width="140" height="140"/>
+                                        <color key="backgroundColor" red="0.2112280198" green="0.386420861" blue="0.81224798389999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="140" id="K8M-KV-ObF"/>
+                                            <constraint firstAttribute="width" constant="140" id="rCW-T0-jrj"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qco-lh-ra1" userLabel="Pause Button">
+                                        <rect key="frame" x="3" y="0.0" width="140" height="140"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="IW0-K2-O3N"/>
+                                            <constraint firstAttribute="height" constant="140" id="jhI-yF-C9W"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pauseButtonTouched:" destination="2" eventType="touchUpInside" id="hSw-D7-KI6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="142" id="LSU-VH-TGM"/>
+                                    <constraint firstAttribute="centerX" secondItem="znW-6t-ZOE" secondAttribute="centerX" id="aFu-tb-pcs"/>
+                                    <constraint firstAttribute="centerY" secondItem="Qco-lh-ra1" secondAttribute="centerY" constant="1.5" id="alR-sZ-1Qr"/>
+                                    <constraint firstItem="znW-6t-ZOE" firstAttribute="top" secondItem="VOk-xn-mmP" secondAttribute="top" constant="2" id="ncr-OZ-Eig"/>
+                                    <constraint firstAttribute="height" constant="142" id="oua-Eh-qoJ"/>
+                                    <constraint firstAttribute="centerX" secondItem="Qco-lh-ra1" secondAttribute="centerX" constant="-1.5" id="t6O-mz-cBU"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.24914944559999999" green="0.24914944559999999" blue="0.24914944559999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="SYJ-yv-jg0" firstAttribute="baseline" secondItem="vEn-DS-3mI" secondAttribute="baseline" id="2wl-NO-070"/>
+                            <constraint firstItem="SYJ-yv-jg0" firstAttribute="leading" secondItem="JHE-S6-cDj" secondAttribute="leading" id="7KU-bP-fCv"/>
+                            <constraint firstItem="vEn-DS-3mI" firstAttribute="trailing" secondItem="JHE-S6-cDj" secondAttribute="trailing" id="88f-pR-tEL"/>
+                            <constraint firstItem="JHE-S6-cDj" firstAttribute="top" secondItem="SYJ-yv-jg0" secondAttribute="bottom" constant="22" id="Pil-tG-fO5"/>
+                            <constraint firstItem="SYJ-yv-jg0" firstAttribute="top" secondItem="ndv-c7-rpV" secondAttribute="bottom" constant="11" id="UWx-7n-sDj"/>
+                            <constraint firstItem="VOk-xn-mmP" firstAttribute="top" secondItem="ndv-c7-rpV" secondAttribute="top" constant="330" id="Zvq-18-BsE"/>
+                            <constraint firstItem="VOk-xn-mmP" firstAttribute="leading" secondItem="SYJ-yv-jg0" secondAttribute="trailing" constant="-18" id="d9U-B7-Tvk"/>
                             <constraint firstItem="ndv-c7-rpV" firstAttribute="top" secondItem="AiV-Cg-cqc" secondAttribute="bottom" id="jnt-0c-b9F"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ndv-c7-rpV" secondAttribute="trailing" constant="-16" id="rtd-xd-gYY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VOk-xn-mmP" secondAttribute="trailing" constant="73" id="xBD-4V-KOS"/>
+                            <constraint firstItem="NYY-lZ-GQU" firstAttribute="top" secondItem="VOk-xn-mmP" secondAttribute="bottom" constant="8" id="zgb-QL-qnz"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="980"/>
                     <connections>
-                        <outlet property="gridPrime" destination="ndv-c7-rpV" id="cVd-iL-Zib"/>
+                        <outlet property="greaterGrid" destination="ndv-c7-rpV" id="8bD-FK-9N6"/>
+                        <outlet property="lesserGrid" destination="VOk-xn-mmP" id="whH-3I-8nl"/>
                         <outlet property="livesDisplay" destination="naE-mx-WlC" id="85j-aZ-Te6"/>
                         <outlet property="pauseButton" destination="Qco-lh-ra1" id="Vxr-D0-kWx"/>
                         <outlet property="pauseMenuButton" destination="SYJ-yv-jg0" id="uSs-Dr-3E7"/>
                         <outlet property="scoreLabel" destination="Olh-8j-OMi" id="uYG-Cw-sSP"/>
                         <outlet property="soundOffButton" destination="vEn-DS-3mI" id="QnQ-UU-D0N"/>
                         <outlet property="topComponentsHolder" destination="JHE-S6-cDj" id="oFc-AE-fAC"/>
-                        <outlet property="topSquareHolder" destination="VOk-xn-mmP" id="vQu-g6-egT"/>
                         <segue destination="S0d-ek-GIW" kind="modal" identifier="gameOver" modalTransitionStyle="flipHorizontal" id="AwH-EG-SNL"/>
                         <segue destination="eWS-dc-88q" kind="modal" identifier="returnToMenu" modalTransitionStyle="flipHorizontal" id="etr-QF-oi9"/>
                     </connections>

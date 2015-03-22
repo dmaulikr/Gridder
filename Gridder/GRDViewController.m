@@ -11,6 +11,9 @@
 #import "GRDSquare.h"
 #import "GRDMenu.h"
 
+#define LESSERGRID_SQUARE_SIZE 9
+#define GREATERGRID_SQUARE_SIZE 4
+
 @interface GRDViewController ()
 
 @property (nonatomic, assign) int maxMilliseconds;
@@ -24,8 +27,8 @@
 	delegate = (GRDAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	delegate.gameVC = self;
-	self.primeSquares = [[NSMutableArray alloc] init];
-	self.lesserSquares = [[NSMutableArray alloc] init];
+	self.greaterGridCollection = [[NSMutableArray alloc] init];
+	self.lesserGridCollection = [[NSMutableArray alloc] init];
 	[self generateGrid:0 withYOffset:0 withCount:1];
 	[self generateSmallGrid:0 withYOffset:0 withCount:1];
 	
@@ -36,6 +39,9 @@
 												 name:@"appWillEnterForeground"
 											   object:nil];
 	
+	self.greaterGrid.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width);
+	self.lesserGrid.frame = CGRectMake(0, 0, (self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE) * 4, (self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE) * 4);
+
 	[self initStyling];
 }
 
@@ -43,7 +49,7 @@
 	GRDSquare *square = [[[NSBundle mainBundle] loadNibNamed:@"GRDSquare"
 													  owner:self
 													options:nil] lastObject];
-	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / 4, self.view.bounds.size.width / 4);
+	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / GREATERGRID_SQUARE_SIZE, self.view.bounds.size.width / GREATERGRID_SQUARE_SIZE);
 	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
 	square.layer.shadowRadius = 20.0f;
 	square.layer.shadowOpacity = .9;
@@ -57,9 +63,9 @@
 	square.userInteractionEnabled = YES;
 	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
 	
-	[self.gridPrime addSubview:square];
+	[self.greaterGrid addSubview:square];
 	
-	[self.primeSquares addObject:square];
+	[self.greaterGridCollection addObject:square];
 	
 	if (count % 4 == 0) {
 		if(count >= 16) return;
@@ -76,7 +82,7 @@
 													   owner:self
 													 options:nil] lastObject];
 	
-	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / 13, self.view.bounds.size.width / 13);
+	square.frame = CGRectMake(0 + xOffset, yOffset, self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE, self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE);
 	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
 	square.layer.shadowRadius = 20.0f;
 	square.layer.shadowOpacity = .9;
@@ -88,8 +94,8 @@
 	square.layer.borderColor = [UIColor blackColor].CGColor;
 	square.layer.borderWidth = 3.0;
 	
-	[self.topSquareHolder addSubview:square];
-	[self.lesserSquares addObject:square];
+	[self.lesserGrid addSubview:square];
+	[self.lesserGridCollection addObject:square];
 	
 	if (count % 4 == 0) {
 		if(count >= 16) return;
@@ -98,7 +104,7 @@
 		return;
 	}
 	
-	[self generateSmallGrid:xOffset + self.view.bounds.size.width / 13 withYOffset:yOffset withCount:count + 1];
+	[self generateSmallGrid:xOffset + self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE withYOffset:yOffset withCount:count + 1];
 }
 
 
@@ -109,7 +115,7 @@
 - (void)initStyling {
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"px.png"]];
 	
-	self.topSquareHolder.backgroundColor = [UIColor clearColor];
+	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.topComponentsHolder.backgroundColor = [UIColor clearColor];
 	
 	self.pauseButton.layer.cornerRadius = 3;
@@ -194,15 +200,15 @@
 		touchedSquare.isActive = NO;
 	}
 	
-	if ([GRDWizard gridComparisonMatches:self.gridPrime compareWithSuperview2:self.topSquareHolder]) {
+	if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
 		[self gridderPulse:YES];
 	}
 }
 
 
 - (void)setUpGlassSquares {
-	for (int i = 0; i < [self.primeSquares count]; i++) {
-		GRDSquare *square = [self.primeSquares objectAtIndex:i];
+	for (int i = 0; i < [self.greaterGridCollection count]; i++) {
+		GRDSquare *square = [self.greaterGridCollection objectAtIndex:i];
 		GRDGlassSquare *glassSquare = [[GRDGlassSquare alloc] initWithFrame:CGRectMake(square.frame.origin.x, square.frame.origin.y, square.frame.size.width, square.frame.size.height + 20)];
 		glassSquare.image = [UIImage imageNamed:@"Ice1.png"];
 				
@@ -238,8 +244,8 @@
 - (void)randomiseGridder {
 	int totalActive = 0;
 
-	for (int i = 0; i < [self.lesserSquares count]; i++) { // Randomise The Gridder
-		GRDSquare *square = [self.lesserSquares objectAtIndex:i];
+	for (int i = 0; i < [self.lesserGridCollection count]; i++) { // Randomise The Gridder
+		GRDSquare *square = [self.lesserGridCollection objectAtIndex:i];
 		int flip = arc4random() % 2;
 		if(flip == 0) {
 			square.isActive = NO;
@@ -275,8 +281,8 @@
 			}
 		}
 	}
-	for (int o = 0; o < [self.primeSquares count]; o++) { // Reset The Square
-		GRDSquare *square = [self.primeSquares objectAtIndex:o];
+	for (int o = 0; o < [self.greaterGridCollection count]; o++) { // Reset The Square
+		GRDSquare *square = [self.greaterGridCollection objectAtIndex:o];
 		square.isActive = NO;
 		[square setBackgroundColor: [UIColor blueColor]];
 	}
@@ -435,7 +441,7 @@
 		touchedSquare.isActive = NO;
 	}
 
-	if ([GRDWizard gridComparisonMatches:self.gridPrime compareWithSuperview2:self.topSquareHolder]) {
+	if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
 		[self gridderPulse:YES];
 	}
 }
