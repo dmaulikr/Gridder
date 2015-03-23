@@ -21,7 +21,6 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	//[self performSelector:@selector(generateGrids) withObject:nil afterDelay:1.0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,6 +29,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	self.hourglass.image = [UIImage imageNamed:@"sandglass"];
+	self.hourglass.contentMode = UIViewContentModeScaleAspectFill;
 	[self generateGrids];
 }
 
@@ -40,9 +41,6 @@
 - (void)generateGrids {
 	self.greaterGridSquares = [[NSMutableArray alloc] init];
 	self.lesserGridSquares = [[NSMutableArray alloc] init];
-	
-	//self.greaterGrid.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.width);
-	//self.lesserGrid.frame = CGRectMake(0, 0, (self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE) * 4, (self.view.bounds.size.width / LESSERGRID_SQUARE_SIZE) * 4);
 	
 	[self generateGreaterGridWithXOffset:0 withYOffset:0 fromCount:1];
 	[self generateLesserGridWithXOffset:0 withYOffset:0 fromCount:1];
@@ -61,7 +59,7 @@
 	square.layer.masksToBounds = NO;
 	square.tag = count;
 	square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor blueColor];
+	square.backgroundColor = [UIColor whiteColor];
 	square.layer.borderColor = [UIColor blackColor].CGColor;
 	square.layer.borderWidth = 3.0;
 	square.userInteractionEnabled = YES;
@@ -86,13 +84,13 @@
 													 options:nil] lastObject];
 	
 	square.frame = CGRectMake(0 + xOffset, yOffset, self.lesserGrid.frame.size.width / 4, self.lesserGrid.frame.size.width / 4);
-	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
+	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blackColor]);
 	square.layer.shadowRadius = 20.0f;
 	square.layer.shadowOpacity = .9;
 	square.layer.shadowOffset = CGSizeZero;
 	square.tag = count;
 	square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor blueColor];
+	square.backgroundColor = [UIColor whiteColor];
 	square.layer.borderColor = [UIColor blackColor].CGColor;
 	square.layer.borderWidth = 2.0;
 	
