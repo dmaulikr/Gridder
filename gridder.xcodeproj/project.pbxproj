@@ -74,6 +74,7 @@
 		FA7D5AE21805189E004011D4 /* graduation-cap.png in Resources */ = {isa = PBXBuildFile; fileRef = FA7D5AE11805189E004011D4 /* graduation-cap.png */; };
 		FA7D5AE4180539CB004011D4 /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = FA7D5AE3180539CB004011D4 /* email.png */; };
 		FA7D5AE618053FB6004011D4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7D5AE518053FB5004011D4 /* MessageUI.framework */; };
+		FA93E80C1ABEEA8C008F5806 /* GRDPrimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA93E80B1ABEEA8C008F5806 /* GRDPrimeViewController.m */; };
 		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
 		FAF687041ABDDFED00915381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF687031ABDDFED00915381 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -163,6 +164,8 @@
 		FA7D5AE11805189E004011D4 /* graduation-cap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "graduation-cap.png"; sourceTree = "<group>"; };
 		FA7D5AE3180539CB004011D4 /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		FA7D5AE518053FB5004011D4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		FA93E80A1ABEEA8C008F5806 /* GRDPrimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDPrimeViewController.h; sourceTree = "<group>"; };
+		FA93E80B1ABEEA8C008F5806 /* GRDPrimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDPrimeViewController.m; sourceTree = "<group>"; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -339,6 +342,8 @@
 				FA03797C1791E03F00BF5251 /* GRDCredits.m */,
 				FA03797E1791E19400BF5251 /* GRDHighScores.h */,
 				FA03797F1791E19400BF5251 /* GRDHighScores.m */,
+				FA93E80A1ABEEA8C008F5806 /* GRDPrimeViewController.h */,
+				FA93E80B1ABEEA8C008F5806 /* GRDPrimeViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -588,6 +593,7 @@
 				FA0379801791E19400BF5251 /* GRDHighScores.m in Sources */,
 				FA13D1DC17FAC2D90009AFE9 /* GRDWizard.m in Sources */,
 				FA07DE31180002CC0021F2F7 /* GRDGlassSquare.m in Sources */,
+				FA93E80C1ABEEA8C008F5806 /* GRDPrimeViewController.m in Sources */,
 				FA7D5AD41801141C004011D4 /* GRDSoundPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
