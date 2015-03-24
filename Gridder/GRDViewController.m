@@ -473,7 +473,7 @@
 	square.layer.borderColor = [UIColor blackColor].CGColor;
 	square.layer.borderWidth = 3.0;
 	square.userInteractionEnabled = YES;
-	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
+	//[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
 	
 	[self.greaterGrid addSubview:square];
 	[self.greaterGridCollection addObject:square];

@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) IBOutlet UIView *greaterGrid;
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;
-@property (strong, nonatomic) IBOutlet UIImageView *hourglass;
 @property (nonatomic, strong) NSMutableArray *lesserGridSquares;
 @property (nonatomic, strong) NSMutableArray *greaterGridSquares;
 

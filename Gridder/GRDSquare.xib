@@ -10,7 +10,6 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GRDSquare">
             <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="0.1125152165" green="0.71443422379999999" blue="0.18970370959999999" alpha="1" colorSpace="calibratedRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

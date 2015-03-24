@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gridBG"]];
+	self.view.backgroundColor = [UIColor darkGrayColor];
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
 	
@@ -30,6 +30,9 @@
 	background.image = [UIImage imageNamed:@"v3_bg"];
 	background.contentMode = UIViewContentModeScaleToFill;
 	[self.view addSubview:background];
+	
+	[self.view bringSubviewToFront:self.greaterGrid];
+	[self.view bringSubviewToFront:self.lesserGrid];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,8 +41,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	self.hourglass.image = [UIImage imageNamed:@"sandglass"];
-	self.hourglass.contentMode = UIViewContentModeScaleAspectFill;
 	[self generateGrids];
 }
 
@@ -62,24 +63,17 @@
 													 options:nil] lastObject];
 	
 	square.frame = CGRectMake(0 + xOffset, yOffset, self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE, self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE);
-	//square.layer.shadowColor = (__bridge CGColorRef)([UIColor blackColor]);
-	//square.layer.shadowRadius = 20.0f;
-	//square.layer.shadowOpacity = .9;
-	//square.layer.shadowOffset = CGSizeZero;
+
 	square.layer.masksToBounds = NO;
 	square.tag = count;
-	//square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"active"]];
-	[square setBackgroundImage:[UIImage imageNamed:@"active"] forState:UIControlStateNormal];
-	[square setImage:[UIImage imageNamed:@"active"] forState:UIControlStateNormal];
-	square.layer.borderColor = [UIColor blackColor].CGColor;
-	square.layer.borderWidth = 1.0;
+	square.contentScaleFactor = UIViewContentModeScaleAspectFill;
+	square.image = [UIImage imageNamed:@"v3_inactive"];
+	
 	square.userInteractionEnabled = YES;
-	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
+	//[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
 	
 	[self.greaterGrid addSubview:square];
 	[self.greaterGridSquares addObject:square];
-	
 	if (count % 4 == 0) {
 		if(count >= 16) return;
 		yOffset += square.bounds.size.height;
@@ -96,15 +90,9 @@
 													 options:nil] lastObject];
 	
 	square.frame = CGRectMake(0 + xOffset, yOffset, self.lesserGrid.frame.size.width / 4, self.lesserGrid.frame.size.width / 4);
-	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blackColor]);
-	square.layer.shadowRadius = 20.0f;
-	square.layer.shadowOpacity = .9;
-	square.layer.shadowOffset = CGSizeZero;
 	square.tag = count;
-//	/square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor clearColor];
-	square.layer.borderColor = [UIColor blackColor].CGColor;
-	square.layer.borderWidth = 1.0;
+	square.contentScaleFactor = UIViewContentModeScaleAspectFill;
+	square.image = [UIImage imageNamed:@"v3_inactive"];
 	
 	[self.lesserGrid addSubview:square];
 	[self.lesserGridSquares addObject:square];
