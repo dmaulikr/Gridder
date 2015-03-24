@@ -21,6 +21,11 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"active"]];
+	self.view.layer.borderColor = [UIColor blackColor].CGColor;
+	self.view.layer.borderWidth = 10.0;
+	self.lesserGrid.backgroundColor = [UIColor clearColor];
+	self.greaterGrid.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,6 +49,7 @@
 	
 	[self generateGreaterGridWithXOffset:0 withYOffset:0 fromCount:1];
 	[self generateLesserGridWithXOffset:0 withYOffset:0 fromCount:1];
+	
 }
 
 - (void)generateGreaterGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
@@ -52,16 +58,16 @@
 													 options:nil] lastObject];
 	
 	square.frame = CGRectMake(0 + xOffset, yOffset, self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE, self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE);
-	square.layer.shadowColor = (__bridge CGColorRef)([UIColor blueColor]);
-	square.layer.shadowRadius = 20.0f;
-	square.layer.shadowOpacity = .9;
-	square.layer.shadowOffset = CGSizeZero;
+	//square.layer.shadowColor = (__bridge CGColorRef)([UIColor blackColor]);
+	//square.layer.shadowRadius = 20.0f;
+	//square.layer.shadowOpacity = .9;
+	//square.layer.shadowOffset = CGSizeZero;
 	square.layer.masksToBounds = NO;
 	square.tag = count;
-	square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor whiteColor];
+	//square.layer.cornerRadius = 5;
+	square.backgroundColor = [UIColor clearColor];
 	square.layer.borderColor = [UIColor blackColor].CGColor;
-	square.layer.borderWidth = 3.0;
+	square.layer.borderWidth = 1.0;
 	square.userInteractionEnabled = YES;
 	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
 	
@@ -89,10 +95,10 @@
 	square.layer.shadowOpacity = .9;
 	square.layer.shadowOffset = CGSizeZero;
 	square.tag = count;
-	square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor whiteColor];
+//	/square.layer.cornerRadius = 5;
+	square.backgroundColor = [UIColor clearColor];
 	square.layer.borderColor = [UIColor blackColor].CGColor;
-	square.layer.borderWidth = 2.0;
+	square.layer.borderWidth = 1.0;
 	
 	[self.lesserGrid addSubview:square];
 	[self.lesserGridSquares addObject:square];

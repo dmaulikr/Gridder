@@ -519,38 +519,38 @@ You should also watch out for ice... </string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uI5-H4-KgX" userLabel="Hourglass" customClass="UIImageView">
-                                <rect key="frame" x="139" y="328" width="42" height="57"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUP-OK-aex" userLabel="Lesser Grid">
-                                <rect key="frame" x="120" y="393" width="80" height="80"/>
+                                <rect key="frame" x="120" y="390" width="80" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZUP-OK-aex" secondAttribute="height" multiplier="1:1" id="iVq-Td-3U7"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Od2-sf-Ook" userLabel="Greater Grid">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                <rect key="frame" x="10" y="10" width="300" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uI5-H4-KgX" userLabel="Hourglass" customClass="UIImageView">
+                                <rect key="frame" x="134" y="318" width="53" height="67"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Od2-sf-Ook" firstAttribute="top" secondItem="Nsu-Sp-FjE" secondAttribute="bottom" id="5HU-Pz-tgu"/>
+                            <constraint firstItem="Od2-sf-Ook" firstAttribute="top" secondItem="Nsu-Sp-FjE" secondAttribute="bottom" constant="10" id="5HU-Pz-tgu"/>
                             <constraint firstItem="uI5-H4-KgX" firstAttribute="top" secondItem="Od2-sf-Ook" secondAttribute="bottom" constant="8" id="5NF-pC-Vhi"/>
                             <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="uI5-H4-KgX" secondAttribute="centerX" id="CAP-tX-in9"/>
-                            <constraint firstItem="uI5-H4-KgX" firstAttribute="leading" secondItem="P6l-MS-VRZ" secondAttribute="leading" constant="139" id="Gg8-5O-LhY"/>
+                            <constraint firstItem="uI5-H4-KgX" firstAttribute="leading" secondItem="P6l-MS-VRZ" secondAttribute="leading" constant="134" id="Gg8-5O-LhY"/>
                             <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="Od2-sf-Ook" secondAttribute="centerX" id="Ic4-us-0LH"/>
-                            <constraint firstItem="Od2-sf-Ook" firstAttribute="leading" secondItem="P6l-MS-VRZ" secondAttribute="leading" id="JrU-Vn-y6h"/>
-                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="ZUP-OK-aex" secondAttribute="bottom" constant="7" id="NSj-ue-Zxr"/>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="uI5-H4-KgX" secondAttribute="bottom" constant="8" id="SAp-af-GNL"/>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="P6l-MS-VRZ" secondAttribute="top" constant="393" id="VgY-xX-JDw"/>
-                            <constraint firstItem="uI5-H4-KgX" firstAttribute="top" secondItem="Od2-sf-Ook" secondAttribute="bottom" constant="8" symbolic="YES" id="gjV-2D-nat"/>
-                            <constraint firstItem="uI5-H4-KgX" firstAttribute="top" secondItem="P6l-MS-VRZ" secondAttribute="top" constant="328" id="m4m-Vr-upP"/>
+                            <constraint firstItem="Od2-sf-Ook" firstAttribute="leading" secondItem="P6l-MS-VRZ" secondAttribute="leading" constant="10" id="JrU-Vn-y6h"/>
+                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="ZUP-OK-aex" secondAttribute="bottom" constant="10" id="NSj-ue-Zxr"/>
+                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="uI5-H4-KgX" secondAttribute="bottom" constant="5" id="SAp-af-GNL"/>
+                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="P6l-MS-VRZ" secondAttribute="top" constant="390" id="VgY-xX-JDw"/>
+                            <constraint firstItem="uI5-H4-KgX" firstAttribute="top" secondItem="Od2-sf-Ook" secondAttribute="bottom" constant="8" id="gjV-2D-nat"/>
+                            <constraint firstItem="uI5-H4-KgX" firstAttribute="top" secondItem="P6l-MS-VRZ" secondAttribute="top" constant="318" id="m4m-Vr-upP"/>
                             <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="P6l-MS-VRZ" secondAttribute="centerX" id="qTW-41-c08"/>
                             <constraint firstItem="uI5-H4-KgX" firstAttribute="centerX" secondItem="Od2-sf-Ook" secondAttribute="centerX" id="sHX-mu-Svc"/>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="uI5-H4-KgX" secondAttribute="bottom" constant="8" symbolic="YES" id="sjw-oj-G9G"/>
+                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="uI5-H4-KgX" secondAttribute="bottom" constant="5" id="sjw-oj-G9G"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
