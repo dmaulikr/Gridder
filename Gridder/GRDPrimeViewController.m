@@ -8,6 +8,7 @@
 
 #import "GRDPrimeViewController.h"
 #import "GRDSquare.h"
+#import "GRDWizard.h"
 
 @interface GRDPrimeViewController ()
 
@@ -21,11 +22,14 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"active"]];
-	self.view.layer.borderColor = [UIColor blackColor].CGColor;
-	self.view.layer.borderWidth = 10.0;
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gridBG"]];
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
+	
+	UIImageView *background = [[UIImageView alloc] initWithFrame:self.view.frame];
+	background.image = [UIImage imageNamed:@"v3_bg"];
+	background.contentMode = UIViewContentModeScaleToFill;
+	[self.view addSubview:background];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +69,9 @@
 	square.layer.masksToBounds = NO;
 	square.tag = count;
 	//square.layer.cornerRadius = 5;
-	square.backgroundColor = [UIColor clearColor];
+	square.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"active"]];
+	[square setBackgroundImage:[UIImage imageNamed:@"active"] forState:UIControlStateNormal];
+	[square setImage:[UIImage imageNamed:@"active"] forState:UIControlStateNormal];
 	square.layer.borderColor = [UIColor blackColor].CGColor;
 	square.layer.borderWidth = 1.0;
 	square.userInteractionEnabled = YES;
@@ -116,6 +122,38 @@
 - (BOOL)prefersStatusBarHidden{
 	return YES;
 }
+
+#pragma mark -
+#pragma mark Actions
+#pragma mark -
+
+- (IBAction)touchSquare:(id)sender {
+	//if (delegate.soundIsActive) [delegate.soundPlayer.squareTouchedSoundPlayer play];
+	GRDSquare *touchedSquare = (GRDSquare *)sender;
+	
+	if(!touchedSquare.isActive) {
+		int randomPop = arc4random() % 100;
+		if(randomPop >= 0 && randomPop <= 3) {
+			[touchedSquare setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"clock-icon.png"]]];
+			//delegate.millisecondsFromGridPulse--;
+			//[GRDWizard gainTime:touchedSquare withGrdVC:self];
+		} else if(randomPop == 100) {
+			[touchedSquare setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"heart.png"]]];
+			//[GRDWizard gainALife:self];
+		} else {
+			[touchedSquare setBackgroundColor:[UIColor whiteColor]];
+		}
+		touchedSquare.isActive = YES;
+	} else {
+		[touchedSquare setBackgroundColor:[UIColor blueColor]];
+		touchedSquare.isActive = NO;
+	}
+	
+	if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+		//[self gridderPulse:YES];
+	}
+}
+
 
 
 @end

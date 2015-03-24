@@ -76,6 +76,7 @@
 		FA7D5AE618053FB6004011D4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7D5AE518053FB5004011D4 /* MessageUI.framework */; };
 		FA93E80C1ABEEA8C008F5806 /* GRDPrimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA93E80B1ABEEA8C008F5806 /* GRDPrimeViewController.m */; };
 		FA93E80E1AC0BEC7008F5806 /* sandglass.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E80D1AC0BEC7008F5806 /* sandglass.png */; };
+		FA93E8151AC20CC1008F5806 /* v3_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8141AC20CC1008F5806 /* v3_bg.png */; };
 		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
 		FAF687041ABDDFED00915381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF687031ABDDFED00915381 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -168,6 +169,7 @@
 		FA93E80A1ABEEA8C008F5806 /* GRDPrimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDPrimeViewController.h; sourceTree = "<group>"; };
 		FA93E80B1ABEEA8C008F5806 /* GRDPrimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDPrimeViewController.m; sourceTree = "<group>"; };
 		FA93E80D1AC0BEC7008F5806 /* sandglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sandglass.png; sourceTree = "<group>"; };
+		FA93E8141AC20CC1008F5806 /* v3_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_bg.png; sourceTree = "<group>"; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,6 +250,7 @@
 		FA1BABEF17909F2000FEC33A /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				FA93E8111AC207B3008F5806 /* 3.0 */,
 				FA7D5AE3180539CB004011D4 /* email.png */,
 				FA7D5ADF18051847004011D4 /* chess-castle.png */,
 				FA7D5AE11805189E004011D4 /* graduation-cap.png */,
@@ -474,6 +477,14 @@
 			path = Gridder;
 			sourceTree = "<group>";
 		};
+		FA93E8111AC207B3008F5806 /* 3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				FA93E8141AC20CC1008F5806 /* v3_bg.png */,
+			);
+			name = 3.0;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -552,6 +563,7 @@
 				FA1BAC311791AE4400FEC33A /* active.png in Resources */,
 				FA1BAC321791AE4400FEC33A /* active@2X.png in Resources */,
 				FA1BAC351791AE6A00FEC33A /* inactive.png in Resources */,
+				FA93E8151AC20CC1008F5806 /* v3_bg.png in Resources */,
 				FA1BAC361791AE6A00FEC33A /* inactive@2X.png in Resources */,
 				FA1BAC3D1791C7CB00FEC33A /* gridder1.png in Resources */,
 				FA1BAC3E1791C7CB00FEC33A /* gridder2.png in Resources */,
