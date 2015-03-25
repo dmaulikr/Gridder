@@ -22,14 +22,9 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.view.backgroundColor = [UIColor darkGrayColor];
+	self.view.backgroundColor = [UIColor whiteColor];
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
-	
-	UIImageView *background = [[UIImageView alloc] initWithFrame:self.view.frame];
-	background.image = [UIImage imageNamed:@"v3_bg"];
-	background.contentMode = UIViewContentModeScaleToFill;
-	[self.view addSubview:background];
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
@@ -62,13 +57,13 @@
 													   owner:self
 													 options:nil] lastObject];
 	
-	square.frame = CGRectMake(0 + xOffset, yOffset, self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE, self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE);
+	square.frame = CGRectMake(0 + xOffset, yOffset, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE) - 15, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE) - 15);
 
 	square.layer.masksToBounds = NO;
 	square.tag = count;
 	square.contentScaleFactor = UIViewContentModeScaleAspectFill;
-	square.image = [UIImage imageNamed:@"v3_inactive"];
-	
+	square.backgroundColor = [UIColor orangeColor];
+
 	square.userInteractionEnabled = YES;
 	//[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
 	
@@ -77,11 +72,11 @@
 	if (count % 4 == 0) {
 		if(count >= 16) return;
 		yOffset += square.bounds.size.height;
-		[self generateGreaterGridWithXOffset:0 withYOffset:yOffset fromCount:count + 1];
+		[self generateGreaterGridWithXOffset:0 withYOffset:yOffset + 15 fromCount:count + 1];
 		return;
 	}
 	
-	[self generateGreaterGridWithXOffset:xOffset + self.greaterGrid.bounds.size.width / 4 withYOffset:yOffset fromCount:count + 1];
+	[self generateGreaterGridWithXOffset:(xOffset + self.greaterGrid.bounds.size.width / 4) + 5 withYOffset:yOffset fromCount:count + 1];
 }
 
 - (void)generateLesserGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
@@ -89,10 +84,10 @@
 													   owner:self
 													 options:nil] lastObject];
 	
-	square.frame = CGRectMake(0 + xOffset, yOffset, self.lesserGrid.frame.size.width / 4, self.lesserGrid.frame.size.width / 4);
+	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / 4) - 15, (self.lesserGrid.frame.size.width / 4) - 15);
 	square.tag = count;
 	square.contentScaleFactor = UIViewContentModeScaleAspectFill;
-	square.image = [UIImage imageNamed:@"v3_inactive"];
+	square.backgroundColor = [UIColor orangeColor];
 	
 	[self.lesserGrid addSubview:square];
 	[self.lesserGridSquares addObject:square];
@@ -100,11 +95,11 @@
 	if (count % 4 == 0) {
 		if(count >= 16) return;
 		yOffset += square.bounds.size.height;
-		[self generateLesserGridWithXOffset:0 withYOffset:yOffset fromCount:count + 1];
+		[self generateLesserGridWithXOffset:0 withYOffset:yOffset + 15 fromCount:count + 1];
 		return;
 	}
 	
-	[self generateLesserGridWithXOffset:xOffset + self.lesserGrid.frame.size.width / 4 withYOffset:yOffset fromCount:count + 1];
+	[self generateLesserGridWithXOffset:xOffset + (self.lesserGrid.frame.size.width / 4) + 5 withYOffset:yOffset fromCount:count + 1];
 }
 
 - (BOOL)prefersStatusBarHidden{

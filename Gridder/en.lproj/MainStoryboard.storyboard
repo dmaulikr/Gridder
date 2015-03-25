@@ -519,18 +519,18 @@ You should also watch out for ice... </string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUP-OK-aex" userLabel="Lesser Grid">
-                                <rect key="frame" x="120" y="374" width="80" height="80"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="ZUP-OK-aex" secondAttribute="height" multiplier="1:1" id="iVq-Td-3U7"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Od2-sf-Ook" userLabel="Greater Grid">
                                 <rect key="frame" x="10" y="65" width="300" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Od2-sf-Ook" secondAttribute="height" multiplier="1:1" id="i7U-C4-4Pl"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUP-OK-aex" userLabel="Lesser Grid">
+                                <rect key="frame" x="120" y="380" width="80" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ZUP-OK-aex" secondAttribute="height" multiplier="1:1" id="iVq-Td-3U7"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -539,8 +539,8 @@ You should also watch out for ice... </string>
                             <constraint firstItem="Od2-sf-Ook" firstAttribute="top" secondItem="Nsu-Sp-FjE" secondAttribute="bottom" constant="65" id="5HU-Pz-tgu"/>
                             <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="Od2-sf-Ook" secondAttribute="centerX" id="Ic4-us-0LH"/>
                             <constraint firstItem="Od2-sf-Ook" firstAttribute="leading" secondItem="P6l-MS-VRZ" secondAttribute="leading" constant="10" id="JrU-Vn-y6h"/>
-                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="ZUP-OK-aex" secondAttribute="bottom" constant="26" id="NSj-ue-Zxr"/>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="P6l-MS-VRZ" secondAttribute="top" constant="374" id="VgY-xX-JDw"/>
+                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="ZUP-OK-aex" secondAttribute="bottom" constant="20" id="NSj-ue-Zxr"/>
+                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="P6l-MS-VRZ" secondAttribute="top" constant="380" id="VgY-xX-JDw"/>
                             <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="P6l-MS-VRZ" secondAttribute="centerX" id="qTW-41-c08"/>
                         </constraints>
                     </view>
