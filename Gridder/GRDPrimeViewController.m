@@ -9,6 +9,7 @@
 #import "GRDPrimeViewController.h"
 #import "GRDSquare.h"
 #import "GRDWizard.h"
+#import "GRDAppDelegate.h"
 
 @interface GRDPrimeViewController ()
 
@@ -28,6 +29,8 @@
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
+	
+	[self setupTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -137,6 +140,32 @@
 	}
 }
 
+#pragma mark - 
+#pragma mark Timer
+#pragma mark -
+
+- (void)setupTimer {
+	self.progressBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+	self.progressBar.progressTintColor = [UIColor orangeColor];
+	self.progressBar.center = self.view.center;
+	self.progressBar.frame = CGRectMake(12, 15, self.view.frame.size.width - 24, 50);
+	
+	[self.view addSubview:self.progressBar];
+	
+	GRDAppDelegate *delegate = (GRDAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+	delegate.pulseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+}
+
+- (void)timerFireMethod:(NSTimer *)theTimer {
+	self.timeUntilNextPulse += 10;
+	if (self.timeUntilNextPulse >= self.maximumTimeAllowed) {
+		self.timeUntilNextPulse = 0;
+		//[self gridderPulse:NO];
+	}
+	
+	[self.progressBar setProgress:((float)self.timeUntilNextPulse / self.maximumTimeAllowed) animated:YES];
+}
 
 
 @end

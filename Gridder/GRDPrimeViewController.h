@@ -17,5 +17,8 @@
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;
 @property (nonatomic, strong) NSMutableArray *lesserGridSquares;
 @property (nonatomic, strong) NSMutableArray *greaterGridSquares;
+@property (nonatomic, strong) UIProgressView *progressBar;
+@property (nonatomic) NSInteger timeUntilNextPulse;
+@property (nonatomic) NSInteger maximumTimeAllowed;
 
 @end

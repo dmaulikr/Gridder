@@ -1,0 +1,10 @@
+PODS:
+  - YLProgressBar (3.5.2)
+
+DEPENDENCIES:
+  - YLProgressBar
+
+SPEC CHECKSUMS:
+  YLProgressBar: 75f1d6c2cc37a9e0c5806e63b5e374f3483c9ee0
+
+COCOAPODS: 0.36.0

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F89B68A39FF57B3CF89BBDEE /* libPods-gridder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB863B65DEC5C08C1A35807 /* libPods-gridder.a */; };
 		FA03797A1791CA7600BF5251 /* GRDHowToPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0379791791CA7600BF5251 /* GRDHowToPlay.m */; };
 		FA03797D1791E03F00BF5251 /* GRDCredits.m in Sources */ = {isa = PBXBuildFile; fileRef = FA03797C1791E03F00BF5251 /* GRDCredits.m */; };
 		FA0379801791E19400BF5251 /* GRDHighScores.m in Sources */ = {isa = PBXBuildFile; fileRef = FA03797F1791E19400BF5251 /* GRDHighScores.m */; };
@@ -78,11 +79,14 @@
 		FA93E80E1AC0BEC7008F5806 /* sandglass.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E80D1AC0BEC7008F5806 /* sandglass.png */; };
 		FA93E8151AC20CC1008F5806 /* v3_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8141AC20CC1008F5806 /* v3_bg.png */; };
 		FA93E8171AC20F08008F5806 /* v3_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8161AC20F08008F5806 /* v3_inactive.png */; };
+		FA93E8191AC49FC2008F5806 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8181AC49FC2008F5806 /* Podfile */; };
 		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
 		FAF687041ABDDFED00915381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF687031ABDDFED00915381 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7EB863B65DEC5C08C1A35807 /* libPods-gridder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gridder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECE1021212F5277F5E10819C /* Pods-gridder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.debug.xcconfig"; sourceTree = "<group>"; };
 		FA0379781791CA7500BF5251 /* GRDHowToPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDHowToPlay.h; sourceTree = "<group>"; };
 		FA0379791791CA7600BF5251 /* GRDHowToPlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDHowToPlay.m; sourceTree = "<group>"; };
 		FA03797B1791E03F00BF5251 /* GRDCredits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDCredits.h; sourceTree = "<group>"; };
@@ -172,8 +176,10 @@
 		FA93E80D1AC0BEC7008F5806 /* sandglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sandglass.png; sourceTree = "<group>"; };
 		FA93E8141AC20CC1008F5806 /* v3_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_bg.png; sourceTree = "<group>"; };
 		FA93E8161AC20F08008F5806 /* v3_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_inactive.png; sourceTree = "<group>"; };
+		FA93E8181AC49FC2008F5806 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		FE242326784D7FA49E14EF52 /* Pods-gridder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.release.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,17 +195,38 @@
 				FA1BABA4178D856F00FEC33A /* UIKit.framework in Frameworks */,
 				FA1BABA6178D856F00FEC33A /* Foundation.framework in Frameworks */,
 				FA1BABA8178D857000FEC33A /* CoreGraphics.framework in Frameworks */,
+				F89B68A39FF57B3CF89BBDEE /* libPods-gridder.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7659906D45E6A3BF2A10CBBF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EB863B65DEC5C08C1A35807 /* libPods-gridder.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A940EE18C9A17507A4B8348C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ECE1021212F5277F5E10819C /* Pods-gridder.debug.xcconfig */,
+				FE242326784D7FA49E14EF52 /* Pods-gridder.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FA1BAB97178D856F00FEC33A = {
 			isa = PBXGroup;
 			children = (
+				FA1EF8FE18F2F984007B8E72 /* Support */,
 				FA1BABA9178D857000FEC33A /* GRIDDER */,
 				FA1EF90818F2FB20007B8E72 /* Resources */,
+				A940EE18C9A17507A4B8348C /* Pods */,
+				7659906D45E6A3BF2A10CBBF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -317,9 +344,9 @@
 				FA1EF8F918F2F91D007B8E72 /* Application */,
 				FA1EF8FA18F2F928007B8E72 /* Controllers */,
 				FA1EF8FB18F2F937007B8E72 /* Models */,
+				FA93E8181AC49FC2008F5806 /* Podfile */,
 				FA1EF8FC18F2F941007B8E72 /* Views */,
 				FA1EF8FD18F2F946007B8E72 /* Library */,
-				FA1EF8FE18F2F984007B8E72 /* Support */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -394,6 +421,7 @@
 			children = (
 			);
 			name = Support;
+			path = Gridder;
 			sourceTree = "<group>";
 		};
 		FA1EF8FF18F2F9C8007B8E72 /* iPhone */ = {
@@ -495,9 +523,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA1BABC3178D857000FEC33A /* Build configuration list for PBXNativeTarget "gridder" */;
 			buildPhases = (
+				755747A15890716EB0B763AA /* Check Pods Manifest.lock */,
 				FA1BAB9C178D856F00FEC33A /* Sources */,
 				FA1BAB9D178D856F00FEC33A /* Frameworks */,
 				FA1BAB9E178D856F00FEC33A /* Resources */,
+				F834831A8D20DF04473F2FAA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -562,6 +592,7 @@
 				FA1BAC2A1791AE0100FEC33A /* gridBG.png in Resources */,
 				FA93E80E1AC0BEC7008F5806 /* sandglass.png in Resources */,
 				FA1BAC2D1791AE2A00FEC33A /* pause.png in Resources */,
+				FA93E8191AC49FC2008F5806 /* Podfile in Resources */,
 				FA1BAC2E1791AE2A00FEC33A /* play.png in Resources */,
 				FA1BAC311791AE4400FEC33A /* active.png in Resources */,
 				FA1BAC321791AE4400FEC33A /* active@2X.png in Resources */,
@@ -595,6 +626,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		755747A15890716EB0B763AA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F834831A8D20DF04473F2FAA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-gridder/Pods-gridder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FA1BAB9C178D856F00FEC33A /* Sources */ = {
@@ -666,7 +730,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "6DC57D4D-225D-4C45-B852-7B26909621F8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6DC57D4D-225D-4C45-B852-7B26909621F8";
@@ -693,7 +757,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "6DC57D4D-225D-4C45-B852-7B26909621F8";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6DC57D4D-225D-4C45-B852-7B26909621F8";
@@ -704,6 +768,7 @@
 		};
 		FA1BABC4178D857000FEC33A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECE1021212F5277F5E10819C /* Pods-gridder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -711,7 +776,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gridder-Prefix.pch";
 				INFOPLIST_FILE = Gridder/gridder.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Gridder;
 				PROVISIONING_PROFILE = "";
@@ -725,6 +790,7 @@
 		};
 		FA1BABC5178D857000FEC33A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE242326784D7FA49E14EF52 /* Pods-gridder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -732,7 +798,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "gridder-Prefix.pch";
 				INFOPLIST_FILE = Gridder/gridder.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Gridder;
 				PROVISIONING_PROFILE = "";
