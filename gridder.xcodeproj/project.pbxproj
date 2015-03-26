@@ -176,7 +176,7 @@
 		FA93E80D1AC0BEC7008F5806 /* sandglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sandglass.png; sourceTree = "<group>"; };
 		FA93E8141AC20CC1008F5806 /* v3_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_bg.png; sourceTree = "<group>"; };
 		FA93E8161AC20F08008F5806 /* v3_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_inactive.png; sourceTree = "<group>"; };
-		FA93E8181AC49FC2008F5806 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		FA93E8181AC49FC2008F5806 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE242326784D7FA49E14EF52 /* Pods-gridder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.release.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.release.xcconfig"; sourceTree = "<group>"; };
@@ -222,21 +222,11 @@
 		FA1BAB97178D856F00FEC33A = {
 			isa = PBXGroup;
 			children = (
-				FA1EF8FE18F2F984007B8E72 /* Support */,
 				FA1BABA9178D857000FEC33A /* GRIDDER */,
 				FA1EF90818F2FB20007B8E72 /* Resources */,
 				A940EE18C9A17507A4B8348C /* Pods */,
 				7659906D45E6A3BF2A10CBBF /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		FA1BABA1178D856F00FEC33A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FA1BABA0178D856F00FEC33A /* Gridder.app */,
-			);
-			name = Products;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		FA1BABA2178D856F00FEC33A /* Frameworks */ = {
@@ -258,9 +248,7 @@
 		FA1BABA9178D857000FEC33A /* GRIDDER */ = {
 			isa = PBXGroup;
 			children = (
-				FA1EF8F818F2F916007B8E72 /* Shared */,
-				FA1EF8FF18F2F9C8007B8E72 /* iPhone */,
-				FA1EF90018F2F9D3007B8E72 /* iPad */,
+				FA1EF8F818F2F916007B8E72 /* Source */,
 				FA1EF90718F2FA33007B8E72 /* Other sources */,
 				FA1BABAA178D857000FEC33A /* Supporting Files */,
 			);
@@ -271,6 +259,7 @@
 		FA1BABAA178D857000FEC33A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA93E8181AC49FC2008F5806 /* Podfile */,
 				FA1BABAB178D857000FEC33A /* gridder.plist */,
 			);
 			name = "Supporting Files";
@@ -338,17 +327,15 @@
 			name = Audio;
 			sourceTree = "<group>";
 		};
-		FA1EF8F818F2F916007B8E72 /* Shared */ = {
+		FA1EF8F818F2F916007B8E72 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				FA1EF8F918F2F91D007B8E72 /* Application */,
 				FA1EF8FA18F2F928007B8E72 /* Controllers */,
 				FA1EF8FB18F2F937007B8E72 /* Models */,
-				FA93E8181AC49FC2008F5806 /* Podfile */,
 				FA1EF8FC18F2F941007B8E72 /* Views */,
-				FA1EF8FD18F2F946007B8E72 /* Library */,
 			);
-			name = Shared;
+			name = Source;
 			sourceTree = "<group>";
 		};
 		FA1EF8F918F2F91D007B8E72 /* Application */ = {
@@ -358,6 +345,7 @@
 				FA5D28F519A0F0F600075314 /* GRDAppDelegate.m */,
 				FA1BABBB178D857000FEC33A /* MainStoryboard.storyboard */,
 				FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */,
+				FA1BABA0178D856F00FEC33A /* Gridder.app */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -406,84 +394,6 @@
 				FA1BABC9178DE20900FEC33A /* GRDSquare.m */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		FA1EF8FD18F2F946007B8E72 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				FA1BABA1178D856F00FEC33A /* Products */,
-			);
-			name = Library;
-			sourceTree = "<group>";
-		};
-		FA1EF8FE18F2F984007B8E72 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Support;
-			path = Gridder;
-			sourceTree = "<group>";
-		};
-		FA1EF8FF18F2F9C8007B8E72 /* iPhone */ = {
-			isa = PBXGroup;
-			children = (
-				FA1EF90318F2F9FC007B8E72 /* Models */,
-				FA1EF90218F2F9F2007B8E72 /* Views */,
-				FA1EF90118F2F9EC007B8E72 /* Controllers */,
-			);
-			name = iPhone;
-			sourceTree = "<group>";
-		};
-		FA1EF90018F2F9D3007B8E72 /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-				FA1EF90618F2FA07007B8E72 /* Models */,
-				FA1EF90518F2FA04007B8E72 /* Views */,
-				FA1EF90418F2FA00007B8E72 /* Controllers */,
-			);
-			name = iPad;
-			sourceTree = "<group>";
-		};
-		FA1EF90118F2F9EC007B8E72 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		FA1EF90218F2F9F2007B8E72 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		FA1EF90318F2F9FC007B8E72 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		FA1EF90418F2FA00007B8E72 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		FA1EF90518F2FA04007B8E72 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		FA1EF90618F2FA07007B8E72 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		FA1EF90718F2FA33007B8E72 /* Other sources */ = {
@@ -556,7 +466,7 @@
 				en,
 			);
 			mainGroup = FA1BAB97178D856F00FEC33A;
-			productRefGroup = FA1BABA1178D856F00FEC33A /* Products */;
+			productRefGroup = FA1BAB97178D856F00FEC33A;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
