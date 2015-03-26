@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <YLProgressBar.h>
 
 #define LESSERGRID_SQUARE_SIZE 9
 #define GREATERGRID_SQUARE_SIZE 4
@@ -17,8 +18,11 @@
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;
 @property (nonatomic, strong) NSMutableArray *lesserGridSquares;
 @property (nonatomic, strong) NSMutableArray *greaterGridSquares;
-@property (nonatomic, strong) UIProgressView *progressBar;
+
+// Timer related
+@property (nonatomic, strong) YLProgressBar *progressBar;
 @property (nonatomic) NSInteger timeUntilNextPulse;
 @property (nonatomic) NSInteger maximumTimeAllowed;
+@property (nonatomic, strong) NSTimer *pulseTimer;
 
 @end

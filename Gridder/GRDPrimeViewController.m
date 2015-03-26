@@ -145,16 +145,20 @@
 #pragma mark -
 
 - (void)setupTimer {
-	self.progressBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+	self.progressBar = [[YLProgressBar alloc] init];
+	self.progressBar.type = YLProgressBarTypeFlat;
+	self.progressBar.hideStripes = YES;
+	self.progressBar.hideTrack = YES;
+	self.progressBar.hideGloss = YES;
 	self.progressBar.progressTintColor = [UIColor orangeColor];
+	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:[UIColor orangeColor], nil];
+	self.progressBar.trackTintColor = self.view.backgroundColor;
 	self.progressBar.center = self.view.center;
-	self.progressBar.frame = CGRectMake(12, 15, self.view.frame.size.width - 24, 50);
-	
-	[self.view addSubview:self.progressBar];
-	
-	GRDAppDelegate *delegate = (GRDAppDelegate *)[[UIApplication sharedApplication] delegate];
+	self.progressBar.frame = CGRectMake(10, 20, self.view.frame.size.width - 20, 30);
+	self.maximumTimeAllowed = 800;
+	self.pulseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
 
-	delegate.pulseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+	[self.view addSubview:self.progressBar];
 }
 
 - (void)timerFireMethod:(NSTimer *)theTimer {
