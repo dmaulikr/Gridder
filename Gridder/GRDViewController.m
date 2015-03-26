@@ -93,11 +93,11 @@
 			[touchedSquare setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"heart.png"]]];
 			[GRDWizard gainALife:self];
 		} else {
-			[touchedSquare setBackgroundColor:[UIColor whiteColor]];
+			[touchedSquare setBackgroundColor: [UIColor colorWithRed:255/255 green:204/255 blue:154/255 alpha:1.0]];
 		}
 		touchedSquare.isActive = YES;
 	} else {
-		[touchedSquare setBackgroundColor:[UIColor blueColor]];
+		[touchedSquare setBackgroundColor:[UIColor orangeColor]];
 		touchedSquare.isActive = NO;
 	}
 	

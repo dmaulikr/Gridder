@@ -26,6 +26,7 @@
 	self.view.backgroundColor = [UIColor whiteColor];
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
+	self.gridColour = [UIColor orangeColor];
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
@@ -64,11 +65,11 @@
 
 	square.layer.masksToBounds = NO;
 	square.tag = count;
-	square.contentScaleFactor = UIViewContentModeScaleAspectFill;
-	square.backgroundColor = [UIColor orangeColor];
+	square.backgroundColor = self.gridColour;
+	square.alpha = 0.3f;
 
 	square.userInteractionEnabled = YES;
-	//[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
+	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
 	
 	[self.greaterGrid addSubview:square];
 	[self.greaterGridSquares addObject:square];
@@ -89,8 +90,8 @@
 	
 	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / 4) - 15, (self.lesserGrid.frame.size.width / 4) - 15);
 	square.tag = count;
-	square.contentScaleFactor = UIViewContentModeScaleAspectFill;
-	square.backgroundColor = [UIColor orangeColor];
+	square.backgroundColor = self.gridColour;
+	square.alpha = 0.3f;
 	
 	[self.lesserGrid addSubview:square];
 	[self.lesserGridSquares addObject:square];
@@ -117,21 +118,11 @@
 	//if (delegate.soundIsActive) [delegate.soundPlayer.squareTouchedSoundPlayer play];
 	GRDSquare *touchedSquare = (GRDSquare *)sender;
 	
-	if(!touchedSquare.isActive) {
-		int randomPop = arc4random() % 100;
-		if(randomPop >= 0 && randomPop <= 3) {
-			[touchedSquare setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"clock-icon.png"]]];
-			//delegate.millisecondsFromGridPulse--;
-			//[GRDWizard gainTime:touchedSquare withGrdVC:self];
-		} else if(randomPop == 100) {
-			[touchedSquare setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"heart.png"]]];
-			//[GRDWizard gainALife:self];
-		} else {
-			[touchedSquare setBackgroundColor:[UIColor whiteColor]];
-		}
+	if (!touchedSquare.isActive) {
+		touchedSquare.alpha = 1.0f;
 		touchedSquare.isActive = YES;
 	} else {
-		[touchedSquare setBackgroundColor:[UIColor blueColor]];
+		touchedSquare.alpha = 0.3f;
 		touchedSquare.isActive = NO;
 	}
 	

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;
 @property (nonatomic, strong) NSMutableArray *lesserGridSquares;
 @property (nonatomic, strong) NSMutableArray *greaterGridSquares;
+@property (nonatomic, strong) UIColor *gridColour;
 
 // Timer related
 @property (nonatomic, strong) YLProgressBar *progressBar;
