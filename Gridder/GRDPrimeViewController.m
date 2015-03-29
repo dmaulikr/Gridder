@@ -195,6 +195,7 @@ typedef NSInteger DifficultyLevel;
 #pragma mark -
 
 - (void)squareTouch:(NSSet *)touches withEvent:(UIEvent *)event {
+	
 	GRDSquare *touchedSquare;
 	UITouch *touch = [touches anyObject];
 	CGPoint firstTouch = [touch locationInView:self.greaterGrid];

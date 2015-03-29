@@ -19,7 +19,7 @@
 		FA07DE3518000A9A0021F2F7 /* bump.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA07DE3318000A9A0021F2F7 /* bump.wav */; };
 		FA13D1DC17FAC2D90009AFE9 /* GRDWizard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA13D1DB17FAC2D90009AFE9 /* GRDWizard.m */; };
 		FA13D1DE17FD52330009AFE9 /* menutheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA13D1DD17FD52330009AFE9 /* menutheme.mp3 */; };
-		FA13D1E017FD6CDE0009AFE9 /* bar-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = FA13D1DF17FD6CDE0009AFE9 /* bar-chart.png */; };
+		FA13D1E017FD6CDE0009AFE9 /* v3_icon_score.png in Resources */ = {isa = PBXBuildFile; fileRef = FA13D1DF17FD6CDE0009AFE9 /* v3_icon_score.png */; };
 		FA13D1E217FD6CE60009AFE9 /* hammer.png in Resources */ = {isa = PBXBuildFile; fileRef = FA13D1E117FD6CE60009AFE9 /* hammer.png */; };
 		FA13D1E417FD93BE0009AFE9 /* race-flag.png in Resources */ = {isa = PBXBuildFile; fileRef = FA13D1E317FD93BE0009AFE9 /* race-flag.png */; };
 		FA1BABA4178D856F00FEC33A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA1BABA3178D856F00FEC33A /* UIKit.framework */; };
@@ -29,7 +29,7 @@
 		FA1BABBD178D857000FEC33A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1BABBB178D857000FEC33A /* MainStoryboard.storyboard */; };
 		FA1BABC0178D857000FEC33A /* GRDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BABBF178D857000FEC33A /* GRDViewController.m */; };
 		FA1BABCA178DE20900FEC33A /* GRDSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BABC9178DE20900FEC33A /* GRDSquare.m */; };
-		FA1BABCE178F4F0300FEC33A /* Heart-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA1BABCD178F4F0300FEC33A /* Heart-icon.png */; };
+		FA1BABCE178F4F0300FEC33A /* v3_icon_lives.png in Resources */ = {isa = PBXBuildFile; fileRef = FA1BABCD178F4F0300FEC33A /* v3_icon_lives.png */; };
 		FA1BABD61790023A00FEC33A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA1BABD51790023A00FEC33A /* AVFoundation.framework */; };
 		FA1BABE11790478B00FEC33A /* GRDMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BABE01790478B00FEC33A /* GRDMenu.m */; };
 		FA1BABE817905F2200FEC33A /* GRDGameOverScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1BABE717905F2200FEC33A /* GRDGameOverScreen.m */; };
@@ -103,7 +103,7 @@
 		FA13D1DA17FAC2D90009AFE9 /* GRDWizard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDWizard.h; sourceTree = "<group>"; };
 		FA13D1DB17FAC2D90009AFE9 /* GRDWizard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDWizard.m; sourceTree = "<group>"; };
 		FA13D1DD17FD52330009AFE9 /* menutheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = menutheme.mp3; sourceTree = "<group>"; };
-		FA13D1DF17FD6CDE0009AFE9 /* bar-chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-chart.png"; sourceTree = "<group>"; };
+		FA13D1DF17FD6CDE0009AFE9 /* v3_icon_score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_icon_score.png; sourceTree = "<group>"; };
 		FA13D1E117FD6CE60009AFE9 /* hammer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hammer.png; sourceTree = "<group>"; };
 		FA13D1E317FD93BE0009AFE9 /* race-flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "race-flag.png"; sourceTree = "<group>"; };
 		FA1BABA0178D856F00FEC33A /* Gridder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gridder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,7 +119,7 @@
 		FA1BABBF178D857000FEC33A /* GRDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GRDViewController.m; sourceTree = "<group>"; };
 		FA1BABC8178DE20900FEC33A /* GRDSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDSquare.h; sourceTree = "<group>"; };
 		FA1BABC9178DE20900FEC33A /* GRDSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDSquare.m; sourceTree = "<group>"; };
-		FA1BABCD178F4F0300FEC33A /* Heart-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Heart-icon.png"; sourceTree = "<group>"; };
+		FA1BABCD178F4F0300FEC33A /* v3_icon_lives.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_icon_lives.png; sourceTree = "<group>"; };
 		FA1BABD51790023A00FEC33A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FA1BABDF1790478B00FEC33A /* GRDMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDMenu.h; sourceTree = "<group>"; };
 		FA1BABE01790478B00FEC33A /* GRDMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDMenu.m; sourceTree = "<group>"; };
@@ -279,7 +279,6 @@
 				FA07DE2517FEB1EC0021F2F7 /* rank.png */,
 				FA07DE2317FE5C100021F2F7 /* arrow-big-01.png */,
 				FA13D1E317FD93BE0009AFE9 /* race-flag.png */,
-				FA13D1DF17FD6CDE0009AFE9 /* bar-chart.png */,
 				FA13D1E117FD6CE60009AFE9 /* hammer.png */,
 				FA07DE2717FFAD000021F2F7 /* speaker-off.png */,
 				FA1BAC371791C7CB00FEC33A /* gridder1.png */,
@@ -300,7 +299,6 @@
 				FA1BAC2B1791AE2A00FEC33A /* pause.png */,
 				FA1BAC2C1791AE2A00FEC33A /* play.png */,
 				FA1BAC291791AE0100FEC33A /* gridBG.png */,
-				FA1BABCD178F4F0300FEC33A /* Heart-icon.png */,
 				FA1BAC091791528500FEC33A /* clock-icon.png */,
 				FA1BAC0B1791530000FEC33A /* speaker-on.png */,
 				FAF687031ABDDFED00915381 /* Images.xcassets */,
@@ -420,6 +418,8 @@
 		FA93E8111AC207B3008F5806 /* 3.0 */ = {
 			isa = PBXGroup;
 			children = (
+				FA13D1DF17FD6CDE0009AFE9 /* v3_icon_score.png */,
+				FA1BABCD178F4F0300FEC33A /* v3_icon_lives.png */,
 				FA93E8161AC20F08008F5806 /* v3_inactive.png */,
 				FA93E8141AC20CC1008F5806 /* v3_bg.png */,
 			);
@@ -481,7 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA1BABBD178D857000FEC33A /* MainStoryboard.storyboard in Resources */,
-				FA1BABCE178F4F0300FEC33A /* Heart-icon.png in Resources */,
+				FA1BABCE178F4F0300FEC33A /* v3_icon_lives.png in Resources */,
 				FA1BAC08179151C000FEC33A /* clock.png in Resources */,
 				FA1BAC0A1791528500FEC33A /* clock-icon.png in Resources */,
 				FA1BAC0C1791530000FEC33A /* speaker-on.png in Resources */,
@@ -517,7 +517,7 @@
 				FA1BAC421791C7CB00FEC33A /* gridder6.png in Resources */,
 				FA13D1DE17FD52330009AFE9 /* menutheme.mp3 in Resources */,
 				FAF687041ABDDFED00915381 /* Images.xcassets in Resources */,
-				FA13D1E017FD6CDE0009AFE9 /* bar-chart.png in Resources */,
+				FA13D1E017FD6CDE0009AFE9 /* v3_icon_score.png in Resources */,
 				FA13D1E217FD6CE60009AFE9 /* hammer.png in Resources */,
 				FA13D1E417FD93BE0009AFE9 /* race-flag.png in Resources */,
 				FA07DE2417FE5C100021F2F7 /* arrow-big-01.png in Resources */,

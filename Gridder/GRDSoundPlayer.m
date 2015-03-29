@@ -24,8 +24,6 @@
 	url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"menubeep2" ofType:@"wav"]];
 	menuBlipSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
 	
-	url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"press" ofType:@"wav"]];
-	squareTouchedSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
 	
 	url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"lifegained" ofType:@"wav"]];
 	lifeGainedSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
@@ -52,6 +50,32 @@
 	url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"bump" ofType:@"wav"]];
 	bumpSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
 	bumpSoundBackupPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+}
+
++ (void)playSound:(SoundPlayer)type {
+	AVAudioPlayer *player;
+	NSURL *url;
+	
+	switch (type) {
+		case SoundPlayerTouchSquare:
+			url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"press" ofType:@"wav"]];
+			break;
+		case SoundPlayerPulseSuccess:
+			url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"pulse" ofType:@"wav"]];
+			break;
+		case SoundPlayerPulseFailure:
+			url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"negativebeep" ofType:@"wav"]];
+			break;
+		default:
+			break;
+	}
+	
+	if (url) {
+		player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+		[player prepareToPlay];
+		[player play];
+	}
+	
 }
 
 @end
