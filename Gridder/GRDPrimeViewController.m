@@ -105,7 +105,6 @@
 	square.delegate = self;
 
 	square.userInteractionEnabled = YES;
-	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
 
 	[self.greaterGrid addSubview:square];
 	[self.greaterGridSquares addObject:square];
@@ -144,44 +143,6 @@
 
 - (BOOL)prefersStatusBarHidden{
 	return YES;
-}
-
-#pragma mark -
-#pragma mark Actions
-#pragma mark -
-
-- (void)squareDragged:(UIPanGestureRecognizer *)sender {
-	//if (delegate.soundIsActive) [delegate.soundPlayer.squareTouchedSoundPlayer play];
-	GRDSquare *touchedSquare = (GRDSquare *)sender.view;
-	
-	if (!touchedSquare.isActive) {
-		touchedSquare.alpha = 1.0f;
-		touchedSquare.isActive = YES;
-	} else {
-		touchedSquare.alpha = 0.3f;
-		touchedSquare.isActive = NO;
-	}
-	
-	if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
-		//[self gridderPulse:YES];
-	}
-}
-
-- (IBAction)touchSquare:(id)sender {
-	//if (delegate.soundIsActive) [delegate.soundPlayer.squareTouchedSoundPlayer play];
-	GRDSquare *touchedSquare = (GRDSquare *)sender;
-	
-	if (!touchedSquare.isActive) {
-		touchedSquare.alpha = 1.0f;
-		touchedSquare.isActive = YES;
-	} else {
-		touchedSquare.alpha = 0.3f;
-		touchedSquare.isActive = NO;
-	}
-	
-	if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
-		//[self gridderPulse:YES];
-	}
 }
 
 #pragma mark - 
