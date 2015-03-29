@@ -25,6 +25,7 @@ typedef NSInteger DifficultyLevel;
 @property (nonatomic) int lives;
 @property (nonatomic) DifficultyLevel difficultyLevel;
 @property (nonatomic) CGRect scoreFaderFrame;
+@property (nonatomic) CGRect lifeFaderFrame;
 
 // Views
 @property (nonatomic, strong) UIButton *pauseButton;
@@ -84,7 +85,9 @@ typedef NSInteger DifficultyLevel;
 	self.transitionFader.hidden = YES;
 	[self.view addSubview:self.transitionFader];
 	[self.view bringSubviewToFront:self.transitionFader];
+	
 	self.scoreFaderFrame = CGRectMake(self.footerView.frame.size.width - 60, self.footerView.frame.origin.y - 20, 100, 50);
+	self.lifeFaderFrame = CGRectMake(self.footerView.frame.origin.x - 15, self.footerView.frame.origin.y - 20, 100, 50);
 
 	self.scoreGainedFader = [[UILabel alloc] initWithFrame:self.scoreFaderFrame];
 	self.scoreGainedFader.backgroundColor = [UIColor clearColor];
@@ -93,6 +96,15 @@ typedef NSInteger DifficultyLevel;
 	self.scoreGainedFader.font = [UIFont systemFontOfSize:30];
 	self.scoreGainedFader.alpha = 0.0f;
 	[self.view addSubview:self.scoreGainedFader];
+	
+	
+	self.lifeFader = [[UILabel alloc] initWithFrame:self.lifeFaderFrame];
+	self.lifeFader.backgroundColor = [UIColor clearColor];
+	self.lifeFader.textAlignment = NSTextAlignmentCenter;
+	self.lifeFader.textColor = self.gridColour;
+	self.lifeFader.font = [UIFont systemFontOfSize:30];
+	self.lifeFader.alpha = 0.0f;
+	[self.view addSubview:self.lifeFader];
 	
 	[self populateFooterView];
 	[self randomiseLesserGrid];
@@ -282,7 +294,7 @@ typedef NSInteger DifficultyLevel;
 	int pointsGained;
 	if (self.difficultyLevel == DifficultyLevelEasy) pointsGained = (500 / (self.timeUntilNextPulse + 1)) + 5 + (self.rounds * 2);
 	else if (self.difficultyLevel == DifficultyLevelMedium)pointsGained = (2000 / (self.timeUntilNextPulse + 1)) + 10 + (self.rounds * 2);
-	else if (self.difficultyLevel == DifficultyLevelHard) pointsGained = (4000 / (self.timeUntilNextPulse + 1)) + 20;
+	else pointsGained = (4000 / (self.timeUntilNextPulse + 1)) + 20;
 
 	self.scoreGainedFader.text = [NSString stringWithFormat:@"+%d!", pointsGained];
 	self.scoreGainedFader.alpha = 1.0f;
@@ -298,6 +310,37 @@ typedef NSInteger DifficultyLevel;
 	[UIView animateWithDuration:1.5 animations:^{ self.scoreGainedFader.alpha = 0.0f;} completion:^(BOOL finished) {
 		self.scoreGainedFader.frame = self.scoreFaderFrame;
 	}];
+}
+
+- (void)loseALife {
+	self.lives--;
+	
+	if (self.lives == 0) {
+		[self.pulseTimer invalidate];
+		self.pulseTimer = nil;
+		[self startNewGame];
+		
+		return;
+	}
+	
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
+	
+	[self.lifeFader setText:@"-1"];
+	self.lifeFader.alpha = 1.0f;
+
+	[UIView beginAnimations:@"ScrollLifeLostAnimation" context:nil];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1.5];
+	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
+	self.lifeFader.frame = CGRectMake(self.lifeFader.frame.origin.x, self.lifeFader.frame.origin.y - 100, self.lifeFader.frame.size.width, self.lifeFader.frame.size.height);
+	[UIView commitAnimations];
+	
+	[UIView animateWithDuration:1.5 animations:^{ self.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
+		self.lifeFader.frame = self.lifeFaderFrame;
+	}];
+	
+	
+
 }
 
 #pragma mark - 
@@ -354,19 +397,6 @@ typedef NSInteger DifficultyLevel;
 		
 		//if(delegate.currentStreak % 10 == 0) [GRDWizard gainALife:self];
 		
-		//self.scoreLabel.text = [NSString stringWithFormat:@"%d", [delegate.currentHighScore intValue]];
-		
-		int newScore = 0;
-		if (self.difficultyLevel == DifficultyLevelEasy) {
-			//newScore = [delegate.currentHighScore integerValue] + (50 / (delegate.millisecondsFromGridPulse + 1)+ 5 + (delegate.numRounds * 2));
-		} else if (self.difficultyLevel == DifficultyLevelMedium) {
-			//newScore = [delegate.currentHighScore integerValue] + (200 / (delegate.millisecondsFromGridPulse + 1) + 10 + (delegate.numRounds * 2));
-		} else if (self.difficultyLevel == DifficultyLevelHard) {
-			//newScore = [delegate.currentHighScore integerValue] + (400 / (delegate.millisecondsFromGridPulse + 1) + 20);
-		}
-		
-		//delegate.currentHighScore = [NSNumber numberWithInteger:newScore];
-		
 		if (self.difficultyLevel == DifficultyLevelEasy) {
 			if (self.maximumTimeAllowed > 300) self.maximumTimeAllowed -= 30;
 		} else if (self.difficultyLevel == DifficultyLevelMedium) {
@@ -376,17 +406,14 @@ typedef NSInteger DifficultyLevel;
 		}
 		
 		
-	} else if (successful == NO) {
+	} else if (!successful) { // Failed to match in time
 		//delegate.soundPlayer.pulseFailSoundPlayer.currentTime = 0;
 		//if (delegate.soundIsActive) [delegate.soundPlayer.pulseFailSoundPlayer play];
 		
 		//delegate.currentStreak = 0;
-		//self.scoreLabel.text = [NSString stringWithFormat:@"%d", [delegate.currentHighScore intValue]];
-		if(self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
-		//[GRDWizard loseALife:self];
+		if (self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
+		[self loseALife];
 	}
-	
-	//self.scoreLabel.text = [NSString stringWithFormat:@"%d", [delegate.currentHighScore integerValue]];
 	
 	self.timeUntilNextPulse = 0;
 	
