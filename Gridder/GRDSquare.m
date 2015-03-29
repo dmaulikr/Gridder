@@ -32,9 +32,19 @@
 - (void)setIsActive:(BOOL)isActive {
 	_isActive = isActive;
 	if (isActive) {
-		self.alpha = 1;
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.2];
+		
+		self.alpha = 1.0f;
+		
+		[UIView commitAnimations];
 	} else {
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.2];
+		
 		self.alpha = 0.3f;
+		
+		[UIView commitAnimations];
 	}
 }
 
