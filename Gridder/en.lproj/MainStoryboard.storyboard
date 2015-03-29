@@ -535,6 +535,26 @@ You should also watch out for ice... </string>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Wn-8s-S2h" userLabel="Footer">
                                 <rect key="frame" x="10" y="443" width="300" height="31"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="v3_icon_lives.png" translatesAutoresizingMaskIntoConstraints="NO" id="p2w-ZA-zsr">
+                                        <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="v3_icon_score.png" translatesAutoresizingMaskIntoConstraints="NO" id="DJl-Ik-TTz">
+                                        <rect key="frame" x="269" y="0.0" width="31" height="31"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdC-68-NMu" userLabel="livesLabel">
+                                        <rect key="frame" x="39" y="5" width="72" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uq8-hM-9h3" userLabel="scoreLabel">
+                                        <rect key="frame" x="187" y="5" width="72" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="3XK-DF-2on"/>
@@ -559,6 +579,8 @@ You should also watch out for ice... </string>
                         <outlet property="footerView" destination="6Wn-8s-S2h" id="GJ5-Hx-nft"/>
                         <outlet property="greaterGrid" destination="Od2-sf-Ook" id="BG3-NX-R4a"/>
                         <outlet property="lesserGrid" destination="ZUP-OK-aex" id="xEA-YU-Zlw"/>
+                        <outlet property="livesLabel" destination="NdC-68-NMu" id="TVG-rJ-EMe"/>
+                        <outlet property="scoreLabel" destination="Uq8-hM-9h3" id="JMi-RX-NLX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r45-rh-ykh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -934,6 +956,8 @@ TESTING Ed Walters</string>
         <image name="rank.png" width="30" height="30"/>
         <image name="speaker-on.png" width="30" height="30"/>
         <image name="star.png" width="30" height="30"/>
+        <image name="v3_icon_lives.png" width="256" height="256"/>
+        <image name="v3_icon_score.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

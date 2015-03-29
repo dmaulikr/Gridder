@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UIView *greaterGrid;
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;
 @property (strong, nonatomic) IBOutlet UIView *footerView;
+@property (strong, nonatomic) IBOutlet UILabel *livesLabel;
+@property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 
 // Objects
 @property (nonatomic, strong) NSMutableArray *lesserGridSquares;

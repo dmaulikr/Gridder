@@ -20,13 +20,17 @@ typedef NSInteger DifficultyLevel;
 
 @interface GRDPrimeViewController ()
 
+@property (nonatomic) int score;
 @property (nonatomic) int rounds;
 @property (nonatomic) int lives;
 @property (nonatomic) DifficultyLevel difficultyLevel;
+@property (nonatomic) CGRect scoreFaderFrame;
 
 // Views
 @property (nonatomic, strong) UIButton *pauseButton;
 @property (nonatomic, strong) UIView *transitionFader;
+@property (nonatomic, strong) UILabel *scoreGainedFader;
+@property (nonatomic, strong) UILabel *lifeFader;
 
 // Achievements
 @property (nonatomic) int onTheEdgeStreak;
@@ -45,10 +49,8 @@ typedef NSInteger DifficultyLevel;
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
 	self.gridColour = [UIColor orangeColor];
-	self.rounds = 0;
-	self.lives = 3;
-	self.onTheEdgeStreak = 0;
-	self.difficultyLevel = DifficultyLevelEasy;
+	
+	[self startNewGame];
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
@@ -82,6 +84,15 @@ typedef NSInteger DifficultyLevel;
 	self.transitionFader.hidden = YES;
 	[self.view addSubview:self.transitionFader];
 	[self.view bringSubviewToFront:self.transitionFader];
+	self.scoreFaderFrame = CGRectMake(self.footerView.frame.size.width - 60, self.footerView.frame.origin.y - 20, 100, 50);
+
+	self.scoreGainedFader = [[UILabel alloc] initWithFrame:self.scoreFaderFrame];
+	self.scoreGainedFader.backgroundColor = [UIColor clearColor];
+	self.scoreGainedFader.textAlignment = NSTextAlignmentCenter;
+	self.scoreGainedFader.textColor = self.gridColour;
+	self.scoreGainedFader.font = [UIFont systemFontOfSize:30];
+	self.scoreGainedFader.alpha = 0.0f;
+	[self.view addSubview:self.scoreGainedFader];
 	
 	[self populateFooterView];
 	[self randomiseLesserGrid];
@@ -160,7 +171,7 @@ typedef NSInteger DifficultyLevel;
 }
 
 #pragma mark - 
-#pragma mark Timer
+#pragma mark TIMER
 #pragma mark -
 
 - (void)setupTimer {
@@ -191,7 +202,7 @@ typedef NSInteger DifficultyLevel;
 }
 
 #pragma mark -
-#pragma mark Touch methods
+#pragma mark TOUCH METHODS
 #pragma mark -
 
 - (void)squareTouch:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -236,12 +247,6 @@ typedef NSInteger DifficultyLevel;
 	}
 }
 
-
-#pragma mark -
-#pragma mark GRDSquare Delegate
-#pragma mark -
-
-
 - (void)squareDidBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self didBeginTouching:touches withEvent:event];
 }
@@ -255,7 +260,7 @@ typedef NSInteger DifficultyLevel;
 }
 
 #pragma mark -
-#pragma mark Animations & Visual
+#pragma mark ANIMATIONS
 #pragma mark -
 
 - (void)pulseTransitionWithSuccess:(BOOL)successful {
@@ -273,9 +278,42 @@ typedef NSInteger DifficultyLevel;
 	 ];
 }
 
+- (void)gainPoints {
+	int pointsGained;
+	if (self.difficultyLevel == DifficultyLevelEasy) pointsGained = (500 / (self.timeUntilNextPulse + 1)) + 5 + (self.rounds * 2);
+	else if (self.difficultyLevel == DifficultyLevelMedium)pointsGained = (2000 / (self.timeUntilNextPulse + 1)) + 10 + (self.rounds * 2);
+	else if (self.difficultyLevel == DifficultyLevelHard) pointsGained = (4000 / (self.timeUntilNextPulse + 1)) + 20;
+
+	self.scoreGainedFader.text = [NSString stringWithFormat:@"+%d!", pointsGained];
+	self.scoreGainedFader.alpha = 1.0f;
+	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", self.score + [self.scoreGainedFader.text intValue]]];
+	
+	[UIView beginAnimations:@"ScrollPointsGainedAnimation" context:nil];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1.5];
+	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
+	self.scoreGainedFader.frame = CGRectMake(self.scoreGainedFader.frame.origin.x, self.scoreGainedFader.frame.origin.y - 100, self.scoreGainedFader.frame.size.width, self.scoreGainedFader.frame.size.height);
+	[UIView commitAnimations];
+	
+	[UIView animateWithDuration:1.5 animations:^{ self.scoreGainedFader.alpha = 0.0f;} completion:^(BOOL finished) {
+		self.scoreGainedFader.frame = self.scoreFaderFrame;
+	}];
+}
+
 #pragma mark - 
-#pragma mark Game methods
+#pragma mark GAME FUNCTIONS
 #pragma mark -
+
+- (void)startNewGame {
+	self.rounds = 0;
+	self.lives = 3;
+	self.score = 0;
+	self.onTheEdgeStreak = 0;
+	self.difficultyLevel = DifficultyLevelEasy;
+	
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
+	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", self.score]];
+}
 
 - (void)pulseWithSuccessfulMatch:(BOOL)successful {
 	if (!self.pulseTimer) {
@@ -283,7 +321,6 @@ typedef NSInteger DifficultyLevel;
 	}
 	
 	self.rounds++;
-	
 	
 	[self randomiseLesserGrid];
 	
@@ -300,7 +337,7 @@ typedef NSInteger DifficultyLevel;
 		//delegate.soundPlayer.pulseSuccessSoundPlayer.currentTime = 0;
 		//if (delegate.soundIsActive) [delegate.soundPlayer.pulseSuccessSoundPlayer play];
 		
-		//[GRDWizard gainPoints:self];
+		[self gainPoints];
 		
 		//delegate.currentStreak++;
 		if (self.rounds > 50) {

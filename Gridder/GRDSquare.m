@@ -49,7 +49,7 @@
 		[UIView commitAnimations];
 	}
 	
-	[GRDSoundPlayer playSound:SoundPlayerTouchSquare];
+	//	[GRDSoundPlayer playSound:SoundPlayerTouchSquare];
 
 }
 
