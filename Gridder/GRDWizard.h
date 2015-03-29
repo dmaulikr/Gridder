@@ -13,8 +13,8 @@
 @class GRDViewController;
 @interface GRDWizard : NSObject
 
-+ (BOOL)gridComparisonMatches:(UIView *)superview1 compareWithSuperview2:(UIView *)superview2;
-+ (GRDSquare *)squareForPosition:(NSInteger)pos fromSuperview:(UIView *)superView;
++ (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid;
++ (GRDSquare *)squareForPosition:(NSInteger)pos fromGrid:(NSMutableArray *)grid;
 + (void)gainALife:(GRDViewController *)grdVC;
 + (void)loseALife:(GRDViewController *)grdVC;
 + (void)gainStreak:(GRDViewController *)grdVC;

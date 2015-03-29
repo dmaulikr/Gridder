@@ -45,6 +45,7 @@ typedef NSInteger DifficultyLevel;
 	self.rounds = 0;
 	self.lives = 3;
 	self.onTheEdgeStreak = 0;
+	self.difficultyLevel = DifficultyLevelEasy;
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
@@ -103,6 +104,7 @@ typedef NSInteger DifficultyLevel;
 	square.backgroundColor = self.gridColour;
 	square.alpha = 0.3f;
 	square.delegate = self;
+	square.isActive = NO;
 
 	square.userInteractionEnabled = YES;
 
@@ -127,6 +129,7 @@ typedef NSInteger DifficultyLevel;
 	square.tag = count;
 	square.backgroundColor = self.gridColour;
 	square.alpha = 0.3f;
+	square.isActive = NO;
 	
 	[self.lesserGrid addSubview:square];
 	[self.lesserGridSquares addObject:square];
@@ -180,7 +183,7 @@ typedef NSInteger DifficultyLevel;
 #pragma mark Touch methods
 #pragma mark -
 
-- (void)didBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)squareTouch:(NSSet *)touches withEvent:(UIEvent *)event {
 	GRDSquare *touchedSquare;
 	UITouch *touch = [touches anyObject];
 	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
@@ -193,14 +196,19 @@ typedef NSInteger DifficultyLevel;
 	if (!touchedSquare.isBeingTouchDragged) {
 		if (touchedSquare) {
 			if (!touchedSquare.isActive) {
-				touchedSquare.alpha = 1.0f;
 				touchedSquare.isActive = YES;
 			} else {
-				touchedSquare.alpha = 0.3f;
 				touchedSquare.isActive = NO;
 			}
 			
-			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+			for (GRDSquare *square in self.lesserGridSquares) {
+				NSLog(@"LESSER GRID POS [%d] isActive:%@ ", square.tag, square.isActive ? @"YES" : @"NO");
+			}
+			for (GRDSquare *square in self.greaterGridSquares) {
+				NSLog(@"GREATER GRID POS [%d] isActive:%@ ", square.tag, square.isActive ? @"YES" : @"NO");
+			}
+			
+			if ([GRDWizard gridComparisonMatches:self.greaterGridSquares compareWith:self.lesserGridSquares]) {
 				[self pulseWithSuccessfulMatch:YES];
 			}
 		}
@@ -209,33 +217,12 @@ typedef NSInteger DifficultyLevel;
 	touchedSquare.isBeingTouchDragged = YES;
 }
 
+- (void)didBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self squareTouch:touches withEvent:event];
+}
+
 - (void)didTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	GRDSquare *touchedSquare;
-	UITouch *touch = [touches anyObject];
-	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
-	for (GRDSquare *square in self.greaterGridSquares) {
-		if (CGRectContainsPoint(square.frame, firstTouch)) {
-			touchedSquare = square;
-		}
-	}
-	
-	if (!touchedSquare.isBeingTouchDragged) {
-		if (touchedSquare) {
-			if (!touchedSquare.isActive) {
-				touchedSquare.alpha = 1.0f;
-				touchedSquare.isActive = YES;
-			} else {
-				touchedSquare.alpha = 0.3f;
-				touchedSquare.isActive = NO;
-			}
-			
-			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
-				[self pulseWithSuccessfulMatch:YES];
-			}
-		}
-	}
-	
-	touchedSquare.isBeingTouchDragged = YES;
+	[self squareTouch:touches withEvent:event];
 }
 
 - (void)didEndTouching:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -344,12 +331,10 @@ typedef NSInteger DifficultyLevel;
 - (void)randomiseLesserGrid {
 	int totalActive = 0;
 	
-	for (int i = 0; i < [self.lesserGridSquares count]; i++) {
-		GRDSquare *square = [self.lesserGridSquares objectAtIndex:i];
+	for (GRDSquare *square in self.lesserGridSquares) {
 		int flip = arc4random() % 2;
 		if (flip == 0) {
 			square.isActive = NO;
-			[square setBackgroundColor: [UIColor blueColor]];
 		} else {
 			totalActive++;
 			if (self.difficultyLevel == DifficultyLevelEasy) {
@@ -368,6 +353,13 @@ typedef NSInteger DifficultyLevel;
 		}
 	}
 	
+	for (GRDSquare *square in self.lesserGridSquares) {
+		NSLog(@"LESSER GRID POS (%d) isActive:%@ ", square.tag, square.isActive ? @"YES" : @"NO");
+	}
+	for (GRDSquare *square in self.greaterGridSquares) {
+		NSLog(@"GREATER GRID POS (%d) isActive:%@ ", square.tag, square.isActive ? @"YES" : @"NO");
+	}
+	
 	/*if (glassLevel > 0) {
 		if (arc4random() % 2 == 1) {
 			for (int i = 0; i < glassLevel; i++) {
@@ -376,8 +368,8 @@ typedef NSInteger DifficultyLevel;
 			}
 		}
 	}*/
-	for (int o = 0; o < [self.greaterGridSquares count]; o++) { // Reset Greater Grid
-		GRDSquare *square = [self.greaterGridSquares objectAtIndex:o];
+	
+	for (GRDSquare *square in self.greaterGridSquares) {
 		square.isActive = NO;
 	}
 }

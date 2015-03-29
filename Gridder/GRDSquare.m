@@ -10,21 +10,32 @@
 #import "GRDViewController.h"
 
 @implementation GRDSquare
-@synthesize isActive;
+@synthesize isActive = _isActive;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-		self.isActive = NO;
+		
 		self.userInteractionEnabled = YES;
-		    }
+	}
     return self;
 }
 
 - (void)awakeFromNib {
-	self.isActive = NO;
 	self.userInteractionEnabled = YES;
+}
+
+- (BOOL)getIsActive {
+	return self.isActive;
+}
+
+- (void)setIsActive:(BOOL)isActive {
+	_isActive = isActive;
+	if (isActive) {
+		self.alpha = 1;
+	} else {
+		self.alpha = 0.3f;
+	}
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

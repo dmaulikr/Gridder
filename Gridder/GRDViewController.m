@@ -101,9 +101,9 @@
 		touchedSquare.isActive = NO;
 	}
 	
-	if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
-		[self gridderPulse:YES];
-	}
+	//if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+	//	[self gridderPulse:YES];
+	//}
 }
 
 
@@ -342,9 +342,9 @@
 		touchedSquare.isActive = NO;
 	}
 
-	if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
-		[self gridderPulse:YES];
-	}
+	//if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+	//	[self gridderPulse:YES];
+	//}
 }
 
 - (void)foregroundTransition {

@@ -11,9 +11,20 @@
 
 @implementation GRDWizard
 
-+ (BOOL)gridComparisonMatches:(UIView *)superview1 compareWithSuperview2:(UIView *)superview2 {
++ (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid {
+	
 	for (int x = 1; x < 16; x++) {
-		if ([GRDWizard squareForPosition:x fromSuperview:superview1].isActive != [GRDWizard squareForPosition:x fromSuperview:superview2].isActive) {
+		for (GRDSquare *square in lesserGrid) {
+			if (square.tag == x) {
+				NSLog(@"LESSER GRID POS <%d> isActive:%@ ", x, square.isActive ? @"YES" : @"NO");
+			}
+		}
+		for (GRDSquare *square in greaterGrid) {
+			if (square.tag == x) {
+				NSLog(@"GREATER GRID POS <%d> isActive:%@ ", x, square.isActive ? @"YES" : @"NO");
+			}
+		}
+		if ([GRDWizard squareForPosition:x fromGrid:greaterGrid].isActive != [GRDWizard squareForPosition:x fromGrid:lesserGrid].isActive) {
 			return NO;
 		}
 	}
@@ -21,12 +32,10 @@
 	return YES;
 }
 
-+ (GRDSquare *)squareForPosition:(NSInteger)pos fromSuperview:(UIView *)superView {
-	for (GRDSquare *square in [superView subviews]) {
-		if ([square isKindOfClass:[GRDSquare class]]) {
-			if (square.tag == pos) {
-				return square;
-			}
++ (GRDSquare *)squareForPosition:(NSInteger)pos fromGrid:(NSMutableArray *)grid {
+	for (GRDSquare *square in grid) {
+		if (square.tag == pos) {
+			return square;
 		}
 	}
 	

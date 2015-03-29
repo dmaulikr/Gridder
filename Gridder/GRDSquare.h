@@ -18,8 +18,8 @@
 
 @interface GRDSquare : UIButton
 
+@property (nonatomic) BOOL isActive;
 @property (weak, nonatomic) id<GRDSquareProtocol> delegate;
-@property BOOL isActive;
 @property BOOL isBeingTouchDragged;
 
 @end
