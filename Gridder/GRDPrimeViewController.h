@@ -18,6 +18,7 @@
 // Views
 @property (strong, nonatomic) IBOutlet UIView *greaterGrid;
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;
+@property (strong, nonatomic) IBOutlet UIView *footerView;
 
 // Objects
 @property (nonatomic, strong) NSMutableArray *lesserGridSquares;

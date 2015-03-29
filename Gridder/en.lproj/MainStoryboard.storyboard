@@ -527,25 +527,36 @@ You should also watch out for ice... </string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUP-OK-aex" userLabel="Lesser Grid">
-                                <rect key="frame" x="120" y="380" width="80" height="80"/>
+                                <rect key="frame" x="120" y="366" width="80" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZUP-OK-aex" secondAttribute="height" multiplier="1:1" id="iVq-Td-3U7"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Wn-8s-S2h" userLabel="Footer">
+                                <rect key="frame" x="10" y="442" width="300" height="31"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="3XK-DF-2on"/>
+                                    <constraint firstAttribute="height" constant="31" id="mcZ-TS-sPB"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Od2-sf-Ook" firstAttribute="top" secondItem="Nsu-Sp-FjE" secondAttribute="bottom" constant="65" id="5HU-Pz-tgu"/>
+                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="6Wn-8s-S2h" secondAttribute="bottom" constant="7" id="Fhw-RK-r86"/>
+                            <constraint firstAttribute="centerX" secondItem="6Wn-8s-S2h" secondAttribute="centerX" id="HdY-X4-8hN"/>
                             <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="Od2-sf-Ook" secondAttribute="centerX" id="Ic4-us-0LH"/>
                             <constraint firstItem="Od2-sf-Ook" firstAttribute="leading" secondItem="P6l-MS-VRZ" secondAttribute="leading" constant="10" id="JrU-Vn-y6h"/>
-                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="ZUP-OK-aex" secondAttribute="bottom" constant="20" id="NSj-ue-Zxr"/>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="P6l-MS-VRZ" secondAttribute="top" constant="380" id="VgY-xX-JDw"/>
+                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="ZUP-OK-aex" secondAttribute="bottom" constant="34" id="NSj-ue-Zxr"/>
+                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="P6l-MS-VRZ" secondAttribute="top" constant="366" id="VgY-xX-JDw"/>
                             <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="P6l-MS-VRZ" secondAttribute="centerX" id="qTW-41-c08"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="footerView" destination="6Wn-8s-S2h" id="GJ5-Hx-nft"/>
                         <outlet property="greaterGrid" destination="Od2-sf-Ook" id="BG3-NX-R4a"/>
                         <outlet property="lesserGrid" destination="ZUP-OK-aex" id="xEA-YU-Zlw"/>
                     </connections>

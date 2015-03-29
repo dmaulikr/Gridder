@@ -23,6 +23,9 @@ typedef NSInteger DifficultyLevel;
 @property (nonatomic) int rounds;
 @property (nonatomic) int lives;
 @property (nonatomic) DifficultyLevel difficultyLevel;
+
+// Views
+@property (nonatomic, strong) UIButton *pauseButton;
 @property (nonatomic, strong) UIView *transitionFader;
 
 // Achievements
@@ -49,8 +52,6 @@ typedef NSInteger DifficultyLevel;
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
-	
-	[self setupTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,6 +82,16 @@ typedef NSInteger DifficultyLevel;
 	self.transitionFader.hidden = YES;
 	[self.view addSubview:self.transitionFader];
 	[self.view bringSubviewToFront:self.transitionFader];
+	
+	[self populateFooterView];
+	[self randomiseLesserGrid];
+}
+
+- (void)populateFooterView {
+	self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake((self.footerView.frame.size.width / 2) - 47, 0, 100, self.footerView.frame.size.height)];
+	[self.pauseButton setTitle:@"MENU" forState:UIControlStateNormal];
+	[self.pauseButton setBackgroundColor:self.gridColour];
+	[self.footerView addSubview:self.pauseButton];
 }
 
 - (void)generateGrids {
@@ -111,7 +122,7 @@ typedef NSInteger DifficultyLevel;
 	[self.greaterGrid addSubview:square];
 	[self.greaterGridSquares addObject:square];
 	if (count % 4 == 0) {
-		if(count >= 16) return;
+		if (count >= 16) return;
 		yOffset += square.bounds.size.height;
 		[self generateGreaterGridWithXOffset:0 withYOffset:yOffset + 15 fromCount:count + 1];
 		return;
@@ -135,7 +146,7 @@ typedef NSInteger DifficultyLevel;
 	[self.lesserGridSquares addObject:square];
 	
 	if (count % 4 == 0) {
-		if(count >= 16) return;
+		if (count >= 16) return;
 		yOffset += square.bounds.size.height;
 		[self generateLesserGridWithXOffset:0 withYOffset:yOffset + 10 fromCount:count + 1];
 		return;
@@ -201,13 +212,6 @@ typedef NSInteger DifficultyLevel;
 				touchedSquare.isActive = NO;
 			}
 			
-			for (GRDSquare *square in self.lesserGridSquares) {
-				NSLog(@"LESSER GRID POS [%d] isActive:%@ ", square.tag, square.isActive ? @"YES" : @"NO");
-			}
-			for (GRDSquare *square in self.greaterGridSquares) {
-				NSLog(@"GREATER GRID POS [%d] isActive:%@ ", square.tag, square.isActive ? @"YES" : @"NO");
-			}
-			
 			if ([GRDWizard gridComparisonMatches:self.greaterGridSquares compareWith:self.lesserGridSquares]) {
 				[self pulseWithSuccessfulMatch:YES];
 			}
@@ -249,16 +253,36 @@ typedef NSInteger DifficultyLevel;
 	[self didTouchesMoved:touches withEvent:event];
 }
 
+#pragma mark -
+#pragma mark Animations & Visual
+#pragma mark -
+
+- (void)pulseTransitionWithSuccess:(BOOL)successful {
+	self.transitionFader.backgroundColor = successful ? self.view.backgroundColor : [UIColor redColor];
+	self.transitionFader.hidden = NO;
+	[UIView animateWithDuration:0.2
+						  delay:0.0
+						options:0
+					 animations:^{
+						 self.transitionFader.alpha = 1.0f;
+					 } completion:^(BOOL finished) {
+						 self.transitionFader.hidden = YES;
+						 self.transitionFader.alpha = 0;
+					 }
+	 ];
+}
+
 #pragma mark - 
 #pragma mark Game methods
 #pragma mark -
 
 - (void)pulseWithSuccessfulMatch:(BOOL)successful {
+	if (!self.pulseTimer) {
+		[self setupTimer];
+	}
+	
 	self.rounds++;
 	
-	self.transitionFader.backgroundColor = successful ? self.view.backgroundColor : [UIColor redColor];
-	self.transitionFader.hidden = NO;
-	[UIView animateWithDuration:0.2 delay:0.0 options:0 animations:^{ self.transitionFader.alpha = 1.0f; } completion:^(BOOL finished) { self.transitionFader.hidden = YES; self.transitionFader.alpha = 0;}];
 	
 	[self randomiseLesserGrid];
 	
@@ -327,6 +351,9 @@ typedef NSInteger DifficultyLevel;
 	//self.scoreLabel.text = [NSString stringWithFormat:@"%d", [delegate.currentHighScore integerValue]];
 	
 	self.timeUntilNextPulse = 0;
+	
+	[self pulseTransitionWithSuccess:successful];
+
 }
 
 - (void)randomiseLesserGrid {
