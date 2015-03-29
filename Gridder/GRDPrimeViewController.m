@@ -23,6 +23,7 @@ typedef NSInteger DifficultyLevel;
 @property (nonatomic) int score;
 @property (nonatomic) int rounds;
 @property (nonatomic) int lives;
+@property (nonatomic) int streak;
 @property (nonatomic) DifficultyLevel difficultyLevel;
 @property (nonatomic) CGRect scoreFaderFrame;
 @property (nonatomic) CGRect lifeFaderFrame;
@@ -338,9 +339,26 @@ typedef NSInteger DifficultyLevel;
 	[UIView animateWithDuration:1.5 animations:^{ self.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
 		self.lifeFader.frame = self.lifeFaderFrame;
 	}];
-	
-	
+}
 
+- (void)gainALife {
+	self.lives++;
+	
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
+	
+	[self.lifeFader setText:@"+1"];
+	self.lifeFader.alpha = 1.0f;
+	
+	[UIView beginAnimations:@"ScrollLifeGainedAnimation" context:nil];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1.5];
+	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
+	self.lifeFader.frame = CGRectMake(self.lifeFader.frame.origin.x, self.lifeFader.frame.origin.y - 100, self.lifeFader.frame.size.width, self.lifeFader.frame.size.height);
+	[UIView commitAnimations];
+	
+	[UIView animateWithDuration:1.5 animations:^{ self.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
+		self.lifeFader.frame = self.lifeFaderFrame;
+	}];
 }
 
 #pragma mark - 
@@ -351,6 +369,7 @@ typedef NSInteger DifficultyLevel;
 	self.rounds = 0;
 	self.lives = 3;
 	self.score = 0;
+	self.streak = 0;
 	self.onTheEdgeStreak = 0;
 	self.difficultyLevel = DifficultyLevelEasy;
 	
@@ -382,7 +401,8 @@ typedef NSInteger DifficultyLevel;
 		
 		[self gainPoints];
 		
-		//delegate.currentStreak++;
+		self.streak++;
+		
 		if (self.rounds > 50) {
 			self.difficultyLevel = DifficultyLevelHard;
 		} else if (self.rounds > 10) {
@@ -395,7 +415,7 @@ typedef NSInteger DifficultyLevel;
 		
 		//if(delegate.currentStreak > delegate.highestStreak) delegate.highestStreak++;
 		
-		//if(delegate.currentStreak % 10 == 0) [GRDWizard gainALife:self];
+		if (self.streak % 10 == 0) [self gainALife];
 		
 		if (self.difficultyLevel == DifficultyLevelEasy) {
 			if (self.maximumTimeAllowed > 300) self.maximumTimeAllowed -= 30;
@@ -410,7 +430,7 @@ typedef NSInteger DifficultyLevel;
 		//delegate.soundPlayer.pulseFailSoundPlayer.currentTime = 0;
 		//if (delegate.soundIsActive) [delegate.soundPlayer.pulseFailSoundPlayer play];
 		
-		//delegate.currentStreak = 0;
+		self.streak = 0;
 		if (self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
 		[self loseALife];
 	}
