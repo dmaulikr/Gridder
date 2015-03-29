@@ -220,7 +220,32 @@
 #pragma mark -
 
 - (void)squareDidBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+	GRDSquare *touchedSquare;
+	UITouch *touch = [touches anyObject];
+	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
+	for (GRDSquare *square in self.greaterGridSquares) {
+		if (CGRectContainsPoint(square.frame, firstTouch)) {
+			touchedSquare = square;
+		}
+	}
 	
+	if (!touchedSquare.isBeingTouchDragged) {
+		if (touchedSquare) {
+			if (!touchedSquare.isActive) {
+				touchedSquare.alpha = 1.0f;
+				touchedSquare.isActive = YES;
+			} else {
+				touchedSquare.alpha = 0.3f;
+				touchedSquare.isActive = NO;
+			}
+			
+			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+				//[self gridderPulse:YES];
+			}
+		}
+	}
+	
+	touchedSquare.isBeingTouchDragged = YES;
 }
 
 - (void)squareDidEndTouching:(NSSet *)touches withEvent:(UIEvent *)event {
