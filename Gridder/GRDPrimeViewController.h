@@ -15,8 +15,11 @@
 
 @interface GRDPrimeViewController : UIViewController <GRDSquareProtocol>
 
+// Views
 @property (strong, nonatomic) IBOutlet UIView *greaterGrid;
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;
+
+// Objects
 @property (nonatomic, strong) NSMutableArray *lesserGridSquares;
 @property (nonatomic, strong) NSMutableArray *greaterGridSquares;
 @property (nonatomic, strong) UIColor *gridColour;

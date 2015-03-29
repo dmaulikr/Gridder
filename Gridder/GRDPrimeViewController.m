@@ -10,7 +10,23 @@
 #import "GRDWizard.h"
 #import "GRDAppDelegate.h"
 
+enum {
+	DifficultyLevelEasy = 0,
+	DifficultyLevelMedium = 1,
+	DifficultyLevelHard = 1
+};
+
+typedef NSInteger DifficultyLevel;
+
 @interface GRDPrimeViewController ()
+
+@property (nonatomic) int rounds;
+@property (nonatomic) int lives;
+@property (nonatomic) DifficultyLevel difficultyLevel;
+@property (nonatomic, strong) UIView *transitionFader;
+
+// Achievements
+@property (nonatomic) int onTheEdgeStreak;
 
 @end
 
@@ -26,7 +42,9 @@
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
 	self.gridColour = [UIColor orangeColor];
-
+	self.rounds = 0;
+	self.lives = 3;
+	self.onTheEdgeStreak = 0;
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
@@ -40,47 +58,29 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	[self generateGrids];
+	[self drawGUI];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	GRDSquare *touchedSquare;
-	UITouch *touch = [touches anyObject];
-	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
-	for (GRDSquare *square in self.greaterGridSquares) {
-		if (CGRectContainsPoint(square.frame, firstTouch)) {
-			touchedSquare = square;
-		}
-	}
-	
-	if (!touchedSquare.isBeingTouchDragged) {
-		if (touchedSquare) {
-			if (!touchedSquare.isActive) {
-				touchedSquare.alpha = 1.0f;
-				touchedSquare.isActive = YES;
-			} else {
-				touchedSquare.alpha = 0.3f;
-				touchedSquare.isActive = NO;
-			}
-			
-			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
-				//[self gridderPulse:YES];
-			}
-		}
-	}
-	
-	touchedSquare.isBeingTouchDragged = YES;
+	[self didTouchesMoved:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	for (GRDSquare *square in self.greaterGridSquares) {
-		square.isBeingTouchDragged = NO;
-	}
+	[self didEndTouching:touches withEvent:event];
 }
 
 #pragma mark -
 #pragma mark GUI
 #pragma mark -
+
+- (void)drawGUI {
+	[self generateGrids];
+	self.transitionFader = [[UIView alloc] initWithFrame:self.view.frame];
+	self.transitionFader.backgroundColor = self.view.backgroundColor;
+	self.transitionFader.hidden = YES;
+	[self.view addSubview:self.transitionFader];
+	[self.view bringSubviewToFront:self.transitionFader];
+}
 
 - (void)generateGrids {
 	self.greaterGridSquares = [[NSMutableArray alloc] init];
@@ -170,17 +170,17 @@
 	self.timeUntilNextPulse += 10;
 	if (self.timeUntilNextPulse >= self.maximumTimeAllowed) {
 		self.timeUntilNextPulse = 0;
-		//[self gridderPulse:NO];
+		[self pulseWithSuccessfulMatch:NO];
 	}
 	
 	[self.progressBar setProgress:((float)self.timeUntilNextPulse / self.maximumTimeAllowed) animated:YES];
 }
 
 #pragma mark -
-#pragma mark GRDSquare Delegate
+#pragma mark Touch methods
 #pragma mark -
 
-- (void)squareDidBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)didBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event {
 	GRDSquare *touchedSquare;
 	UITouch *touch = [touches anyObject];
 	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
@@ -201,7 +201,7 @@
 			}
 			
 			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
-				//[self gridderPulse:YES];
+				[self pulseWithSuccessfulMatch:YES];
 			}
 		}
 	}
@@ -209,39 +209,179 @@
 	touchedSquare.isBeingTouchDragged = YES;
 }
 
-- (void)squareDidEndTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)didTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	GRDSquare *touchedSquare;
+	UITouch *touch = [touches anyObject];
+	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
+	for (GRDSquare *square in self.greaterGridSquares) {
+		if (CGRectContainsPoint(square.frame, firstTouch)) {
+			touchedSquare = square;
+		}
+	}
+	
+	if (!touchedSquare.isBeingTouchDragged) {
+		if (touchedSquare) {
+			if (!touchedSquare.isActive) {
+				touchedSquare.alpha = 1.0f;
+				touchedSquare.isActive = YES;
+			} else {
+				touchedSquare.alpha = 0.3f;
+				touchedSquare.isActive = NO;
+			}
+			
+			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+				[self pulseWithSuccessfulMatch:YES];
+			}
+		}
+	}
+	
+	touchedSquare.isBeingTouchDragged = YES;
+}
+
+- (void)didEndTouching:(NSSet *)touches withEvent:(UIEvent *)event {
 	for (GRDSquare *square in self.greaterGridSquares) {
 		square.isBeingTouchDragged = NO;
 	}
 }
 
-- (void)squareDidTouchesMove:(NSSet *)touches withEvent:(UIEvent *)event {
-	GRDSquare *touchedSquare;
-	UITouch *touch = [touches anyObject];
-	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
-	for (GRDSquare *square in self.greaterGridSquares) {
-		if (CGRectContainsPoint(square.frame, firstTouch)) {
-			touchedSquare = square;
-		}
-	}
-	
-	if (!touchedSquare.isBeingTouchDragged) {
-		if (touchedSquare) {
-			if (!touchedSquare.isActive) {
-				touchedSquare.alpha = 1.0f;
-				touchedSquare.isActive = YES;
-			} else {
-				touchedSquare.alpha = 0.3f;
-				touchedSquare.isActive = NO;
-			}
-			
-			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
-				//[self gridderPulse:YES];
-			}
-		}
-	}
-	
-	touchedSquare.isBeingTouchDragged = YES;
+
+#pragma mark -
+#pragma mark GRDSquare Delegate
+#pragma mark -
+
+
+- (void)squareDidBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self didBeginTouching:touches withEvent:event];
 }
+
+- (void)squareDidEndTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self didEndTouching:touches withEvent:event];
+}
+
+- (void)squareDidTouchesMove:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self didTouchesMoved:touches withEvent:event];
+}
+
+#pragma mark - 
+#pragma mark Game methods
+#pragma mark -
+
+- (void)pulseWithSuccessfulMatch:(BOOL)successful {
+	self.rounds++;
+	
+	self.transitionFader.hidden = NO;
+	[UIView animateWithDuration:0.2 delay:0.0 options:0 animations:^{ self.transitionFader.alpha = 1.0f; } completion:^(BOOL finished) { self.transitionFader.hidden = YES; self.transitionFader.alpha = 0;}];
+	
+	[self randomiseLesserGrid];
+	
+	if(successful) {
+		if (self.lives == 1) {
+			self.onTheEdgeStreak++;
+			if (self.onTheEdgeStreak == 10) {
+				//[delegate.menuVC.gameCenterManager submitAchievement:kAchievementOnTheEdge percentComplete:100];
+			}
+		} else {
+			self.onTheEdgeStreak = 0;
+		}
+		
+		//delegate.soundPlayer.pulseSuccessSoundPlayer.currentTime = 0;
+		//if (delegate.soundIsActive) [delegate.soundPlayer.pulseSuccessSoundPlayer play];
+		
+		//[GRDWizard gainPoints:self];
+		
+		//delegate.currentStreak++;
+		if (self.rounds > 50) {
+			self.difficultyLevel = DifficultyLevelHard;
+		} else if (self.rounds > 10) {
+			self.difficultyLevel = DifficultyLevelMedium;
+		}
+		
+		//if (glassLevel < 3) {
+		//	glassLevel = (delegate.numRounds + 1) / 6;
+		//}
+		
+		//if(delegate.currentStreak > delegate.highestStreak) delegate.highestStreak++;
+		
+		//if(delegate.currentStreak % 10 == 0) [GRDWizard gainALife:self];
+		
+		//self.scoreLabel.text = [NSString stringWithFormat:@"%d", [delegate.currentHighScore intValue]];
+		
+		int newScore = 0;
+		if (self.difficultyLevel == DifficultyLevelEasy) {
+			//newScore = [delegate.currentHighScore integerValue] + (50 / (delegate.millisecondsFromGridPulse + 1)+ 5 + (delegate.numRounds * 2));
+		} else if (self.difficultyLevel == DifficultyLevelMedium) {
+			//newScore = [delegate.currentHighScore integerValue] + (200 / (delegate.millisecondsFromGridPulse + 1) + 10 + (delegate.numRounds * 2));
+		} else if (self.difficultyLevel == DifficultyLevelHard) {
+			//newScore = [delegate.currentHighScore integerValue] + (400 / (delegate.millisecondsFromGridPulse + 1) + 20);
+		}
+		
+		//delegate.currentHighScore = [NSNumber numberWithInteger:newScore];
+		
+		if (self.difficultyLevel == DifficultyLevelEasy) {
+			if (self.maximumTimeAllowed > 300) self.maximumTimeAllowed -= 30;
+		} else if (self.difficultyLevel == DifficultyLevelMedium) {
+			if (self.maximumTimeAllowed > 280) self.maximumTimeAllowed -= 30;
+		} else if (self.difficultyLevel == DifficultyLevelHard) {
+			if (self.maximumTimeAllowed > 250) self.maximumTimeAllowed -= 30;
+		}
+		
+		
+	} else if (successful == NO) {
+		//delegate.soundPlayer.pulseFailSoundPlayer.currentTime = 0;
+		//if (delegate.soundIsActive) [delegate.soundPlayer.pulseFailSoundPlayer play];
+		
+		//delegate.currentStreak = 0;
+		//self.scoreLabel.text = [NSString stringWithFormat:@"%d", [delegate.currentHighScore intValue]];
+		if(self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
+		//[GRDWizard loseALife:self];
+	}
+	
+	//self.scoreLabel.text = [NSString stringWithFormat:@"%d", [delegate.currentHighScore integerValue]];
+	
+	self.timeUntilNextPulse = 0;
+}
+
+- (void)randomiseLesserGrid {
+	int totalActive = 0;
+	
+	for (int i = 0; i < [self.lesserGridSquares count]; i++) {
+		GRDSquare *square = [self.lesserGridSquares objectAtIndex:i];
+		int flip = arc4random() % 2;
+		if (flip == 0) {
+			square.isActive = NO;
+			[square setBackgroundColor: [UIColor blueColor]];
+		} else {
+			totalActive++;
+			if (self.difficultyLevel == DifficultyLevelEasy) {
+				if (totalActive <= 4) {
+					square.isActive = YES;
+				}
+			} else if (self.difficultyLevel == DifficultyLevelMedium) {
+				if (totalActive <= 4) {
+					square.isActive = YES;
+				}
+			} else if (self.difficultyLevel == DifficultyLevelHard) {
+				if (totalActive <= 5) {
+					square.isActive = YES;
+				}
+			}
+		}
+	}
+	
+	/*if (glassLevel > 0) {
+		if (arc4random() % 2 == 1) {
+			for (int i = 0; i < glassLevel; i++) {
+				GRDGlassSquare *glassSquare = [self.glassSquares objectAtIndex:arc4random() % [self.glassSquares count]];
+				glassSquare.hidden = NO;
+			}
+		}
+	}*/
+	for (int o = 0; o < [self.greaterGridSquares count]; o++) { // Reset Greater Grid
+		GRDSquare *square = [self.greaterGridSquares objectAtIndex:o];
+		square.isActive = NO;
+	}
+}
+
+
 
 @end
