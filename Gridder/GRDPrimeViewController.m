@@ -125,7 +125,7 @@ typedef NSInteger DifficultyLevel;
 													   owner:self
 													 options:nil] lastObject];
 	
-	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / 4) - 15, (self.lesserGrid.frame.size.width / 4) - 15);
+	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / 4) - 10, (self.lesserGrid.frame.size.width / 4) - 10);
 	square.tag = count;
 	square.backgroundColor = self.gridColour;
 	square.alpha = 0.3f;
@@ -137,7 +137,7 @@ typedef NSInteger DifficultyLevel;
 	if (count % 4 == 0) {
 		if(count >= 16) return;
 		yOffset += square.bounds.size.height;
-		[self generateLesserGridWithXOffset:0 withYOffset:yOffset + 15 fromCount:count + 1];
+		[self generateLesserGridWithXOffset:0 withYOffset:yOffset + 10 fromCount:count + 1];
 		return;
 	}
 	
@@ -256,6 +256,7 @@ typedef NSInteger DifficultyLevel;
 - (void)pulseWithSuccessfulMatch:(BOOL)successful {
 	self.rounds++;
 	
+	self.transitionFader.backgroundColor = successful ? self.view.backgroundColor : [UIColor redColor];
 	self.transitionFader.hidden = NO;
 	[UIView animateWithDuration:0.2 delay:0.0 options:0 animations:^{ self.transitionFader.alpha = 1.0f; } completion:^(BOOL finished) { self.transitionFader.hidden = YES; self.transitionFader.alpha = 0;}];
 	
@@ -332,7 +333,7 @@ typedef NSInteger DifficultyLevel;
 	int totalActive = 0;
 	
 	for (GRDSquare *square in self.lesserGridSquares) {
-		int flip = arc4random() % 2;
+		int flip = arc4random_uniform(2);
 		if (flip == 0) {
 			square.isActive = NO;
 		} else {
@@ -351,13 +352,6 @@ typedef NSInteger DifficultyLevel;
 				}
 			}
 		}
-	}
-	
-	for (GRDSquare *square in self.lesserGridSquares) {
-		NSLog(@"LESSER GRID POS (%d) isActive:%@ ", square.tag, square.isActive ? @"YES" : @"NO");
-	}
-	for (GRDSquare *square in self.greaterGridSquares) {
-		NSLog(@"GREATER GRID POS (%d) isActive:%@ ", square.tag, square.isActive ? @"YES" : @"NO");
 	}
 	
 	/*if (glassLevel > 0) {

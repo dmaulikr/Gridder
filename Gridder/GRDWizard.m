@@ -14,16 +14,6 @@
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid {
 	
 	for (int x = 1; x < 16; x++) {
-		for (GRDSquare *square in lesserGrid) {
-			if (square.tag == x) {
-				NSLog(@"LESSER GRID POS <%d> isActive:%@ ", x, square.isActive ? @"YES" : @"NO");
-			}
-		}
-		for (GRDSquare *square in greaterGrid) {
-			if (square.tag == x) {
-				NSLog(@"GREATER GRID POS <%d> isActive:%@ ", x, square.isActive ? @"YES" : @"NO");
-			}
-		}
 		if ([GRDWizard squareForPosition:x fromGrid:greaterGrid].isActive != [GRDWizard squareForPosition:x fromGrid:lesserGrid].isActive) {
 			return NO;
 		}
