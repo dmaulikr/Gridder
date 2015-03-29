@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <YLProgressBar.h>
+#import "GRDSquare.h"
 
 #define LESSERGRID_SQUARE_SIZE 9
 #define GREATERGRID_SQUARE_SIZE 4
 
-@interface GRDPrimeViewController : UIViewController
+@interface GRDPrimeViewController : UIViewController <GRDSquareProtocol>
 
 @property (strong, nonatomic) IBOutlet UIView *greaterGrid;
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;

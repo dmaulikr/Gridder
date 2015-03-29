@@ -27,12 +27,21 @@
 	self.userInteractionEnabled = YES;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self.delegate squareDidBeginTouching:touches withEvent:event];
+
 }
-*/
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	id<GRDSquareProtocol> strongDelegate = self.delegate;
+	
+	if ([strongDelegate respondsToSelector:@selector(squareDidTouchesMove:withEvent:)]) {
+		[strongDelegate squareDidTouchesMove:touches withEvent:event];
+	}
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self.delegate squareDidEndTouching:touches withEvent:event];
+}
 
 @end

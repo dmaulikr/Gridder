@@ -7,7 +7,6 @@
 //
 
 #import "GRDPrimeViewController.h"
-#import "GRDSquare.h"
 #import "GRDWizard.h"
 #import "GRDAppDelegate.h"
 
@@ -27,6 +26,7 @@
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
 	self.gridColour = [UIColor orangeColor];
+
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
@@ -41,6 +41,41 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self generateGrids];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	GRDSquare *touchedSquare;
+	UITouch *touch = [touches anyObject];
+	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
+	for (GRDSquare *square in self.greaterGridSquares) {
+		if (CGRectContainsPoint(square.frame, firstTouch)) {
+			touchedSquare = square;
+		}
+	}
+	
+	if (!touchedSquare.isBeingTouchDragged) {
+		if (touchedSquare) {
+			if (!touchedSquare.isActive) {
+				touchedSquare.alpha = 1.0f;
+				touchedSquare.isActive = YES;
+			} else {
+				touchedSquare.alpha = 0.3f;
+				touchedSquare.isActive = NO;
+			}
+			
+			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+				//[self gridderPulse:YES];
+			}
+		}
+	}
+	
+	touchedSquare.isBeingTouchDragged = YES;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	for (GRDSquare *square in self.greaterGridSquares) {
+		square.isBeingTouchDragged = NO;
+	}
 }
 
 #pragma mark -
@@ -67,10 +102,11 @@
 	square.tag = count;
 	square.backgroundColor = self.gridColour;
 	square.alpha = 0.3f;
+	square.delegate = self;
 
 	square.userInteractionEnabled = YES;
 	[square addTarget:self action:@selector(touchSquare:) forControlEvents:UIControlEventTouchDown];
-	
+
 	[self.greaterGrid addSubview:square];
 	[self.greaterGridSquares addObject:square];
 	if (count % 4 == 0) {
@@ -113,6 +149,23 @@
 #pragma mark -
 #pragma mark Actions
 #pragma mark -
+
+- (void)squareDragged:(UIPanGestureRecognizer *)sender {
+	//if (delegate.soundIsActive) [delegate.soundPlayer.squareTouchedSoundPlayer play];
+	GRDSquare *touchedSquare = (GRDSquare *)sender.view;
+	
+	if (!touchedSquare.isActive) {
+		touchedSquare.alpha = 1.0f;
+		touchedSquare.isActive = YES;
+	} else {
+		touchedSquare.alpha = 0.3f;
+		touchedSquare.isActive = NO;
+	}
+	
+	if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+		//[self gridderPulse:YES];
+	}
+}
 
 - (IBAction)touchSquare:(id)sender {
 	//if (delegate.soundIsActive) [delegate.soundPlayer.squareTouchedSoundPlayer play];
@@ -162,5 +215,47 @@
 	[self.progressBar setProgress:((float)self.timeUntilNextPulse / self.maximumTimeAllowed) animated:YES];
 }
 
+#pragma mark -
+#pragma mark GRDSquare Delegate
+#pragma mark -
+
+- (void)squareDidBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+	
+}
+
+- (void)squareDidEndTouching:(NSSet *)touches withEvent:(UIEvent *)event {
+	for (GRDSquare *square in self.greaterGridSquares) {
+		square.isBeingTouchDragged = NO;
+	}
+}
+
+- (void)squareDidTouchesMove:(NSSet *)touches withEvent:(UIEvent *)event {
+	GRDSquare *touchedSquare;
+	UITouch *touch = [touches anyObject];
+	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
+	for (GRDSquare *square in self.greaterGridSquares) {
+		if (CGRectContainsPoint(square.frame, firstTouch)) {
+			touchedSquare = square;
+		}
+	}
+	
+	if (!touchedSquare.isBeingTouchDragged) {
+		if (touchedSquare) {
+			if (!touchedSquare.isActive) {
+				touchedSquare.alpha = 1.0f;
+				touchedSquare.isActive = YES;
+			} else {
+				touchedSquare.alpha = 0.3f;
+				touchedSquare.isActive = NO;
+			}
+			
+			if ([GRDWizard gridComparisonMatches:self.greaterGrid compareWithSuperview2:self.lesserGrid]) {
+				//[self gridderPulse:YES];
+			}
+		}
+	}
+	
+	touchedSquare.isBeingTouchDragged = YES;
+}
 
 @end

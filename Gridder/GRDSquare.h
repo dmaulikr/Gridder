@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GRDSquareProtocol <NSObject>
+
+@optional - (void)squareDidBeginTouching:(NSSet *)touches withEvent:(UIEvent *)event;
+@optional - (void)squareDidEndTouching:(NSSet *)touches withEvent:(UIEvent *)event;
+@optional - (void)squareDidTouchesMove:(NSSet *)touches withEvent:(UIEvent *)event;
+
+@end
+
 @interface GRDSquare : UIButton
 
+@property (weak, nonatomic) id<GRDSquareProtocol> delegate;
 @property BOOL isActive;
+@property BOOL isBeingTouchDragged;
 
 @end
