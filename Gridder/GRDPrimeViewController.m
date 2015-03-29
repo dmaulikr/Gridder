@@ -13,7 +13,7 @@
 enum {
 	DifficultyLevelEasy = 0,
 	DifficultyLevelMedium = 1,
-	DifficultyLevelHard = 1
+	DifficultyLevelHard = 2
 };
 
 typedef NSInteger DifficultyLevel;
@@ -193,8 +193,8 @@ typedef NSInteger DifficultyLevel;
 	self.progressBar.hideStripes = YES;
 	self.progressBar.hideTrack = YES;
 	self.progressBar.hideGloss = YES;
-	self.progressBar.progressTintColor = [UIColor orangeColor];
-	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:[UIColor orangeColor], nil];
+	self.progressBar.progressTintColor = self.gridColour;
+	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:self.gridColour, nil];
 	self.progressBar.trackTintColor = self.view.backgroundColor;
 	self.progressBar.center = self.view.center;
 	self.progressBar.frame = CGRectMake(10, 20, self.view.frame.size.width - 20, 30);
@@ -327,29 +327,22 @@ typedef NSInteger DifficultyLevel;
 	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
 	
 	[self.lifeFader setText:@"-1"];
-	self.lifeFader.alpha = 1.0f;
-
-	[UIView beginAnimations:@"ScrollLifeLostAnimation" context:nil];
-	[UIView setAnimationDelegate: self];
-	[UIView setAnimationDuration: 1.5];
-	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
-	self.lifeFader.frame = CGRectMake(self.lifeFader.frame.origin.x, self.lifeFader.frame.origin.y - 100, self.lifeFader.frame.size.width, self.lifeFader.frame.size.height);
-	[UIView commitAnimations];
-	
-	[UIView animateWithDuration:1.5 animations:^{ self.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
-		self.lifeFader.frame = self.lifeFaderFrame;
-	}];
+	[self fadeLife];
 }
 
 - (void)gainALife {
 	self.lives++;
 	
 	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
-	
 	[self.lifeFader setText:@"+1"];
+	
+	[self fadeLife];
+}
+
+- (void)fadeLife {
 	self.lifeFader.alpha = 1.0f;
 	
-	[UIView beginAnimations:@"ScrollLifeGainedAnimation" context:nil];
+	[UIView beginAnimations:@"ScrollLifeAnimation" context:nil];
 	[UIView setAnimationDelegate: self];
 	[UIView setAnimationDuration: 1.5];
 	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
@@ -359,6 +352,35 @@ typedef NSInteger DifficultyLevel;
 	[UIView animateWithDuration:1.5 animations:^{ self.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
 		self.lifeFader.frame = self.lifeFaderFrame;
 	}];
+
+}
+
+- (void)setDifficultyLevel:(DifficultyLevel)difficultyLevel {
+	switch (difficultyLevel) {
+		case DifficultyLevelHard:
+			self.gridColour = [UIColor purpleColor];
+			break;
+		case DifficultyLevelMedium:
+			self.gridColour = [UIColor blueColor];
+			break;
+		case DifficultyLevelEasy:
+		default:
+			self.gridColour = [UIColor orangeColor];
+			break;
+	}
+	
+	for (GRDSquare *square in self.greaterGridSquares) {
+		square.backgroundColor = self.gridColour;
+	}
+	for (GRDSquare *square in self.lesserGridSquares) {
+		square.backgroundColor = self.gridColour;
+	}
+	
+	self.pauseButton.backgroundColor = self.gridColour;
+	self.scoreGainedFader.textColor = self.gridColour;
+	self.lifeFader.textColor = self.gridColour;
+	self.progressBar.progressTintColor = self.gridColour;
+	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:self.gridColour, nil];
 }
 
 #pragma mark - 
@@ -405,8 +427,10 @@ typedef NSInteger DifficultyLevel;
 		
 		if (self.rounds > 50) {
 			self.difficultyLevel = DifficultyLevelHard;
+			self.gridColour = [UIColor redColor];
 		} else if (self.rounds > 10) {
 			self.difficultyLevel = DifficultyLevelMedium;
+			self.gridColour = [UIColor purpleColor];
 		}
 		
 		//if (glassLevel < 3) {

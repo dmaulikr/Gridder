@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Gridder/GRDPrimeViewController.m"
-            timestampString = "449350210.690538"
+            timestampString = "449351062.691477"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "-pulseTransitionWithSuccess:"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "-pulseWithSuccessfulMatch:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
