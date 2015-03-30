@@ -125,6 +125,7 @@ typedef NSInteger DifficultyLevel;
 	[self generateGreaterGridWithXOffset:0 withYOffset:0 fromCount:1];
 	[self generateLesserGridWithXOffset:0 withYOffset:0 fromCount:1];
 	
+	[GRDWizard populateAdjascentSquares:self.lesserGridSquares];
 }
 
 - (void)generateGreaterGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {

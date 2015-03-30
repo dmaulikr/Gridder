@@ -21,5 +21,6 @@
 @property (nonatomic) BOOL isActive;
 @property (weak, nonatomic) id<GRDSquareProtocol> delegate;
 @property BOOL isBeingTouchDragged;
+@property (nonatomic, strong) NSMutableArray *adjascentSquares;
 
 @end

@@ -21,5 +21,6 @@
 + (void)gainPoints:(GRDViewController *)grdVC;
 + (void)gainTime:(GRDSquare *)square withGrdVC:(GRDViewController *)grdVC;
 + (void)styleButtonAsASquare:(UIButton *)button;
++ (void)populateAdjascentSquares:(NSMutableArray *)squares;
 
 @end
