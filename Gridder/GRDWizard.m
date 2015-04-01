@@ -171,125 +171,230 @@
 	button.layer.borderWidth = 3.0;
 }
 
-+ (void)populateAdjascentSquares:(NSMutableArray *)squares {
+/*
+ 
+ 0   1   2   3
+ 
+ 4   5   6   7
+ 
+ 8   9   10  11
+ 
+ 12  13  14  15
+ 
+ */
+
++ (void)populateStraightAdjacentSquares:(NSMutableArray *)squares {
+	int i = 0;
+	for (GRDSquare *square in squares) {
+		switch (i) {
+			case 0: // 1,4
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:1]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:4]];
+				break;
+			case 1: // 0,5,2
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:0]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:2]];
+				break;
+			case 2: // 1,6,3
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:1]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:3]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:6]];
+				break;
+			case 3: // 2,7
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:2]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:7]];
+				break;
+			case 4: // 0,5,8
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:0]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:8]];
+				break;
+			case 5: // 1,6,9,4
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:1]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:4]];
+				break;
+			case 6: // 2,10,5,7
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:2]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:7]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:5]];
+				break;
+			case 7: // 3,6,11
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:3]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:11]];
+				break;
+			case 8: // 4,9,12
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:4]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:12]];
+				break;
+			case 9: // 5,8,13,10
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:13]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:8]];
+				break;
+			case 10: // 6,9,14,11
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:11]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:14]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:9]];
+				break;
+			case 11: // 7,10,15
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:7]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:15]];
+				break;
+			case 12: // 8,13
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:8]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:13]];
+				break;
+			case 13: // 12,9,14
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:12]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:14]];
+				break;
+			case 14: // 13,10,15
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:13]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:15]];
+				break;
+			case 15: // 14,11
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:14]];
+				[square.adjacentStraightSquares addObject:[squares objectAtIndex:11]];
+				break;
+			default:
+				break;
+		}
+		
+		i++;
+	}
+	
+}
+
++ (void)populateAdjacentAllSquares:(NSMutableArray *)squares {
 	int i = 0;
 	for (GRDSquare *square in squares) {
 		switch (i) {
 			case 0: // 1,4,5
-				[square.adjascentSquares addObject:[squares objectAtIndex:1]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:4]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:1]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:4]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:5]];
 				break;
 			case 1: // 0,4,5,6,2
-				[square.adjascentSquares addObject:[squares objectAtIndex:0]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:2]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:4]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:5]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:0]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:2]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:4]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:6]];
 				break;
 			case 2: // 1,5,6,7,3
-				[square.adjascentSquares addObject:[squares objectAtIndex:1]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:3]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:5]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:6]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:7]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:1]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:3]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:7]];
 				break;
 			case 3: // 2,6,7
-				[square.adjascentSquares addObject:[squares objectAtIndex:2]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:6]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:7]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:2]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:7]];
 				break;
 			case 4: // 0,1,5,9,8
-				[square.adjascentSquares addObject:[squares objectAtIndex:0]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:1]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:5]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:9]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:8]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:0]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:1]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:8]];
 				break;
 			case 5: // 0,1,2,6,10,9,8,4
-				[square.adjascentSquares addObject:[squares objectAtIndex:0]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:1]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:2]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:6]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:10]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:9]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:8]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:4]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:0]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:1]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:2]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:8]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:4]];
 				break;
 			case 6: // 1,2,3,7,11,10,9,5
-				[square.adjascentSquares addObject:[squares objectAtIndex:1]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:2]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:3]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:7]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:11]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:10]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:9]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:1]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:2]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:3]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:7]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:11]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:5]];
 				break;
 			case 7: // 3,2,6,10,11
-				[square.adjascentSquares addObject:[squares objectAtIndex:3]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:2]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:6]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:10]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:11]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:3]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:2]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:11]];
 				break;
 			case 8: // 4,5,9,13,12
-				[square.adjascentSquares addObject:[squares objectAtIndex:4]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:5]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:9]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:13]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:12]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:4]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:13]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:12]];
 				break;
 			case 9: // 4,5,6,10,14,13,12,8
-				[square.adjascentSquares addObject:[squares objectAtIndex:4]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:5]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:6]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:10]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:14]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:13]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:12]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:8]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:4]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:14]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:13]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:12]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:8]];
 				break;
 			case 10: // 5,6,7,11,15,14,13,9
-				[square.adjascentSquares addObject:[squares objectAtIndex:5]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:6]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:7]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:11]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:15]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:14]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:13]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:5]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:7]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:11]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:15]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:14]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:13]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:9]];
 				break;
 			case 11: // 7,6,10,14,15
-				[square.adjascentSquares addObject:[squares objectAtIndex:7]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:6]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:10]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:14]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:15]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:7]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:6]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:14]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:15]];
 				break;
 			case 12: // 8,9,13
-				[square.adjascentSquares addObject:[squares objectAtIndex:8]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:9]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:13]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:8]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:13]];
 				break;
 			case 13: // 12,8,9,10,14
-				[square.adjascentSquares addObject:[squares objectAtIndex:12]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:8]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:9]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:10]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:14]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:12]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:8]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:14]];
 				break;
 			case 14: // 13,9,10,11,15
-				[square.adjascentSquares addObject:[squares objectAtIndex:13]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:9]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:10]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:11]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:15]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:13]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:9]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:11]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:15]];
 				break;
 			case 15: // 14,10,11
-				[square.adjascentSquares addObject:[squares objectAtIndex:14]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:10]];
-				[square.adjascentSquares addObject:[squares objectAtIndex:11]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:14]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:10]];
+				[square.adjacentAllSquares addObject:[squares objectAtIndex:11]];
 				break;
 			default:
 				break;

@@ -126,7 +126,8 @@ typedef NSInteger DifficultyLevel;
 	[self generateGreaterGridWithXOffset:0 withYOffset:0 fromCount:1];
 	[self generateLesserGridWithXOffset:0 withYOffset:0 fromCount:1];
 	
-	[GRDWizard populateAdjascentSquares:self.lesserGridSquares];
+	[GRDWizard populateAdjacentAllSquares:self.lesserGridSquares];
+	[GRDWizard populateStraightAdjacentSquares:self.lesserGridSquares];
 }
 
 - (void)generateGreaterGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
@@ -167,7 +168,8 @@ typedef NSInteger DifficultyLevel;
 	square.backgroundColor = self.gridColour;
 	square.alpha = 0.3f;
 	square.isActive = NO;
-	square.adjascentSquares = [[NSMutableArray alloc] init];
+	square.adjacentAllSquares = [[NSMutableArray alloc] init];
+	square.adjacentStraightSquares = [[NSMutableArray alloc] init];
 	
 	[self.lesserGrid addSubview:square];
 	[self.lesserGridSquares addObject:square];
@@ -411,6 +413,10 @@ typedef NSInteger DifficultyLevel;
 	
 	self.rounds++;
 	
+	for (GRDSquare *square in self.lesserGridSquares) {
+		square.isActive = NO;
+	}
+	
 	[self randomiseLesserGrid];
 	
 	if(successful) {
@@ -471,23 +477,6 @@ typedef NSInteger DifficultyLevel;
 }
 
 - (void)randomiseLesserGrid {
-	GRDSquare *square = [self.lesserGridSquares objectAtIndex:arc4random_uniform([self.lesserGridSquares count] - 1)];
-	
-	square.isActive = YES;
-	
-	for (GRDSquare *adjacentSquare in square.adjascentSquares) {
-		int flip = arc4random_uniform(2);
-		if (flip == 0) {
-			square.isActive = NO;
-		} else {
-			square.isActive = YES;
-		}
-	}
-	
-	
-	
-	
-	
 	int activeMax = 5;
 	if (self.difficultyLevel == DifficultyLevelEasy) {
 		activeMax = 5;
@@ -496,10 +485,7 @@ typedef NSInteger DifficultyLevel;
 	} else if (self.difficultyLevel == DifficultyLevelHard) {
 		activeMax = 10;
 	}
-	
-	
-	
-	
+
 	for (int i = 0; i <= activeMax; i++) {
 		// Clear active flag
 		for (GRDSquare *square in self.lesserGridSquares) {
@@ -521,8 +507,8 @@ typedef NSInteger DifficultyLevel;
 				GRDSquare *square = [self.lesserGridSquares objectAtIndex:x];
 				if (!square.isActive) {
 					// But one of its adjacent squares is...
-					for (unsigned int y = 0; y < [square.adjascentSquares count]; y++) {
-						GRDSquare *adjacentSquare = [square.adjascentSquares objectAtIndex:y];
+					for (unsigned int y = 0; y < [square.adjacentStraightSquares count]; y++) {
+						GRDSquare *adjacentSquare = [square.adjacentStraightSquares objectAtIndex:y];
 						if (adjacentSquare.isActive) {
 							// It's a candidate
 							[self.activationCandidates addObject:[NSNumber numberWithInt:x]];
@@ -542,88 +528,6 @@ typedef NSInteger DifficultyLevel;
 		}
 		
 	}
-	
-	
-	/*while(++totalActive < maximumActiveSquares) {
-		int count = 0;
-		for (GRDSquare *square in self.lesserGridSquares) {
-			if (square.isActive) {
-				int adjacentIndex = 0;
-				for (GRDSquare *adjascentSquare in square.adjascentSquares) {
-					if (!adjascentSquare.isActive && ![((NSNumber *)[self.activationCandidates objectAtIndex:adjacentIndex]) boolValue]) {
-						BOOL b = YES;
-						[self.activationCandidates replaceObjectAtIndex:adjacentIndex withObject:[NSNumber numberWithBool:b]];
-						adjacentIndex++;
-						count++;
-					}
-				}
-			}
-		}
-		
-		count = arc4random_uniform(count);
-		int i = 0;
-		for (NSNumber *candidate in self.activationCandidates) {
-			
-			if ([candidate boolValue]) {
-				if (count == 0) {
-					totalActive++;
-					if (totalActive > maximumActiveSquares) {
-						break;
-					}
-					((GRDSquare *)[self.lesserGridSquares objectAtIndex:i]).isActive = YES;
-				} else {
-					count--;
-				}
-			}
-			i++;
-		}
-
-	}*/
-	
-	
-	/*for (GRDSquare *square in self.lesserGridSquares) {
-		int flip = arc4random_uniform(2);
-		if (flip == 0) {
-			square.isActive = NO;
-		} else {
-			totalActive++;
-			
-			if (totalActive <= maximumActiveSquares) {
-				break;
-			}
-		}
-	}*/
-	
-			
-			
-			
-			/*
-			 Integer Count = 0
-			 For each square, Square[I]:
-			    If Square[I].Activated
-			        For each square Square[J] in Square[I].AdjacentSquares
-			            If Not Square[J].Activated && Not Candidates[J]
-			                Candidates[J] = True
-			                Count++
-			 Count = Random(Count) // (that is to say, set Count to a random number between 0 and Count)
-			 For each bool Candidates[I] in Candidates
-			    If Candidates[I]
-			        If Count == 0
-			            Terminate algorithm here, Square[I] is the next square to activate
-			        Else
-			             Count--
-			 */
-	//}
-	//}
-	
-	/*if (glassLevel > 0) {
-		if (arc4random() % 2 == 1) {
-			for (int i = 0; i < glassLevel; i++) {
-				GRDGlassSquare *glassSquare = [self.glassSquares objectAtIndex:arc4random() % [self.glassSquares count]];
-				glassSquare.hidden = NO;
-			}
-		}
-	}*/
 	
 	for (GRDSquare *square in self.greaterGridSquares) {
 		square.isActive = NO;
