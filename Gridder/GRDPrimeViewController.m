@@ -27,6 +27,7 @@ typedef NSInteger DifficultyLevel;
 @property (nonatomic) DifficultyLevel difficultyLevel;
 @property (nonatomic) CGRect scoreFaderFrame;
 @property (nonatomic) CGRect lifeFaderFrame;
+@property (nonatomic, strong) NSMutableArray *activationCandidates;
 
 // Views
 @property (nonatomic, strong) UIButton *pauseButton;
@@ -166,6 +167,7 @@ typedef NSInteger DifficultyLevel;
 	square.backgroundColor = self.gridColour;
 	square.alpha = 0.3f;
 	square.isActive = NO;
+	square.adjascentSquares = [[NSMutableArray alloc] init];
 	
 	[self.lesserGrid addSubview:square];
 	[self.lesserGridSquares addObject:square];
@@ -394,6 +396,8 @@ typedef NSInteger DifficultyLevel;
 	self.score = 0;
 	self.streak = 0;
 	self.onTheEdgeStreak = 0;
+	self.activationCandidates = [[NSMutableArray alloc] init];
+	
 	self.difficultyLevel = DifficultyLevelEasy;
 	
 	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
@@ -467,29 +471,150 @@ typedef NSInteger DifficultyLevel;
 }
 
 - (void)randomiseLesserGrid {
-	int totalActive = 0;
+	GRDSquare *square = [self.lesserGridSquares objectAtIndex:arc4random_uniform([self.lesserGridSquares count] - 1)];
 	
-	for (GRDSquare *square in self.lesserGridSquares) {
+	square.isActive = YES;
+	
+	for (GRDSquare *adjacentSquare in square.adjascentSquares) {
+		int flip = arc4random_uniform(2);
+		if (flip == 0) {
+			square.isActive = NO;
+		} else {
+			square.isActive = YES;
+		}
+	}
+	
+	
+	
+	
+	
+	int activeMax = 5;
+	if (self.difficultyLevel == DifficultyLevelEasy) {
+		activeMax = 5;
+	} else if (self.difficultyLevel == DifficultyLevelMedium) {
+		activeMax = 7;
+	} else if (self.difficultyLevel == DifficultyLevelHard) {
+		activeMax = 10;
+	}
+	
+	
+	
+	
+	for (int i = 0; i <= activeMax; i++) {
+		// Clear active flag
+		for (GRDSquare *square in self.lesserGridSquares) {
+			square.isActive = NO;
+		}
+		int activeCount = 0;
+		
+		// Select random start point
+		GRDSquare *randomlyChosenSquare = [self.lesserGridSquares objectAtIndex:arc4random_uniform(15)];
+		if (randomlyChosenSquare) { randomlyChosenSquare.isActive = YES; }
+		activeCount++;
+		
+		// New algorithm
+		while (activeCount < activeMax) {
+			// Determine candidate squares
+			self.activationCandidates = [[NSMutableArray alloc] init];
+			for (unsigned int x = 0; x < [self.lesserGridSquares count]; x++) {
+				// If the square isn't already active...
+				GRDSquare *square = [self.lesserGridSquares objectAtIndex:x];
+				if (!square.isActive) {
+					// But one of its adjacent squares is...
+					for (unsigned int y = 0; y < [square.adjascentSquares count]; y++) {
+						GRDSquare *adjacentSquare = [square.adjascentSquares objectAtIndex:y];
+						if (adjacentSquare.isActive) {
+							// It's a candidate
+							[self.activationCandidates addObject:[NSNumber numberWithInt:x]];
+					
+							break;
+						}
+					}
+				}
+			}
+			
+			// Activate a random candidate
+			unsigned int idx = arc4random_uniform([self.activationCandidates count]);
+			
+			GRDSquare *square = [self.lesserGridSquares objectAtIndex:[((NSNumber *)[self.activationCandidates objectAtIndex:idx]) intValue]];
+			square.isActive = true;
+			++activeCount;
+		}
+		
+	}
+	
+	
+	/*while(++totalActive < maximumActiveSquares) {
+		int count = 0;
+		for (GRDSquare *square in self.lesserGridSquares) {
+			if (square.isActive) {
+				int adjacentIndex = 0;
+				for (GRDSquare *adjascentSquare in square.adjascentSquares) {
+					if (!adjascentSquare.isActive && ![((NSNumber *)[self.activationCandidates objectAtIndex:adjacentIndex]) boolValue]) {
+						BOOL b = YES;
+						[self.activationCandidates replaceObjectAtIndex:adjacentIndex withObject:[NSNumber numberWithBool:b]];
+						adjacentIndex++;
+						count++;
+					}
+				}
+			}
+		}
+		
+		count = arc4random_uniform(count);
+		int i = 0;
+		for (NSNumber *candidate in self.activationCandidates) {
+			
+			if ([candidate boolValue]) {
+				if (count == 0) {
+					totalActive++;
+					if (totalActive > maximumActiveSquares) {
+						break;
+					}
+					((GRDSquare *)[self.lesserGridSquares objectAtIndex:i]).isActive = YES;
+				} else {
+					count--;
+				}
+			}
+			i++;
+		}
+
+	}*/
+	
+	
+	/*for (GRDSquare *square in self.lesserGridSquares) {
 		int flip = arc4random_uniform(2);
 		if (flip == 0) {
 			square.isActive = NO;
 		} else {
 			totalActive++;
-			if (self.difficultyLevel == DifficultyLevelEasy) {
-				if (totalActive <= 4) {
-					square.isActive = YES;
-				}
-			} else if (self.difficultyLevel == DifficultyLevelMedium) {
-				if (totalActive <= 4) {
-					square.isActive = YES;
-				}
-			} else if (self.difficultyLevel == DifficultyLevelHard) {
-				if (totalActive <= 5) {
-					square.isActive = YES;
-				}
+			
+			if (totalActive <= maximumActiveSquares) {
+				break;
 			}
 		}
-	}
+	}*/
+	
+			
+			
+			
+			/*
+			 Integer Count = 0
+			 For each square, Square[I]:
+			    If Square[I].Activated
+			        For each square Square[J] in Square[I].AdjacentSquares
+			            If Not Square[J].Activated && Not Candidates[J]
+			                Candidates[J] = True
+			                Count++
+			 Count = Random(Count) // (that is to say, set Count to a random number between 0 and Count)
+			 For each bool Candidates[I] in Candidates
+			    If Candidates[I]
+			        If Count == 0
+			            Terminate algorithm here, Square[I] is the next square to activate
+			        Else
+			             Count--
+			 */
+	//}
+	//}
 	
 	/*if (glassLevel > 0) {
 		if (arc4random() % 2 == 1) {
@@ -503,6 +628,8 @@ typedef NSInteger DifficultyLevel;
 	for (GRDSquare *square in self.greaterGridSquares) {
 		square.isActive = NO;
 	}
+	self.activationCandidates = nil;
+	
 }
 
 
