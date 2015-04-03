@@ -10,13 +10,11 @@
 #import "GRDWizard.h"
 #import "GRDAppDelegate.h"
 
-enum {
+typedef enum : int {
 	DifficultyLevelEasy = 0,
 	DifficultyLevelMedium = 1,
 	DifficultyLevelHard = 2
-};
-
-typedef NSInteger DifficultyLevel;
+} DifficultyLevel;
 
 @interface GRDPrimeViewController ()
 
@@ -366,16 +364,18 @@ typedef NSInteger DifficultyLevel;
 		case DifficultyLevelHard:
 			self.gridColour = [UIColor purpleColor];
 			self.gridTransitionColour = [UIColor orangeColor];
-			
+			_difficultyLevel = DifficultyLevelHard;
 			break;
 		case DifficultyLevelMedium:
 			self.gridColour = [UIColor blueColor];
 			self.gridTransitionColour = [UIColor greenColor];
+			_difficultyLevel = DifficultyLevelMedium;
 			break;
 		case DifficultyLevelEasy:
 		default:
 			self.gridColour = [UIColor orangeColor];
 			self.gridTransitionColour = [UIColor purpleColor];
+			_difficultyLevel = DifficultyLevelEasy;
 			break;
 	}
 	
@@ -409,6 +409,8 @@ typedef NSInteger DifficultyLevel;
 	
 	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
 	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", self.score]];
+	
+	[self randomiseLesserGrid];
 }
 
 - (void)pulse {
@@ -428,12 +430,10 @@ typedef NSInteger DifficultyLevel;
 	
 	
 	
-	if (self.rounds > 50) {
+	if (self.rounds > 30) {
 		self.difficultyLevel = DifficultyLevelHard;
-		self.gridColour = [UIColor redColor];
 	} else if (self.rounds > 10) {
 		self.difficultyLevel = DifficultyLevelMedium;
-		self.gridColour = [UIColor purpleColor];
 	}
 	
 	//if (glassLevel < 3) {
@@ -576,7 +576,7 @@ typedef NSInteger DifficultyLevel;
 	} else if (self.difficultyLevel == DifficultyLevelMedium) {
 		activeMax = 7;
 	} else if (self.difficultyLevel == DifficultyLevelHard) {
-		activeMax = 10;
+		activeMax = 8;
 	}
 
 	for (int i = 0; i <= activeMax; i++) {
@@ -600,8 +600,8 @@ typedef NSInteger DifficultyLevel;
 				GRDSquare *square = [self.lesserGridSquares objectAtIndex:x];
 				if (!square.isActive) {
 					// But one of its adjacent squares is...
-					for (unsigned int y = 0; y < [square.adjacentStraightSquares count]; y++) {
-						GRDSquare *adjacentSquare = [square.adjacentStraightSquares objectAtIndex:y];
+					for (unsigned int y = 0; y < (self.difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares count] : [square.adjacentStraightSquares count]); y++) {
+						GRDSquare *adjacentSquare = self.difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares objectAtIndex:y] : [square.adjacentStraightSquares objectAtIndex:y];
 						if (adjacentSquare.isActive) {
 							// It's a candidate
 							[self.activationCandidates addObject:[NSNumber numberWithInt:x]];
