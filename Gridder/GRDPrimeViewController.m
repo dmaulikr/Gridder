@@ -114,7 +114,7 @@ typedef NSInteger DifficultyLevel;
 
 - (void)populateFooterView {
 	self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake((self.footerView.frame.size.width / 2) - 47, 0, 100, self.footerView.frame.size.height)];
-	[self.pauseButton setTitle:@"MENU" forState:UIControlStateNormal];
+	[self.pauseButton setTitle:@"PAUSE" forState:UIControlStateNormal];
 	[self.pauseButton setBackgroundColor:self.gridColour];
 	[self.footerView addSubview:self.pauseButton];
 }
@@ -406,77 +406,165 @@ typedef NSInteger DifficultyLevel;
 	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", self.score]];
 }
 
+- (void)pulse {
+	[self randomiseLesserGrid];
+	
+	if (self.lives == 1) {
+		self.onTheEdgeStreak++;
+		if (self.onTheEdgeStreak == 10) {
+			//[delegate.menuVC.gameCenterManager submitAchievement:kAchievementOnTheEdge percentComplete:100];
+		}
+	} else {
+		self.onTheEdgeStreak = 0;
+	}
+	
+	//delegate.soundPlayer.pulseSuccessSoundPlayer.currentTime = 0;
+	//if (delegate.soundIsActive) [delegate.soundPlayer.pulseSuccessSoundPlayer play];
+	
+	
+	
+	if (self.rounds > 50) {
+		self.difficultyLevel = DifficultyLevelHard;
+		self.gridColour = [UIColor redColor];
+	} else if (self.rounds > 10) {
+		self.difficultyLevel = DifficultyLevelMedium;
+		self.gridColour = [UIColor purpleColor];
+	}
+	
+	//if (glassLevel < 3) {
+	//	glassLevel = (delegate.numRounds + 1) / 6;
+	//}
+	
+	//if(delegate.currentStreak > delegate.highestStreak) delegate.highestStreak++;
+	
+	
+	if (self.difficultyLevel == DifficultyLevelEasy) {
+		if (self.maximumTimeAllowed > 300) self.maximumTimeAllowed -= 30;
+	} else if (self.difficultyLevel == DifficultyLevelMedium) {
+		if (self.maximumTimeAllowed > 280) self.maximumTimeAllowed -= 30;
+	} else if (self.difficultyLevel == DifficultyLevelHard) {
+		if (self.maximumTimeAllowed > 250) self.maximumTimeAllowed -= 30;
+	}
+	
+	
+	//[self pulseTransitionWithSuccess:YES];
+
+}
 - (void)pulseWithSuccessfulMatch:(BOOL)successful {
 	if (!self.pulseTimer) {
 		[self setupTimer];
 	}
 	
 	self.rounds++;
+	self.timeUntilNextPulse = 0;
+
 	
-	for (GRDSquare *square in self.lesserGridSquares) {
-		square.isActive = NO;
-	}
-	
-	[self randomiseLesserGrid];
-	
-	if(successful) {
-		if (self.lives == 1) {
-			self.onTheEdgeStreak++;
-			if (self.onTheEdgeStreak == 10) {
-				//[delegate.menuVC.gameCenterManager submitAchievement:kAchievementOnTheEdge percentComplete:100];
-			}
-		} else {
-			self.onTheEdgeStreak = 0;
-		}
-		
-		//delegate.soundPlayer.pulseSuccessSoundPlayer.currentTime = 0;
-		//if (delegate.soundIsActive) [delegate.soundPlayer.pulseSuccessSoundPlayer play];
-		
+	if (successful) {
 		[self gainPoints];
-		
 		self.streak++;
-		
-		if (self.rounds > 50) {
-			self.difficultyLevel = DifficultyLevelHard;
-			self.gridColour = [UIColor redColor];
-		} else if (self.rounds > 10) {
-			self.difficultyLevel = DifficultyLevelMedium;
-			self.gridColour = [UIColor purpleColor];
-		}
-		
-		//if (glassLevel < 3) {
-		//	glassLevel = (delegate.numRounds + 1) / 6;
-		//}
-		
-		//if(delegate.currentStreak > delegate.highestStreak) delegate.highestStreak++;
-		
 		if (self.streak % 10 == 0) [self gainALife];
-		
-		if (self.difficultyLevel == DifficultyLevelEasy) {
-			if (self.maximumTimeAllowed > 300) self.maximumTimeAllowed -= 30;
-		} else if (self.difficultyLevel == DifficultyLevelMedium) {
-			if (self.maximumTimeAllowed > 280) self.maximumTimeAllowed -= 30;
-		} else if (self.difficultyLevel == DifficultyLevelHard) {
-			if (self.maximumTimeAllowed > 250) self.maximumTimeAllowed -= 30;
+
+		for (GRDSquare *greaterSquare in self.greaterGridSquares) {
+			if (greaterSquare.isActive) {
+				[UIView animateWithDuration:0.2
+									  delay:0.0
+									options:UIViewAnimationOptionCurveEaseIn
+								 animations:^{
+									 greaterSquare.backgroundColor = [UIColor purpleColor];
+								 }
+								 completion:^(BOOL finished){
+									 [UIView animateWithDuration:0.2
+														   delay:0.0
+														 options: UIViewAnimationOptionCurveEaseIn
+													  animations:^{
+														  greaterSquare.backgroundColor = self.gridColour;
+													  }
+													  completion:^(BOOL finished) {
+														  
+													  }];
+								 }];
+			} else {
+				[UIView animateWithDuration:0.2
+									  delay:0.0
+									options:UIViewAnimationOptionCurveEaseIn
+								 animations:^{
+									 greaterSquare.alpha = 0.1f;
+								 }
+								 completion:^(BOOL finished){
+									 [UIView animateWithDuration:0.2
+														   delay:0.0
+														 options: UIViewAnimationOptionCurveEaseIn
+													  animations:^{
+														  greaterSquare.alpha = 0.3f;
+													  }
+													  completion:^(BOOL finished) {
+														  
+													  }];
+								 }];
+			}
 		}
 		
+		for (GRDSquare *lesserSquare in self.lesserGridSquares) {
+			if (lesserSquare.isActive) {
+				[UIView animateWithDuration:0.2
+									  delay:0.0
+									options: UIViewAnimationOptionCurveEaseIn
+								 animations:^{
+									 lesserSquare.backgroundColor = [UIColor purpleColor];
+								 }
+								 completion:^(BOOL finished) {
+									 [UIView animateWithDuration:0.2
+														   delay:0.0
+														 options: UIViewAnimationOptionCurveEaseIn
+													  animations:^{
+														  lesserSquare.backgroundColor = self.gridColour;
+													  }
+													  completion:^(BOOL finished) {
+													  }];
+								 }];
+			} else {
+				[UIView animateWithDuration:0.2
+									  delay:0.0
+									options:UIViewAnimationOptionCurveEaseIn
+								 animations:^{
+									 lesserSquare.alpha = 0.1f;
+								 }
+								 completion:^(BOOL finished){
+									 [UIView animateWithDuration:0.2
+														   delay:0.0
+														 options: UIViewAnimationOptionCurveEaseIn
+													  animations:^{
+														  lesserSquare.alpha = 0.3f;
+													  }
+													  completion:^(BOOL finished) {
+														  
+													  }];
+								 }];
+			}
+
+		}
 		
-	} else if (!successful) { // Failed to match in time
-		//delegate.soundPlayer.pulseFailSoundPlayer.currentTime = 0;
-		//if (delegate.soundIsActive) [delegate.soundPlayer.pulseFailSoundPlayer play];
+		[self performSelector:@selector(pulse) withObject:nil afterDelay:0.4f];
+	} else {
+		
+		[self randomiseLesserGrid];
 		
 		self.streak = 0;
 		if (self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
 		[self loseALife];
+		
+		
+		[self pulseTransitionWithSuccess:successful];
 	}
 	
-	self.timeUntilNextPulse = 0;
-	
-	[self pulseTransitionWithSuccess:successful];
 
 }
 
 - (void)randomiseLesserGrid {
+	for (GRDSquare *square in self.lesserGridSquares) {
+		square.isActive = NO;
+	}
+	
 	int activeMax = 5;
 	if (self.difficultyLevel == DifficultyLevelEasy) {
 		activeMax = 5;
