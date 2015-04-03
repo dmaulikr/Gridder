@@ -52,6 +52,7 @@ typedef NSInteger DifficultyLevel;
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
 	self.gridColour = [UIColor orangeColor];
+	self.gridTransitionColour = [UIColor purpleColor];
 	
 	[self startNewGame];
 	
@@ -364,13 +365,17 @@ typedef NSInteger DifficultyLevel;
 	switch (difficultyLevel) {
 		case DifficultyLevelHard:
 			self.gridColour = [UIColor purpleColor];
+			self.gridTransitionColour = [UIColor orangeColor];
+			
 			break;
 		case DifficultyLevelMedium:
 			self.gridColour = [UIColor blueColor];
+			self.gridTransitionColour = [UIColor greenColor];
 			break;
 		case DifficultyLevelEasy:
 		default:
 			self.gridColour = [UIColor orangeColor];
+			self.gridTransitionColour = [UIColor purpleColor];
 			break;
 	}
 	
@@ -470,7 +475,7 @@ typedef NSInteger DifficultyLevel;
 									  delay:0.0
 									options:UIViewAnimationOptionCurveEaseIn
 								 animations:^{
-									 greaterSquare.backgroundColor = [UIColor purpleColor];
+									 greaterSquare.backgroundColor = self.gridTransitionColour;
 								 }
 								 completion:^(BOOL finished){
 									 [UIView animateWithDuration:0.2
@@ -510,7 +515,7 @@ typedef NSInteger DifficultyLevel;
 									  delay:0.0
 									options: UIViewAnimationOptionCurveEaseIn
 								 animations:^{
-									 lesserSquare.backgroundColor = [UIColor purpleColor];
+									 lesserSquare.backgroundColor = self.gridTransitionColour;
 								 }
 								 completion:^(BOOL finished) {
 									 [UIView animateWithDuration:0.2

@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *lesserGridSquares;
 @property (nonatomic, strong) NSMutableArray *greaterGridSquares;
 @property (nonatomic, strong) UIColor *gridColour;
+@property (nonatomic, strong) UIColor *gridTransitionColour;
 
 // Timer related
 @property (nonatomic, strong) YLProgressBar *progressBar;
