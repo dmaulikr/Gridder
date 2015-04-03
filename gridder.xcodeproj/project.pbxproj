@@ -80,6 +80,7 @@
 		FA93E8151AC20CC1008F5806 /* v3_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8141AC20CC1008F5806 /* v3_bg.png */; };
 		FA93E8171AC20F08008F5806 /* v3_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8161AC20F08008F5806 /* v3_inactive.png */; };
 		FA93E8191AC49FC2008F5806 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8181AC49FC2008F5806 /* Podfile */; };
+		FA93E81C1ACF37E8008F5806 /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA93E81B1ACF37E8008F5806 /* pop.wav */; };
 		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
 		FAF687041ABDDFED00915381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF687031ABDDFED00915381 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -177,6 +178,7 @@
 		FA93E8141AC20CC1008F5806 /* v3_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_bg.png; sourceTree = "<group>"; };
 		FA93E8161AC20F08008F5806 /* v3_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_inactive.png; sourceTree = "<group>"; };
 		FA93E8181AC49FC2008F5806 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		FA93E81B1ACF37E8008F5806 /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE242326784D7FA49E14EF52 /* Pods-gridder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.release.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.release.xcconfig"; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 		FA1BABF017909F5500FEC33A /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				FA93E81A1ACF37E1008F5806 /* 3.0 */,
 				FA07DE3218000A9A0021F2F7 /* shatter.wav */,
 				FA07DE3318000A9A0021F2F7 /* bump.wav */,
 				FA13D1DD17FD52330009AFE9 /* menutheme.mp3 */,
@@ -426,6 +429,14 @@
 			name = 3.0;
 			sourceTree = "<group>";
 		};
+		FA93E81A1ACF37E1008F5806 /* 3.0 */ = {
+			isa = PBXGroup;
+			children = (
+				FA93E81B1ACF37E8008F5806 /* pop.wav */,
+			);
+			name = 3.0;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -490,6 +501,7 @@
 				FA1BAC12179165F700FEC33A /* menubeep.wav in Resources */,
 				FA1BAC14179165FE00FEC33A /* gameover.wav in Resources */,
 				FA1BAC161791660400FEC33A /* clocknoise.wav in Resources */,
+				FA93E81C1ACF37E8008F5806 /* pop.wav in Resources */,
 				FA1BAC181791694600FEC33A /* menubeep2.wav in Resources */,
 				FA1BAC1A17916ADE00FEC33A /* inverseMode.png in Resources */,
 				FA1BAC211791ADB300FEC33A /* negativebeep.wav in Resources */,

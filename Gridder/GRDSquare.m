@@ -10,6 +10,12 @@
 #import "GRDViewController.h"
 #import "GRDSoundPlayer.h"
 
+@interface GRDSquare ()
+
+@property (nonatomic, strong) AVAudioPlayer *activationSound;
+
+@end
+
 @implementation GRDSquare
 @synthesize isActive = _isActive;
 
@@ -23,7 +29,10 @@
 }
 
 - (void)awakeFromNib {
+	[super awakeFromNib];
 	self.userInteractionEnabled = YES;
+	
+	self.activationSound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"pop" ofType:@"wav"]] error:nil];
 }
 
 - (BOOL)getIsActive {
@@ -40,6 +49,8 @@
 		self.alpha = 1.0f;
 		
 		[UIView commitAnimations];
+		
+		if (self.isGreaterSquare) [self.activationSound play];
 	} else {
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDuration:0.1];
@@ -48,9 +59,6 @@
 		
 		[UIView commitAnimations];
 	}
-	
-	//	[GRDSoundPlayer playSound:SoundPlayerTouchSquare];
-
 }
 
 

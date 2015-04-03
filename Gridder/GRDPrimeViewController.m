@@ -142,7 +142,7 @@ typedef enum : int {
 	square.alpha = 0.3f;
 	square.delegate = self;
 	square.isActive = NO;
-
+	square.isGreaterSquare = YES;
 	square.userInteractionEnabled = YES;
 
 	[self.greaterGrid addSubview:square];
@@ -169,6 +169,7 @@ typedef enum : int {
 	square.isActive = NO;
 	square.adjacentAllSquares = [[NSMutableArray alloc] init];
 	square.adjacentStraightSquares = [[NSMutableArray alloc] init];
+	square.isGreaterSquare = NO;
 	
 	[self.lesserGrid addSubview:square];
 	[self.lesserGridSquares addObject:square];
@@ -544,6 +545,7 @@ typedef enum : int {
 	self.timeUntilNextPulse = 0;
 	
 	if (successful) {
+		[[GRDSoundPlayer sharedInstance].menuBlip2SoundPlayer play];
 		[self gainPoints];
 		self.streak++;
 		if (self.streak % 10 == 0) [self gainALife];

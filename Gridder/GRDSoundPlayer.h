@@ -9,13 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-enum {
+typedef enum : int {
 	SoundPlayerTouchSquare = 0,
 	SoundPlayerPulseSuccess = 1,
 	SoundPlayerPulseFailure = 2
-};
-
-typedef NSInteger SoundPlayer;
+} SoundPlayer;
 
 @interface GRDSoundPlayer : NSObject
 
@@ -34,7 +32,6 @@ typedef NSInteger SoundPlayer;
 @property (strong, nonatomic) AVAudioPlayer *shatterSoundPlayer;
 @property (strong, nonatomic) AVAudioPlayer *shatterSoundBackupPlayer;
 
-- (void)setupPlayers;
-+ (void)playSound:(SoundPlayer)type;
++ (GRDSoundPlayer *)sharedInstance;
 
 @end

@@ -14,7 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	iceBreaks = 0;
 	soundPlayer = [[GRDSoundPlayer alloc] init];
-	[soundPlayer setupPlayers];
+	//[soundPlayer setupPlayers];
 	gameInProgress = NO;
 	gameIsCurrentlyPaused = NO;
 	millisecondsFromGridPulse = 0;
