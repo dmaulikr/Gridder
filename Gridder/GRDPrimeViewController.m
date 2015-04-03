@@ -280,6 +280,88 @@ typedef enum : int {
 #pragma mark ANIMATIONS
 #pragma mark -
 
+- (void)successTransition {
+	for (GRDSquare *greaterSquare in self.greaterGridSquares) {
+		if (greaterSquare.isActive) {
+			[UIView animateWithDuration:0.2
+								  delay:0.0
+								options:UIViewAnimationOptionCurveEaseIn
+							 animations:^{
+								 greaterSquare.backgroundColor = self.gridTransitionColour;
+							 }
+							 completion:^(BOOL finished){
+								 [UIView animateWithDuration:0.2
+													   delay:0.0
+													 options: UIViewAnimationOptionCurveEaseIn
+												  animations:^{
+													  greaterSquare.backgroundColor = self.gridColour;
+												  }
+												  completion:^(BOOL finished) {
+													  
+												  }];
+							 }];
+		} else {
+			[UIView animateWithDuration:0.2
+								  delay:0.0
+								options:UIViewAnimationOptionCurveEaseIn
+							 animations:^{
+								 greaterSquare.alpha = 0.1f;
+							 }
+							 completion:^(BOOL finished){
+								 [UIView animateWithDuration:0.2
+													   delay:0.0
+													 options: UIViewAnimationOptionCurveEaseIn
+												  animations:^{
+													  greaterSquare.alpha = 0.3f;
+												  }
+												  completion:^(BOOL finished) {
+													  
+												  }];
+							 }];
+		}
+	}
+	
+	for (GRDSquare *lesserSquare in self.lesserGridSquares) {
+		if (lesserSquare.isActive) {
+			[UIView animateWithDuration:0.2
+								  delay:0.0
+								options: UIViewAnimationOptionCurveEaseIn
+							 animations:^{
+								 lesserSquare.backgroundColor = self.gridTransitionColour;
+							 }
+							 completion:^(BOOL finished) {
+								 [UIView animateWithDuration:0.2
+													   delay:0.0
+													 options: UIViewAnimationOptionCurveEaseIn
+												  animations:^{
+													  lesserSquare.backgroundColor = self.gridColour;
+												  }
+												  completion:^(BOOL finished) {
+												  }];
+							 }];
+		} else {
+			[UIView animateWithDuration:0.2
+								  delay:0.0
+								options:UIViewAnimationOptionCurveEaseIn
+							 animations:^{
+								 lesserSquare.alpha = 0.1f;
+							 }
+							 completion:^(BOOL finished){
+								 [UIView animateWithDuration:0.2
+													   delay:0.0
+													 options: UIViewAnimationOptionCurveEaseIn
+												  animations:^{
+													  lesserSquare.alpha = 0.3f;
+												  }
+												  completion:^(BOOL finished) {
+													  
+												  }];
+							 }];
+		}
+		
+	}
+}
+
 - (void)pulseTransitionWithSuccess:(BOOL)successful {
 	self.transitionFader.backgroundColor = successful ? self.view.backgroundColor : [UIColor redColor];
 	self.transitionFader.hidden = NO;
@@ -324,7 +406,8 @@ typedef enum : int {
 		[self.pulseTimer invalidate];
 		self.pulseTimer = nil;
 		[self startNewGame];
-		
+		[self randomiseLesserGrid];
+
 		return;
 	}
 	
@@ -410,7 +493,7 @@ typedef enum : int {
 	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
 	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", self.score]];
 	
-	[self randomiseLesserGrid];
+	//[self randomiseLesserGrid];
 }
 
 - (void)pulse {
@@ -450,11 +533,8 @@ typedef enum : int {
 	} else if (self.difficultyLevel == DifficultyLevelHard) {
 		if (self.maximumTimeAllowed > 250) self.maximumTimeAllowed -= 30;
 	}
-	
-	
-	//[self pulseTransitionWithSuccess:YES];
-
 }
+
 - (void)pulseWithSuccessfulMatch:(BOOL)successful {
 	if (!self.pulseTimer) {
 		[self setupTimer];
@@ -462,92 +542,13 @@ typedef enum : int {
 	
 	self.rounds++;
 	self.timeUntilNextPulse = 0;
-
 	
 	if (successful) {
 		[self gainPoints];
 		self.streak++;
 		if (self.streak % 10 == 0) [self gainALife];
 
-		for (GRDSquare *greaterSquare in self.greaterGridSquares) {
-			if (greaterSquare.isActive) {
-				[UIView animateWithDuration:0.2
-									  delay:0.0
-									options:UIViewAnimationOptionCurveEaseIn
-								 animations:^{
-									 greaterSquare.backgroundColor = self.gridTransitionColour;
-								 }
-								 completion:^(BOOL finished){
-									 [UIView animateWithDuration:0.2
-														   delay:0.0
-														 options: UIViewAnimationOptionCurveEaseIn
-													  animations:^{
-														  greaterSquare.backgroundColor = self.gridColour;
-													  }
-													  completion:^(BOOL finished) {
-														  
-													  }];
-								 }];
-			} else {
-				[UIView animateWithDuration:0.2
-									  delay:0.0
-									options:UIViewAnimationOptionCurveEaseIn
-								 animations:^{
-									 greaterSquare.alpha = 0.1f;
-								 }
-								 completion:^(BOOL finished){
-									 [UIView animateWithDuration:0.2
-														   delay:0.0
-														 options: UIViewAnimationOptionCurveEaseIn
-													  animations:^{
-														  greaterSquare.alpha = 0.3f;
-													  }
-													  completion:^(BOOL finished) {
-														  
-													  }];
-								 }];
-			}
-		}
-		
-		for (GRDSquare *lesserSquare in self.lesserGridSquares) {
-			if (lesserSquare.isActive) {
-				[UIView animateWithDuration:0.2
-									  delay:0.0
-									options: UIViewAnimationOptionCurveEaseIn
-								 animations:^{
-									 lesserSquare.backgroundColor = self.gridTransitionColour;
-								 }
-								 completion:^(BOOL finished) {
-									 [UIView animateWithDuration:0.2
-														   delay:0.0
-														 options: UIViewAnimationOptionCurveEaseIn
-													  animations:^{
-														  lesserSquare.backgroundColor = self.gridColour;
-													  }
-													  completion:^(BOOL finished) {
-													  }];
-								 }];
-			} else {
-				[UIView animateWithDuration:0.2
-									  delay:0.0
-									options:UIViewAnimationOptionCurveEaseIn
-								 animations:^{
-									 lesserSquare.alpha = 0.1f;
-								 }
-								 completion:^(BOOL finished){
-									 [UIView animateWithDuration:0.2
-														   delay:0.0
-														 options: UIViewAnimationOptionCurveEaseIn
-													  animations:^{
-														  lesserSquare.alpha = 0.3f;
-													  }
-													  completion:^(BOOL finished) {
-														  
-													  }];
-								 }];
-			}
-
-		}
+		[self successTransition];
 		
 		[self performSelector:@selector(pulse) withObject:nil afterDelay:0.4f];
 	} else {
@@ -561,8 +562,6 @@ typedef enum : int {
 		
 		[self pulseTransitionWithSuccess:successful];
 	}
-	
-
 }
 
 - (void)randomiseLesserGrid {
