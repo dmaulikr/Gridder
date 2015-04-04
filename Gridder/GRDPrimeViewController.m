@@ -583,9 +583,9 @@ typedef enum : int {
 	if (self.difficultyLevel == DifficultyLevelEasy) {
 		activeMax = 5;
 	} else if (self.difficultyLevel == DifficultyLevelMedium) {
-		activeMax = 7;
+		activeMax = 6;
 	} else if (self.difficultyLevel == DifficultyLevelHard) {
-		activeMax = 8;
+		activeMax = 5;
 	}
 
 	for (int i = 0; i <= activeMax; i++) {
