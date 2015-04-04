@@ -25,6 +25,26 @@
 	return _sharedInstance;
 }
 
+- (void)startNewGame {
+	self.rounds = 0;
+	self.lives = 3;
+	self.score = 0;
+	self.streak = 0;
+	self.onTheEdgeStreak = 0;
+	self.activationCandidates = [[NSMutableArray alloc] init];
+	
+	self.difficultyLevel = DifficultyLevelEasy;
+}
+
+- (void)setDifficultyLevel:(DifficultyLevel)difficultyLevel {
+	id<GRDWizardProtocol> strongDelegate = self.delegate;
+	if ([strongDelegate respondsToSelector:@selector(wizardDidAdjustDifficultyLevel:)]) {
+		[self.delegate wizardDidAdjustDifficultyLevel:difficultyLevel];
+	}
+	
+	_difficultyLevel = difficultyLevel;
+}
+
 		
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid {
 	

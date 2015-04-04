@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <YLProgressBar.h>
 #import "GRDSquare.h"
+#import "GRDWizard.h"
 
 #define LESSERGRID_SQUARE_SIZE 9
 #define GREATERGRID_SQUARE_SIZE 4
 
-@interface GRDPrimeViewController : UIViewController <GRDSquareProtocol>
+@interface GRDPrimeViewController : UIViewController <GRDSquareProtocol, GRDWizardProtocol>
 
 // Views
 @property (strong, nonatomic) IBOutlet UIView *greaterGrid;
@@ -23,7 +24,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 
 // Objects
-
 @property (nonatomic, strong) UIColor *gridColour;
 @property (nonatomic, strong) UIColor *gridTransitionColour;
 

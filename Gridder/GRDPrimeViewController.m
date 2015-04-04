@@ -7,25 +7,12 @@
 //
 
 #import "GRDPrimeViewController.h"
-#import "GRDWizard.h"
 #import "GRDAppDelegate.h"
-
-typedef enum : int {
-	DifficultyLevelEasy = 0,
-	DifficultyLevelMedium = 1,
-	DifficultyLevelHard = 2
-} DifficultyLevel;
 
 @interface GRDPrimeViewController ()
 
-@property (nonatomic) int score;
-@property (nonatomic) int rounds;
-@property (nonatomic) int lives;
-@property (nonatomic) int streak;
-@property (nonatomic) DifficultyLevel difficultyLevel;
 @property (nonatomic) CGRect scoreFaderFrame;
 @property (nonatomic) CGRect lifeFaderFrame;
-@property (nonatomic, strong) NSMutableArray *activationCandidates;
 
 // Views
 @property (nonatomic, strong) UIButton *pauseButton;
@@ -34,7 +21,7 @@ typedef enum : int {
 @property (nonatomic, strong) UILabel *lifeFader;
 
 // Achievements
-@property (nonatomic) int onTheEdgeStreak;
+
 
 @end
 
@@ -52,7 +39,8 @@ typedef enum : int {
 	self.gridColour = [UIColor orangeColor];
 	self.gridTransitionColour = [UIColor purpleColor];
 	
-	[self startNewGame];
+	[GRDWizard sharedInstance].delegate = self;
+	[[GRDWizard sharedInstance] startNewGame];
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
@@ -382,13 +370,13 @@ typedef enum : int {
 
 - (void)gainPoints {
 	int pointsGained;
-	if (self.difficultyLevel == DifficultyLevelEasy) pointsGained = (500 / (self.timeUntilNextPulse + 1)) + 5 + (self.rounds * 2);
-	else if (self.difficultyLevel == DifficultyLevelMedium)pointsGained = (2000 / (self.timeUntilNextPulse + 1)) + 10 + (self.rounds * 2);
+	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) pointsGained = (500 / (self.timeUntilNextPulse + 1)) + 5 + ([GRDWizard sharedInstance].rounds * 2);
+	else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelMedium)pointsGained = (2000 / (self.timeUntilNextPulse + 1)) + 10 + ([GRDWizard sharedInstance].rounds * 2);
 	else pointsGained = (4000 / (self.timeUntilNextPulse + 1)) + 20;
 
 	self.scoreGainedFader.text = [NSString stringWithFormat:@"+%d!", pointsGained];
 	self.scoreGainedFader.alpha = 1.0f;
-	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", self.score + [self.scoreGainedFader.text intValue]]];
+	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score + [self.scoreGainedFader.text intValue]]];
 	
 	[UIView beginAnimations:@"ScrollPointsGainedAnimation" context:nil];
 	[UIView setAnimationDelegate: self];
@@ -403,30 +391,35 @@ typedef enum : int {
 }
 
 - (void)loseALife {
-	self.lives--;
+	[GRDWizard sharedInstance].lives--;
 	
 	[[GRDSoundPlayer sharedInstance].pulseFailSoundPlayer play];
 
-	if (self.lives == 0) {
+	if ([GRDWizard sharedInstance].lives == 0) {
 		[self.pulseTimer invalidate];
 		self.pulseTimer = nil;
-		[self startNewGame];
+		[[GRDWizard sharedInstance] startNewGame];
+		
+		[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+		[self.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score]];
+
+		
 		[self randomiseLesserGrid];
 		[[GRDSoundPlayer sharedInstance].gameThemePlayer stop];
 
 		return;
 	}
 	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
 	
 	[self.lifeFader setText:@"-1"];
 	[self fadeLife];
 }
 
 - (void)gainALife {
-	self.lives++;
+	[GRDWizard sharedInstance].lives++;
 	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
 	[self.lifeFader setText:@"+1"];
 	
 	[self fadeLife];
@@ -448,23 +441,24 @@ typedef enum : int {
 
 }
 
-- (void)setDifficultyLevel:(DifficultyLevel)difficultyLevel {
+#pragma mark -
+#pragma mark WIZARD DELEGATE
+#pragma mark -
+
+- (void)wizardDidAdjustDifficultyLevel:(DifficultyLevel)difficultyLevel {
 	switch (difficultyLevel) {
 		case DifficultyLevelHard:
 			self.gridColour = [UIColor purpleColor];
 			self.gridTransitionColour = [UIColor orangeColor];
-			_difficultyLevel = DifficultyLevelHard;
 			break;
 		case DifficultyLevelMedium:
 			self.gridColour = [UIColor blueColor];
 			self.gridTransitionColour = [UIColor greenColor];
-			_difficultyLevel = DifficultyLevelMedium;
 			break;
 		case DifficultyLevelEasy:
 		default:
 			self.gridColour = [UIColor orangeColor];
 			self.gridTransitionColour = [UIColor purpleColor];
-			_difficultyLevel = DifficultyLevelEasy;
 			break;
 	}
 	
@@ -486,32 +480,16 @@ typedef enum : int {
 #pragma mark GAME FUNCTIONS
 #pragma mark -
 
-- (void)startNewGame {
-	self.rounds = 0;
-	self.lives = 3;
-	self.score = 0;
-	self.streak = 0;
-	self.onTheEdgeStreak = 0;
-	self.activationCandidates = [[NSMutableArray alloc] init];
-	
-	self.difficultyLevel = DifficultyLevelEasy;
-	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", self.lives]];
-	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", self.score]];
-	
-	//[self randomiseLesserGrid];
-}
-
 - (void)pulse {
 	[self randomiseLesserGrid];
 	
-	if (self.lives == 1) {
-		self.onTheEdgeStreak++;
-		if (self.onTheEdgeStreak == 10) {
+	if ([GRDWizard sharedInstance].lives == 1) {
+		[GRDWizard sharedInstance].onTheEdgeStreak++;
+		if ([GRDWizard sharedInstance].onTheEdgeStreak == 10) {
 			//[delegate.menuVC.gameCenterManager submitAchievement:kAchievementOnTheEdge percentComplete:100];
 		}
 	} else {
-		self.onTheEdgeStreak = 0;
+		[GRDWizard sharedInstance].onTheEdgeStreak = 0;
 	}
 	
 	//delegate.soundPlayer.pulseSuccessSoundPlayer.currentTime = 0;
@@ -519,10 +497,10 @@ typedef enum : int {
 	
 	
 	
-	if (self.rounds > 30) {
-		self.difficultyLevel = DifficultyLevelHard;
-	} else if (self.rounds > 10) {
-		self.difficultyLevel = DifficultyLevelMedium;
+	if ([GRDWizard sharedInstance].rounds > 30) {
+		[GRDWizard sharedInstance].difficultyLevel = DifficultyLevelHard;
+	} else if ([GRDWizard sharedInstance].rounds > 10) {
+		[GRDWizard sharedInstance].difficultyLevel = DifficultyLevelMedium;
 	}
 	
 	//if (glassLevel < 3) {
@@ -532,11 +510,11 @@ typedef enum : int {
 	//if(delegate.currentStreak > delegate.highestStreak) delegate.highestStreak++;
 	
 	
-	if (self.difficultyLevel == DifficultyLevelEasy) {
+	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) {
 		if (self.maximumTimeAllowed > 300) self.maximumTimeAllowed -= 30;
-	} else if (self.difficultyLevel == DifficultyLevelMedium) {
+	} else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelMedium) {
 		if (self.maximumTimeAllowed > 280) self.maximumTimeAllowed -= 30;
-	} else if (self.difficultyLevel == DifficultyLevelHard) {
+	} else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelHard) {
 		if (self.maximumTimeAllowed > 250) self.maximumTimeAllowed -= 30;
 	}
 }
@@ -546,14 +524,14 @@ typedef enum : int {
 		[self setupTimer];
 	}
 	
-	self.rounds++;
+	[GRDWizard sharedInstance].rounds++;
 	self.timeUntilNextPulse = 0;
 	
 	if (successful) {
 		[[GRDSoundPlayer sharedInstance].menuBlip2SoundPlayer play];
 		[self gainPoints];
-		self.streak++;
-		if (self.streak % 10 == 0) [self gainALife];
+		[GRDWizard sharedInstance].streak++;
+		if ([GRDWizard sharedInstance].streak % 10 == 0) [self gainALife];
 
 		[self successTransition];
 		
@@ -562,7 +540,7 @@ typedef enum : int {
 		
 		[self randomiseLesserGrid];
 		
-		self.streak = 0;
+		[GRDWizard sharedInstance].streak = 0;
 		if (self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
 		[self loseALife];
 		
@@ -577,11 +555,11 @@ typedef enum : int {
 	}
 	
 	int activeMax = 5;
-	if (self.difficultyLevel == DifficultyLevelEasy) {
+	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) {
 		activeMax = 5;
-	} else if (self.difficultyLevel == DifficultyLevelMedium) {
+	} else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelMedium) {
 		activeMax = 6;
-	} else if (self.difficultyLevel == DifficultyLevelHard) {
+	} else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelHard) {
 		activeMax = 5;
 	}
 
@@ -600,17 +578,17 @@ typedef enum : int {
 		// New algorithm
 		while (activeCount < activeMax) {
 			// Determine candidate squares
-			self.activationCandidates = [[NSMutableArray alloc] init];
+			[GRDWizard sharedInstance].activationCandidates = [[NSMutableArray alloc] init];
 			for (unsigned int x = 0; x < [[GRDWizard sharedInstance].lesserGridSquares count]; x++) {
 				// If the square isn't already active...
 				GRDSquare *square = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:x];
 				if (!square.isActive) {
 					// But one of its adjacent squares is...
-					for (unsigned int y = 0; y < (self.difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares count] : [square.adjacentStraightSquares count]); y++) {
-						GRDSquare *adjacentSquare = self.difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares objectAtIndex:y] : [square.adjacentStraightSquares objectAtIndex:y];
+					for (unsigned int y = 0; y < ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares count] : [square.adjacentStraightSquares count]); y++) {
+						GRDSquare *adjacentSquare = [GRDWizard sharedInstance].difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares objectAtIndex:y] : [square.adjacentStraightSquares objectAtIndex:y];
 						if (adjacentSquare.isActive) {
 							// It's a candidate
-							[self.activationCandidates addObject:[NSNumber numberWithInt:x]];
+							[[GRDWizard sharedInstance].activationCandidates addObject:[NSNumber numberWithInt:x]];
 					
 							break;
 						}
@@ -619,9 +597,9 @@ typedef enum : int {
 			}
 			
 			// Activate a random candidate
-			unsigned int idx = arc4random_uniform([self.activationCandidates count]);
+			unsigned int idx = arc4random_uniform([[GRDWizard sharedInstance].activationCandidates count]);
 			
-			GRDSquare *square = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:[((NSNumber *)[self.activationCandidates objectAtIndex:idx]) intValue]];
+			GRDSquare *square = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:[((NSNumber *)[[GRDWizard sharedInstance].activationCandidates objectAtIndex:idx]) intValue]];
 			square.isActive = true;
 			++activeCount;
 		}
@@ -631,7 +609,7 @@ typedef enum : int {
 	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
 		square.isActive = NO;
 	}
-	self.activationCandidates = nil;
+	[GRDWizard sharedInstance].activationCandidates = nil;
 	
 }
 
