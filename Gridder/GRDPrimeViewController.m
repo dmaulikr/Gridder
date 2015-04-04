@@ -144,7 +144,7 @@ typedef enum : int {
 	square.isActive = NO;
 	square.isGreaterSquare = YES;
 	square.userInteractionEnabled = YES;
-
+	
 	[self.greaterGrid addSubview:square];
 	[self.greaterGridSquares addObject:square];
 	if (count % 4 == 0) {
@@ -210,6 +210,11 @@ typedef enum : int {
 }
 
 - (void)timerFireMethod:(NSTimer *)theTimer {
+	if (![[GRDSoundPlayer sharedInstance].gameThemePlayer isPlaying]) {
+		[[GRDSoundPlayer sharedInstance].gameThemePlayer prepareToPlay];
+		[[GRDSoundPlayer sharedInstance].gameThemePlayer play];
+	}
+	
 	self.timeUntilNextPulse += 10;
 	if (self.timeUntilNextPulse >= self.maximumTimeAllowed) {
 		self.timeUntilNextPulse = 0;
@@ -403,11 +408,14 @@ typedef enum : int {
 - (void)loseALife {
 	self.lives--;
 	
+	[[GRDSoundPlayer sharedInstance].pulseFailSoundPlayer play];
+
 	if (self.lives == 0) {
 		[self.pulseTimer invalidate];
 		self.pulseTimer = nil;
 		[self startNewGame];
 		[self randomiseLesserGrid];
+		[[GRDSoundPlayer sharedInstance].gameThemePlayer stop];
 
 		return;
 	}

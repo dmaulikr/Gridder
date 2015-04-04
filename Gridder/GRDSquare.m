@@ -33,6 +33,7 @@
 	self.userInteractionEnabled = YES;
 	
 	self.activationSound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"pop" ofType:@"wav"]] error:nil];
+	[self.activationSound setVolume:0.03f];
 }
 
 - (BOOL)getIsActive {
@@ -49,8 +50,11 @@
 		self.alpha = 1.0f;
 		
 		[UIView commitAnimations];
-		
-		if (self.isGreaterSquare) [self.activationSound play];
+
+		if (self.isGreaterSquare) {
+			[self.activationSound prepareToPlay];
+			[self.activationSound play];
+		}
 	} else {
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDuration:0.1];

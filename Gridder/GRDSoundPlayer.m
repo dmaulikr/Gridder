@@ -37,7 +37,7 @@
 		url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"gameover" ofType:@"wav"]];
 		_sharedInstance.gameOverSoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
 		
-		url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"menubeep2" ofType:@"wav"]];
+		url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"match" ofType:@"wav"]];
 		_sharedInstance.menuBlip2SoundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
 		
 		url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"negativebeep" ofType:@"wav"]];
