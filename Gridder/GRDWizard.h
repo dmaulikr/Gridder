@@ -13,6 +13,11 @@
 @class GRDViewController;
 @interface GRDWizard : NSObject
 
+@property (nonatomic, strong) NSMutableArray *lesserGridSquares;
+@property (nonatomic, strong) NSMutableArray *greaterGridSquares;
+
++ (GRDWizard *)sharedInstance;
+
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid;
 + (GRDSquare *)squareForPosition:(NSInteger)pos fromGrid:(NSMutableArray *)grid;
 + (void)gainALife:(GRDViewController *)grdVC;
@@ -23,4 +28,5 @@
 + (void)styleButtonAsASquare:(UIButton *)button;
 + (void)populateAdjacentAllSquares:(NSMutableArray *)squares;
 + (void)populateStraightAdjacentSquares:(NSMutableArray *)squares;
+
 @end

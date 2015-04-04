@@ -358,20 +358,9 @@
 		FA1EF8FA18F2F928007B8E72 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA1BABBE178D857000FEC33A /* GRDViewController.h */,
-				FA1BABBF178D857000FEC33A /* GRDViewController.m */,
-				FA1BABDF1790478B00FEC33A /* GRDMenu.h */,
-				FA1BABE01790478B00FEC33A /* GRDMenu.m */,
-				FA1BABE617905F2200FEC33A /* GRDGameOverScreen.h */,
-				FA1BABE717905F2200FEC33A /* GRDGameOverScreen.m */,
-				FA0379781791CA7500BF5251 /* GRDHowToPlay.h */,
-				FA0379791791CA7600BF5251 /* GRDHowToPlay.m */,
-				FA03797B1791E03F00BF5251 /* GRDCredits.h */,
-				FA03797C1791E03F00BF5251 /* GRDCredits.m */,
-				FA03797E1791E19400BF5251 /* GRDHighScores.h */,
-				FA03797F1791E19400BF5251 /* GRDHighScores.m */,
 				FA93E80A1ABEEA8C008F5806 /* GRDPrimeViewController.h */,
 				FA93E80B1ABEEA8C008F5806 /* GRDPrimeViewController.m */,
+				FA93E8241AD0487E008F5806 /* 2.0 */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -441,6 +430,25 @@
 				FA93E81B1ACF37E8008F5806 /* pop.wav */,
 			);
 			name = 3.0;
+			sourceTree = "<group>";
+		};
+		FA93E8241AD0487E008F5806 /* 2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				FA1BABBE178D857000FEC33A /* GRDViewController.h */,
+				FA1BABBF178D857000FEC33A /* GRDViewController.m */,
+				FA1BABDF1790478B00FEC33A /* GRDMenu.h */,
+				FA1BABE01790478B00FEC33A /* GRDMenu.m */,
+				FA1BABE617905F2200FEC33A /* GRDGameOverScreen.h */,
+				FA1BABE717905F2200FEC33A /* GRDGameOverScreen.m */,
+				FA0379781791CA7500BF5251 /* GRDHowToPlay.h */,
+				FA0379791791CA7600BF5251 /* GRDHowToPlay.m */,
+				FA03797B1791E03F00BF5251 /* GRDCredits.h */,
+				FA03797C1791E03F00BF5251 /* GRDCredits.m */,
+				FA03797E1791E19400BF5251 /* GRDHighScores.h */,
+				FA03797F1791E19400BF5251 /* GRDHighScores.m */,
+			);
+			name = 2.0;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

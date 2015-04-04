@@ -11,6 +11,21 @@
 
 @implementation GRDWizard
 
++ (GRDWizard *)sharedInstance {
+	static GRDWizard *_sharedInstance = nil;
+	static dispatch_once_t oncePredicate;
+	dispatch_once(&oncePredicate, ^{
+		_sharedInstance = [[GRDWizard alloc] init];
+		
+		_sharedInstance.greaterGridSquares = [[NSMutableArray alloc] init];
+		_sharedInstance.lesserGridSquares = [[NSMutableArray alloc] init];
+		
+	});
+	
+	return _sharedInstance;
+}
+
+		
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid {
 	
 	for (int x = 1; x < 16; x++) {

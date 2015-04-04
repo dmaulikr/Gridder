@@ -119,14 +119,11 @@ typedef enum : int {
 }
 
 - (void)generateGrids {
-	self.greaterGridSquares = [[NSMutableArray alloc] init];
-	self.lesserGridSquares = [[NSMutableArray alloc] init];
-	
 	[self generateGreaterGridWithXOffset:0 withYOffset:0 fromCount:1];
 	[self generateLesserGridWithXOffset:0 withYOffset:0 fromCount:1];
 	
-	[GRDWizard populateAdjacentAllSquares:self.lesserGridSquares];
-	[GRDWizard populateStraightAdjacentSquares:self.lesserGridSquares];
+	[GRDWizard populateAdjacentAllSquares:[GRDWizard sharedInstance].lesserGridSquares];
+	[GRDWizard populateStraightAdjacentSquares:[GRDWizard sharedInstance].lesserGridSquares];
 }
 
 - (void)generateGreaterGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
@@ -146,7 +143,7 @@ typedef enum : int {
 	square.userInteractionEnabled = YES;
 	
 	[self.greaterGrid addSubview:square];
-	[self.greaterGridSquares addObject:square];
+	[[GRDWizard sharedInstance].greaterGridSquares addObject:square];
 	if (count % 4 == 0) {
 		if (count >= 16) return;
 		yOffset += square.bounds.size.height;
@@ -172,7 +169,7 @@ typedef enum : int {
 	square.isGreaterSquare = NO;
 	
 	[self.lesserGrid addSubview:square];
-	[self.lesserGridSquares addObject:square];
+	[[GRDWizard sharedInstance].lesserGridSquares addObject:square];
 	
 	if (count % 4 == 0) {
 		if (count >= 16) return;
@@ -233,7 +230,7 @@ typedef enum : int {
 	GRDSquare *touchedSquare;
 	UITouch *touch = [touches anyObject];
 	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
-	for (GRDSquare *square in self.greaterGridSquares) {
+	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
 		if (CGRectContainsPoint(square.frame, firstTouch)) {
 			touchedSquare = square;
 		}
@@ -247,7 +244,7 @@ typedef enum : int {
 				touchedSquare.isActive = NO;
 			}
 			
-			if ([GRDWizard gridComparisonMatches:self.greaterGridSquares compareWith:self.lesserGridSquares]) {
+			if ([GRDWizard gridComparisonMatches:[GRDWizard sharedInstance].greaterGridSquares compareWith:[GRDWizard sharedInstance].lesserGridSquares]) {
 				[self pulseWithSuccessfulMatch:YES];
 			}
 		}
@@ -265,7 +262,7 @@ typedef enum : int {
 }
 
 - (void)didEndTouching:(NSSet *)touches withEvent:(UIEvent *)event {
-	for (GRDSquare *square in self.greaterGridSquares) {
+	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
 		square.isBeingTouchDragged = NO;
 	}
 }
@@ -287,7 +284,7 @@ typedef enum : int {
 #pragma mark -
 
 - (void)successTransition {
-	for (GRDSquare *greaterSquare in self.greaterGridSquares) {
+	for (GRDSquare *greaterSquare in [GRDWizard sharedInstance].greaterGridSquares) {
 		if (greaterSquare.isActive) {
 			[UIView animateWithDuration:0.2
 								  delay:0.0
@@ -327,7 +324,7 @@ typedef enum : int {
 		}
 	}
 	
-	for (GRDSquare *lesserSquare in self.lesserGridSquares) {
+	for (GRDSquare *lesserSquare in [GRDWizard sharedInstance].lesserGridSquares) {
 		if (lesserSquare.isActive) {
 			[UIView animateWithDuration:0.2
 								  delay:0.0
@@ -471,10 +468,10 @@ typedef enum : int {
 			break;
 	}
 	
-	for (GRDSquare *square in self.greaterGridSquares) {
+	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
 		square.backgroundColor = self.gridColour;
 	}
-	for (GRDSquare *square in self.lesserGridSquares) {
+	for (GRDSquare *square in [GRDWizard sharedInstance].lesserGridSquares) {
 		square.backgroundColor = self.gridColour;
 	}
 	
@@ -575,7 +572,7 @@ typedef enum : int {
 }
 
 - (void)randomiseLesserGrid {
-	for (GRDSquare *square in self.lesserGridSquares) {
+	for (GRDSquare *square in [GRDWizard sharedInstance].lesserGridSquares) {
 		square.isActive = NO;
 	}
 	
@@ -590,13 +587,13 @@ typedef enum : int {
 
 	for (int i = 0; i <= activeMax; i++) {
 		// Clear active flag
-		for (GRDSquare *square in self.lesserGridSquares) {
+		for (GRDSquare *square in [GRDWizard sharedInstance].lesserGridSquares) {
 			square.isActive = NO;
 		}
 		int activeCount = 0;
 		
 		// Select random start point
-		GRDSquare *randomlyChosenSquare = [self.lesserGridSquares objectAtIndex:arc4random_uniform(15)];
+		GRDSquare *randomlyChosenSquare = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:arc4random_uniform(15)];
 		if (randomlyChosenSquare) { randomlyChosenSquare.isActive = YES; }
 		activeCount++;
 		
@@ -604,9 +601,9 @@ typedef enum : int {
 		while (activeCount < activeMax) {
 			// Determine candidate squares
 			self.activationCandidates = [[NSMutableArray alloc] init];
-			for (unsigned int x = 0; x < [self.lesserGridSquares count]; x++) {
+			for (unsigned int x = 0; x < [[GRDWizard sharedInstance].lesserGridSquares count]; x++) {
 				// If the square isn't already active...
-				GRDSquare *square = [self.lesserGridSquares objectAtIndex:x];
+				GRDSquare *square = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:x];
 				if (!square.isActive) {
 					// But one of its adjacent squares is...
 					for (unsigned int y = 0; y < (self.difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares count] : [square.adjacentStraightSquares count]); y++) {
@@ -624,14 +621,14 @@ typedef enum : int {
 			// Activate a random candidate
 			unsigned int idx = arc4random_uniform([self.activationCandidates count]);
 			
-			GRDSquare *square = [self.lesserGridSquares objectAtIndex:[((NSNumber *)[self.activationCandidates objectAtIndex:idx]) intValue]];
+			GRDSquare *square = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:[((NSNumber *)[self.activationCandidates objectAtIndex:idx]) intValue]];
 			square.isActive = true;
 			++activeCount;
 		}
 		
 	}
 	
-	for (GRDSquare *square in self.greaterGridSquares) {
+	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
 		square.isActive = NO;
 	}
 	self.activationCandidates = nil;

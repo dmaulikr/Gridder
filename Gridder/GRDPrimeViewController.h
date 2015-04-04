@@ -23,8 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 
 // Objects
-@property (nonatomic, strong) NSMutableArray *lesserGridSquares;
-@property (nonatomic, strong) NSMutableArray *greaterGridSquares;
+
 @property (nonatomic, strong) UIColor *gridColour;
 @property (nonatomic, strong) UIColor *gridTransitionColour;
 
