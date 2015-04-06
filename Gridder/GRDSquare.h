@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GRDParticleEmitter.h"
 
 @protocol GRDSquareProtocol <NSObject>
 
@@ -16,7 +17,7 @@
 
 @end
 
-@interface GRDSquare : UIButton
+@interface GRDSquare : GRDParticleEmitter
 
 @property (nonatomic) BOOL isGreaterSquare;
 @property (nonatomic) BOOL isActive;

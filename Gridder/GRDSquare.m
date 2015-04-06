@@ -34,6 +34,8 @@
 	
 	self.activationSound = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"pop" ofType:@"wav"]] error:nil];
 	[self.activationSound setVolume:0.03f];
+	
+	
 }
 
 - (BOOL)getIsActive {
@@ -69,7 +71,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self.delegate squareDidBeginTouching:touches withEvent:event];
-
+	[super touchesBegan:touches withEvent:event];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -78,10 +80,14 @@
 	if ([strongDelegate respondsToSelector:@selector(squareDidTouchesMove:withEvent:)]) {
 		[strongDelegate squareDidTouchesMove:touches withEvent:event];
 	}
+	
+	[super touchesMoved:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self.delegate squareDidEndTouching:touches withEvent:event];
+	
+	[super touchesEnded:touches withEvent:event];
 }
 
 @end

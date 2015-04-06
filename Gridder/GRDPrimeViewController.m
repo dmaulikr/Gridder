@@ -137,6 +137,8 @@
 	square.userInteractionEnabled = YES;
 	square.layer.cornerRadius = 3.0f;
 	
+	[self.view sendSubviewToBack:self.greaterGrid];
+	
 	[self.greaterGrid addSubview:square];
 	[[GRDWizard sharedInstance].greaterGridSquares addObject:square];
 	if (count % 4 == 0) {

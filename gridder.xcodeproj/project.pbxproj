@@ -86,6 +86,7 @@
 		FA93E8291AD2A67C008F5806 /* GRDAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = FA93E8281AD2A67C008F5806 /* GRDAnimator.m */; };
 		FA93E82C1AD2EBA0008F5806 /* GRDParticleEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA93E82B1AD2EBA0008F5806 /* GRDParticleEmitter.m */; };
 		FA93E82E1AD2ED63008F5806 /* v3_particle.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E82D1AD2ED63008F5806 /* v3_particle.png */; };
+		FA93E8301AD31ACE008F5806 /* slice.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E82F1AD31ACD008F5806 /* slice.png */; };
 		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
 		FAF687041ABDDFED00915381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF687031ABDDFED00915381 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -191,6 +192,7 @@
 		FA93E82A1AD2EBA0008F5806 /* GRDParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDParticleEmitter.h; sourceTree = "<group>"; };
 		FA93E82B1AD2EBA0008F5806 /* GRDParticleEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDParticleEmitter.m; sourceTree = "<group>"; };
 		FA93E82D1AD2ED63008F5806 /* v3_particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_particle.png; sourceTree = "<group>"; };
+		FA93E82F1AD31ACD008F5806 /* slice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slice.png; sourceTree = "<group>"; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE242326784D7FA49E14EF52 /* Pods-gridder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.release.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.release.xcconfig"; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 		FA93E8111AC207B3008F5806 /* 3.0 */ = {
 			isa = PBXGroup;
 			children = (
+				FA93E82F1AD31ACD008F5806 /* slice.png */,
 				FA93E82D1AD2ED63008F5806 /* v3_particle.png */,
 				FA13D1DF17FD6CDE0009AFE9 /* v3_icon_score.png */,
 				FA1BABCD178F4F0300FEC33A /* v3_icon_lives.png */,
@@ -543,6 +546,7 @@
 				FA1BAC2A1791AE0100FEC33A /* gridBG.png in Resources */,
 				FA93E80E1AC0BEC7008F5806 /* sandglass.png in Resources */,
 				FA1BAC2D1791AE2A00FEC33A /* pause.png in Resources */,
+				FA93E8301AD31ACE008F5806 /* slice.png in Resources */,
 				FA93E8191AC49FC2008F5806 /* Podfile in Resources */,
 				FA1BAC2E1791AE2A00FEC33A /* play.png in Resources */,
 				FA1BAC311791AE4400FEC33A /* active.png in Resources */,
