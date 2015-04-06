@@ -112,8 +112,14 @@ static NSString * YLProgressBarDefaultName = @"Arial-BoldMT";
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Refresh the corner radius value
-    self.cornerRadius = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
-  
+	// MODIFICATION OF LIBRARY
+	if (!self.customCornerRadius) {
+		self.cornerRadius = (_type == YLProgressBarTypeRounded) ? rect.size.height / 2 : 0;
+	} else {
+		self.cornerRadius = [self.customCornerRadius intValue];
+	}
+	// END MODIFICATION OF LIBRARY
+	
     // Compute the progressOffset for the stripe's animation
     self.stripesOffset = (!_stripesAnimated || abs(self.stripesOffset) > 2 * _stripesWidth - 1) ? 0 : self.stripesDirection * abs(self.stripesAnimationVelocity) + self.stripesOffset;
     

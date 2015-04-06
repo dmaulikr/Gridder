@@ -142,6 +142,10 @@ typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
  */
 @interface YLProgressBar : UIView
 
+// MODIFICATION OF LIBRARY
+@property (nonatomic, strong) NSNumber *customCornerRadius;
+// END MODIFICATION OF LIBRARY
+
 #pragma mark Managing the Progress Bar
 /** @name Managing the Progress Bar */
 

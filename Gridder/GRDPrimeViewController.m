@@ -103,6 +103,7 @@
 
 - (void)populateFooterView {
 	self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake((self.footerView.frame.size.width / 2) - 47, 0, 100, self.footerView.frame.size.height)];
+	self.pauseButton.layer.cornerRadius = 3.0f;
 	[self.pauseButton setTitle:@"PAUSE" forState:UIControlStateNormal];
 	[self.pauseButton setBackgroundColor:self.gridColour];
 	[self.footerView addSubview:self.pauseButton];
@@ -131,6 +132,7 @@
 	square.isActive = NO;
 	square.isGreaterSquare = YES;
 	square.userInteractionEnabled = YES;
+	square.layer.cornerRadius = 3.0f;
 	
 	[self.greaterGrid addSubview:square];
 	[[GRDWizard sharedInstance].greaterGridSquares addObject:square];
@@ -157,7 +159,8 @@
 	square.adjacentAllSquares = [[NSMutableArray alloc] init];
 	square.adjacentStraightSquares = [[NSMutableArray alloc] init];
 	square.isGreaterSquare = NO;
-	
+	square.layer.cornerRadius = 3.0f;
+
 	[self.lesserGrid addSubview:square];
 	[[GRDWizard sharedInstance].lesserGridSquares addObject:square];
 	
@@ -181,7 +184,8 @@
 
 - (void)setupTimer {
 	self.progressBar = [[YLProgressBar alloc] init];
-	self.progressBar.type = YLProgressBarTypeFlat;
+	self.progressBar.type = YLProgressBarTypeRounded;
+	self.progressBar.customCornerRadius = [NSNumber numberWithInt:3];
 	self.progressBar.hideStripes = YES;
 	self.progressBar.hideTrack = YES;
 	self.progressBar.hideGloss = YES;
