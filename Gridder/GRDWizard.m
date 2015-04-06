@@ -85,62 +85,40 @@
 	[GRDAnimator animatePointsGained:vc];
 }
 
-/*- (void)loseALife {
++ (void)loseALife:(GRDPrimeViewController *)vc {
 	[GRDWizard sharedInstance].lives--;
 	
 	[[GRDSoundPlayer sharedInstance].pulseFailSoundPlayer play];
 	
 	if ([GRDWizard sharedInstance].lives == 0) {
-		[self.pulseTimer invalidate];
-		self.pulseTimer = nil;
+		[vc.pulseTimer invalidate];
+		vc.pulseTimer = nil;
 		[[GRDWizard sharedInstance] startNewGame];
 		
-		[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
-		[self.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score]];
+		[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+		[vc.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score]];
 		
-		
-		[self randomiseLesserGrid];
+		[vc randomiseLesserGrid];
 		[[GRDSoundPlayer sharedInstance].gameThemePlayer stop];
 		
 		return;
 	}
 	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+	[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
 	
-	[self.lifeFader setText:@"-1"];
-	[self fadeLife];
+	[vc.lifeFader setText:@"-1"];
+	
+	[GRDAnimator animateLifeFade:vc];
 }
 
-- (void)gainALife {
++ (void)gainALife:(GRDPrimeViewController *)vc {
 	[GRDWizard sharedInstance].lives++;
 	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
-	[self.lifeFader setText:@"+1"];
+	[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+	[vc.lifeFader setText:@"+1"];
 	
-	[self fadeLife];
+	[GRDAnimator animateLifeFade:vc];
 }
-
-- (void)fadeLife {
-	self.lifeFader.alpha = 1.0f;
-	
-	[UIView beginAnimations:@"ScrollLifeAnimation" context:nil];
-	[UIView setAnimationDelegate: self];
-	[UIView setAnimationDuration: 1.5];
-	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
-	self.lifeFader.frame = CGRectMake(self.lifeFader.frame.origin.x, self.lifeFader.frame.origin.y - 100, self.lifeFader.frame.size.width, self.lifeFader.frame.size.height);
-	[UIView commitAnimations];
-	
-	[UIView animateWithDuration:1.5 animations:^{ self.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
-		self.lifeFader.frame = self.lifeFaderFrame;
-	}];
-	
-}
-
-*/
-
-
-
-
 
 
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid {

@@ -122,5 +122,21 @@
 	}];
 }
 
++ (void)animateLifeFade:(GRDPrimeViewController *)vc {
+	vc.lifeFader.alpha = 1.0f;
+	
+	[UIView beginAnimations:@"ScrollLifeAnimation" context:nil];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1.5];
+	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
+	vc.lifeFader.frame = CGRectMake(vc.lifeFader.frame.origin.x, vc.lifeFader.frame.origin.y - 100, vc.lifeFader.frame.size.width, vc.lifeFader.frame.size.height);
+	[UIView commitAnimations];
+	
+	[UIView animateWithDuration:1.5 animations:^{ vc.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
+		vc.lifeFader.frame = vc.lifeFaderFrame;
+	}];
+	
+}
+
 
 @end

@@ -263,60 +263,6 @@
 	[self didTouchesMoved:touches withEvent:event];
 }
 
-#pragma mark -
-#pragma mark ANIMATIONS
-#pragma mark -
-
-- (void)loseALife {
-	[GRDWizard sharedInstance].lives--;
-	
-	[[GRDSoundPlayer sharedInstance].pulseFailSoundPlayer play];
-
-	if ([GRDWizard sharedInstance].lives == 0) {
-		[self.pulseTimer invalidate];
-		self.pulseTimer = nil;
-		[[GRDWizard sharedInstance] startNewGame];
-		
-		[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
-		[self.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score]];
-
-		
-		[self randomiseLesserGrid];
-		[[GRDSoundPlayer sharedInstance].gameThemePlayer stop];
-
-		return;
-	}
-	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
-	
-	[self.lifeFader setText:@"-1"];
-	[self fadeLife];
-}
-
-- (void)gainALife {
-	[GRDWizard sharedInstance].lives++;
-	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
-	[self.lifeFader setText:@"+1"];
-	
-	[self fadeLife];
-}
-
-- (void)fadeLife {
-	self.lifeFader.alpha = 1.0f;
-	
-	[UIView beginAnimations:@"ScrollLifeAnimation" context:nil];
-	[UIView setAnimationDelegate: self];
-	[UIView setAnimationDuration: 1.5];
-	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
-	self.lifeFader.frame = CGRectMake(self.lifeFader.frame.origin.x, self.lifeFader.frame.origin.y - 100, self.lifeFader.frame.size.width, self.lifeFader.frame.size.height);
-	[UIView commitAnimations];
-	
-	[UIView animateWithDuration:1.5 animations:^{ self.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
-		self.lifeFader.frame = self.lifeFaderFrame;
-	}];
-
-}
 
 #pragma mark -
 #pragma mark WIZARD DELEGATE
@@ -385,7 +331,7 @@
 		[[GRDSoundPlayer sharedInstance].menuBlip2SoundPlayer play];
 		[GRDWizard gainPoints:self];
 		[GRDWizard sharedInstance].streak++;
-		if ([GRDWizard sharedInstance].streak % 10 == 0) [self gainALife];
+		if ([GRDWizard sharedInstance].streak % 10 == 0) [GRDWizard gainALife:self];
 
 		[GRDAnimator animateMatch];
 		
@@ -396,7 +342,7 @@
 		
 		[GRDWizard sharedInstance].streak = 0;
 		if (self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
-		[self loseALife];
+		[GRDWizard loseALife:self];
 		
 		[GRDAnimator animatePulse:self.transitionFader];
 	}

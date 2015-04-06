@@ -14,5 +14,6 @@
 + (void)animateMatch;
 + (void)animatePulse:(UIView *)transitionFader;
 + (void)animatePointsGained:(GRDPrimeViewController *)vc;
++ (void)animateLifeFade:(GRDPrimeViewController *)vc;
 
 @end

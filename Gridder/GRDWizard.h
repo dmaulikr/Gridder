@@ -42,10 +42,14 @@ typedef enum : int {
 @property (nonatomic) int onTheEdgeStreak;
 @property (nonatomic) DifficultyLevel difficultyLevel;
 
-+ (GRDWizard *)sharedInstance;
+// Instance methods
 - (void)startNewGame;
-+ (void)gainPoints:(GRDPrimeViewController *)vc;
 
+// Static methods
++ (GRDWizard *)sharedInstance;
++ (void)gainPoints:(GRDPrimeViewController *)vc;
++ (void)loseALife:(GRDPrimeViewController *)vc;
++ (void)gainALife:(GRDPrimeViewController *)vc;
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid;
 + (GRDSquare *)squareForPosition:(NSInteger)pos fromGrid:(NSMutableArray *)grid;
 + (void)populateAdjacentAllSquares:(NSMutableArray *)squares;

@@ -38,4 +38,7 @@
 @property (nonatomic) NSInteger maximumTimeAllowed;
 @property (nonatomic, strong) NSTimer *pulseTimer;
 
+// Methods
+- (void)randomiseLesserGrid;
+
 @end
