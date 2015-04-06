@@ -41,6 +41,7 @@ typedef enum : int {
 + (GRDWizard *)sharedInstance;
 - (void)startNewGame;
 
++ (void)addBlurToView:(UIView *)view;
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid;
 + (GRDSquare *)squareForPosition:(NSInteger)pos fromGrid:(NSMutableArray *)grid;
 + (void)gainALife:(GRDViewController *)grdVC;

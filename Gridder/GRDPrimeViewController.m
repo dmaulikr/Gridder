@@ -33,7 +33,9 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	self.view.backgroundColor = [UIColor whiteColor];
+
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"active"]];
+	self.footerView.backgroundColor = self.view.backgroundColor;
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
 	self.gridColour = [UIColor orangeColor];
