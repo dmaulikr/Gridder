@@ -83,6 +83,7 @@
 		FA93E81C1ACF37E8008F5806 /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA93E81B1ACF37E8008F5806 /* pop.wav */; };
 		FA93E8211ACF4802008F5806 /* pop2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8201ACF4802008F5806 /* pop2.wav */; };
 		FA93E8231ACF4943008F5806 /* match.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8221ACF4943008F5806 /* match.wav */; };
+		FA93E8291AD2A67C008F5806 /* GRDAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = FA93E8281AD2A67C008F5806 /* GRDAnimator.m */; };
 		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
 		FAF687041ABDDFED00915381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF687031ABDDFED00915381 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -183,6 +184,8 @@
 		FA93E81B1ACF37E8008F5806 /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
 		FA93E8201ACF4802008F5806 /* pop2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop2.wav; sourceTree = "<group>"; };
 		FA93E8221ACF4943008F5806 /* match.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = match.wav; sourceTree = "<group>"; };
+		FA93E8271AD2A67C008F5806 /* GRDAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDAnimator.h; sourceTree = "<group>"; };
+		FA93E8281AD2A67C008F5806 /* GRDAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDAnimator.m; sourceTree = "<group>"; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE242326784D7FA49E14EF52 /* Pods-gridder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.release.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.release.xcconfig"; sourceTree = "<group>"; };
@@ -368,6 +371,8 @@
 		FA1EF8FB18F2F937007B8E72 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA93E8271AD2A67C008F5806 /* GRDAnimator.h */,
+				FA93E8281AD2A67C008F5806 /* GRDAnimator.m */,
 				FA13D1DA17FAC2D90009AFE9 /* GRDWizard.h */,
 				FA13D1DB17FAC2D90009AFE9 /* GRDWizard.m */,
 				FA7D5AD21801141C004011D4 /* GRDSoundPlayer.h */,
@@ -607,6 +612,7 @@
 				FA7D5ADA18050C46004011D4 /* GameCenterManager.m in Sources */,
 				FA1BABB0178D857000FEC33A /* main.m in Sources */,
 				FA1BABC0178D857000FEC33A /* GRDViewController.m in Sources */,
+				FA93E8291AD2A67C008F5806 /* GRDAnimator.m in Sources */,
 				FA1BABCA178DE20900FEC33A /* GRDSquare.m in Sources */,
 				FA1BABE11790478B00FEC33A /* GRDMenu.m in Sources */,
 				FA1BABE817905F2200FEC33A /* GRDGameOverScreen.m in Sources */,

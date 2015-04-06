@@ -8,6 +8,7 @@
 
 #import "GRDPrimeViewController.h"
 #import "GRDAppDelegate.h"
+#import "GRDAnimator.h"
 
 @interface GRDPrimeViewController ()
 
@@ -38,8 +39,6 @@
 	self.footerView.backgroundColor = self.view.backgroundColor;
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
-	self.gridColour = [UIColor orangeColor];
-	self.gridTransitionColour = [UIColor purpleColor];
 	
 	[GRDWizard sharedInstance].delegate = self;
 	[[GRDWizard sharedInstance] startNewGame];
@@ -83,7 +82,7 @@
 	self.scoreGainedFader = [[UILabel alloc] initWithFrame:self.scoreFaderFrame];
 	self.scoreGainedFader.backgroundColor = [UIColor clearColor];
 	self.scoreGainedFader.textAlignment = NSTextAlignmentCenter;
-	self.scoreGainedFader.textColor = self.gridColour;
+	self.scoreGainedFader.textColor = [GRDWizard sharedInstance].gridColour;
 	self.scoreGainedFader.font = [UIFont systemFontOfSize:30];
 	self.scoreGainedFader.alpha = 0.0f;
 	[self.view addSubview:self.scoreGainedFader];
@@ -92,7 +91,7 @@
 	self.lifeFader = [[UILabel alloc] initWithFrame:self.lifeFaderFrame];
 	self.lifeFader.backgroundColor = [UIColor clearColor];
 	self.lifeFader.textAlignment = NSTextAlignmentCenter;
-	self.lifeFader.textColor = self.gridColour;
+	self.lifeFader.textColor = [GRDWizard sharedInstance].gridColour;
 	self.lifeFader.font = [UIFont systemFontOfSize:30];
 	self.lifeFader.alpha = 0.0f;
 	[self.view addSubview:self.lifeFader];
@@ -105,7 +104,7 @@
 	self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake((self.footerView.frame.size.width / 2) - 47, 0, 100, self.footerView.frame.size.height)];
 	self.pauseButton.layer.cornerRadius = 3.0f;
 	[self.pauseButton setTitle:@"PAUSE" forState:UIControlStateNormal];
-	[self.pauseButton setBackgroundColor:self.gridColour];
+	[self.pauseButton setBackgroundColor:[GRDWizard sharedInstance].gridColour];
 	[self.footerView addSubview:self.pauseButton];
 }
 
@@ -126,7 +125,7 @@
 
 	square.layer.masksToBounds = NO;
 	square.tag = count;
-	square.backgroundColor = self.gridColour;
+	square.backgroundColor = [GRDWizard sharedInstance].gridColour;
 	square.alpha = 0.3f;
 	square.delegate = self;
 	square.isActive = NO;
@@ -153,7 +152,7 @@
 	
 	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / 4) - 10, (self.lesserGrid.frame.size.width / 4) - 10);
 	square.tag = count;
-	square.backgroundColor = self.gridColour;
+	square.backgroundColor = [GRDWizard sharedInstance].gridColour;
 	square.alpha = 0.3f;
 	square.isActive = NO;
 	square.adjacentAllSquares = [[NSMutableArray alloc] init];
@@ -189,8 +188,8 @@
 	self.progressBar.hideStripes = YES;
 	self.progressBar.hideTrack = YES;
 	self.progressBar.hideGloss = YES;
-	self.progressBar.progressTintColor = self.gridColour;
-	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:self.gridColour, nil];
+	self.progressBar.progressTintColor = [GRDWizard sharedInstance].gridColour;
+	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:[GRDWizard sharedInstance].gridColour, nil];
 	self.progressBar.trackTintColor = self.view.backgroundColor;
 	self.progressBar.center = self.view.center;
 	self.progressBar.frame = CGRectMake(10, 20, self.view.frame.size.width - 20, 30);
@@ -277,103 +276,6 @@
 #pragma mark ANIMATIONS
 #pragma mark -
 
-- (void)successTransition {
-	for (GRDSquare *greaterSquare in [GRDWizard sharedInstance].greaterGridSquares) {
-		if (greaterSquare.isActive) {
-			[UIView animateWithDuration:0.2
-								  delay:0.0
-								options:UIViewAnimationOptionCurveEaseIn
-							 animations:^{
-								 greaterSquare.backgroundColor = self.gridTransitionColour;
-							 }
-							 completion:^(BOOL finished){
-								 [UIView animateWithDuration:0.2
-													   delay:0.0
-													 options: UIViewAnimationOptionCurveEaseIn
-												  animations:^{
-													  greaterSquare.backgroundColor = self.gridColour;
-												  }
-												  completion:^(BOOL finished) {
-													  
-												  }];
-							 }];
-		} else {
-			[UIView animateWithDuration:0.2
-								  delay:0.0
-								options:UIViewAnimationOptionCurveEaseIn
-							 animations:^{
-								 greaterSquare.alpha = 0.1f;
-							 }
-							 completion:^(BOOL finished){
-								 [UIView animateWithDuration:0.2
-													   delay:0.0
-													 options: UIViewAnimationOptionCurveEaseIn
-												  animations:^{
-													  greaterSquare.alpha = 0.3f;
-												  }
-												  completion:^(BOOL finished) {
-													  
-												  }];
-							 }];
-		}
-	}
-	
-	for (GRDSquare *lesserSquare in [GRDWizard sharedInstance].lesserGridSquares) {
-		if (lesserSquare.isActive) {
-			[UIView animateWithDuration:0.2
-								  delay:0.0
-								options: UIViewAnimationOptionCurveEaseIn
-							 animations:^{
-								 lesserSquare.backgroundColor = self.gridTransitionColour;
-							 }
-							 completion:^(BOOL finished) {
-								 [UIView animateWithDuration:0.2
-													   delay:0.0
-													 options: UIViewAnimationOptionCurveEaseIn
-												  animations:^{
-													  lesserSquare.backgroundColor = self.gridColour;
-												  }
-												  completion:^(BOOL finished) {
-												  }];
-							 }];
-		} else {
-			[UIView animateWithDuration:0.2
-								  delay:0.0
-								options:UIViewAnimationOptionCurveEaseIn
-							 animations:^{
-								 lesserSquare.alpha = 0.1f;
-							 }
-							 completion:^(BOOL finished){
-								 [UIView animateWithDuration:0.2
-													   delay:0.0
-													 options: UIViewAnimationOptionCurveEaseIn
-												  animations:^{
-													  lesserSquare.alpha = 0.3f;
-												  }
-												  completion:^(BOOL finished) {
-													  
-												  }];
-							 }];
-		}
-		
-	}
-}
-
-- (void)pulseTransitionWithSuccess:(BOOL)successful {
-	self.transitionFader.backgroundColor = successful ? self.view.backgroundColor : [UIColor redColor];
-	self.transitionFader.hidden = NO;
-	[UIView animateWithDuration:0.2
-						  delay:0.0
-						options:0
-					 animations:^{
-						 self.transitionFader.alpha = 1.0f;
-					 } completion:^(BOOL finished) {
-						 self.transitionFader.hidden = YES;
-						 self.transitionFader.alpha = 0;
-					 }
-	 ];
-}
-
 - (void)gainPoints {
 	int pointsGained;
 	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) pointsGained = (500 / (self.timeUntilNextPulse + 1)) + 5 + ([GRDWizard sharedInstance].rounds * 2);
@@ -452,34 +354,11 @@
 #pragma mark -
 
 - (void)wizardDidAdjustDifficultyLevel:(DifficultyLevel)difficultyLevel {
-	switch (difficultyLevel) {
-		case DifficultyLevelHard:
-			self.gridColour = [UIColor purpleColor];
-			self.gridTransitionColour = [UIColor orangeColor];
-			break;
-		case DifficultyLevelMedium:
-			self.gridColour = [UIColor blueColor];
-			self.gridTransitionColour = [UIColor greenColor];
-			break;
-		case DifficultyLevelEasy:
-		default:
-			self.gridColour = [UIColor orangeColor];
-			self.gridTransitionColour = [UIColor purpleColor];
-			break;
-	}
-	
-	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
-		square.backgroundColor = self.gridColour;
-	}
-	for (GRDSquare *square in [GRDWizard sharedInstance].lesserGridSquares) {
-		square.backgroundColor = self.gridColour;
-	}
-	
-	self.pauseButton.backgroundColor = self.gridColour;
-	self.scoreGainedFader.textColor = self.gridColour;
-	self.lifeFader.textColor = self.gridColour;
-	self.progressBar.progressTintColor = self.gridColour;
-	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:self.gridColour, nil];
+	self.pauseButton.backgroundColor = [GRDWizard sharedInstance].gridColour;
+	self.scoreGainedFader.textColor = [GRDWizard sharedInstance].gridColour;
+	self.lifeFader.textColor = [GRDWizard sharedInstance].gridColour;
+	self.progressBar.progressTintColor = [GRDWizard sharedInstance].gridColour;
+	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:[GRDWizard sharedInstance].gridColour, nil];
 }
 
 #pragma mark - 
@@ -539,7 +418,7 @@
 		[GRDWizard sharedInstance].streak++;
 		if ([GRDWizard sharedInstance].streak % 10 == 0) [self gainALife];
 
-		[self successTransition];
+		[GRDAnimator animateMatch];
 		
 		[self performSelector:@selector(pulse) withObject:nil afterDelay:0.4f];
 	} else {
@@ -550,8 +429,7 @@
 		if (self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
 		[self loseALife];
 		
-		
-		[self pulseTransitionWithSuccess:successful];
+		[GRDAnimator animatePulse:self.transitionFader];
 	}
 }
 

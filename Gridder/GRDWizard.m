@@ -20,6 +20,9 @@
 		_sharedInstance.greaterGridSquares = [[NSMutableArray alloc] init];
 		_sharedInstance.lesserGridSquares = [[NSMutableArray alloc] init];
 		
+		_sharedInstance.gridColour = [UIColor orangeColor];
+		_sharedInstance.gridTransitionColour = [UIColor purpleColor];
+		
 	});
 	
 	return _sharedInstance;
@@ -43,6 +46,29 @@
 	}
 	
 	_difficultyLevel = difficultyLevel;
+	
+	switch (difficultyLevel) {
+		case DifficultyLevelHard:
+			self.gridColour = [UIColor purpleColor];
+			self.gridTransitionColour = [UIColor orangeColor];
+			break;
+		case DifficultyLevelMedium:
+			self.gridColour = [UIColor blueColor];
+			self.gridTransitionColour = [UIColor greenColor];
+			break;
+		case DifficultyLevelEasy:
+		default:
+			self.gridColour = [UIColor orangeColor];
+			self.gridTransitionColour = [UIColor purpleColor];
+			break;
+	}
+	
+	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
+		square.backgroundColor = self.gridColour;
+	}
+	for (GRDSquare *square in [GRDWizard sharedInstance].lesserGridSquares) {
+		square.backgroundColor = self.gridColour;
+	}
 }
 
 + (void)addBlurToView:(UIView *)view {

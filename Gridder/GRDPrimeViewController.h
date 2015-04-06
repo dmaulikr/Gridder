@@ -23,10 +23,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *livesLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 
-// Objects
-@property (nonatomic, strong) UIColor *gridColour;
-@property (nonatomic, strong) UIColor *gridTransitionColour;
-
 // Timer related
 @property (nonatomic, strong) YLProgressBar *progressBar;
 @property (nonatomic) NSInteger timeUntilNextPulse;

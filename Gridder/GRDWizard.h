@@ -31,6 +31,9 @@ typedef enum : int {
 @property (nonatomic, strong) NSMutableArray *greaterGridSquares;
 @property (nonatomic, strong) NSMutableArray *activationCandidates;
 
+@property (nonatomic, strong) UIColor *gridColour;
+@property (nonatomic, strong) UIColor *gridTransitionColour;
+
 @property (nonatomic) int score;
 @property (nonatomic) int rounds;
 @property (nonatomic) int lives;
