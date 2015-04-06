@@ -98,6 +98,9 @@
 	
 	[self populateFooterView];
 	[self randomiseLesserGrid];
+	
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+	[GRDAnimator animatePulse:self.transitionFader];
 }
 
 - (void)populateFooterView {
