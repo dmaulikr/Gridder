@@ -9,7 +9,7 @@
 #import "GRDHighScores.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GRDMenu.h"
-
+/*
 @interface GRDHighScores ()
 
 @end
@@ -67,4 +67,4 @@
 }
 
 
-@end
+@end*/

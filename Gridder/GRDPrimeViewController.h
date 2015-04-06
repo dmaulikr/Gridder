@@ -14,6 +14,7 @@
 #define LESSERGRID_SQUARE_SIZE 9
 #define GREATERGRID_SQUARE_SIZE 4
 
+
 @interface GRDPrimeViewController : UIViewController <GRDSquareProtocol, GRDWizardProtocol>
 
 // Views
@@ -22,6 +23,14 @@
 @property (strong, nonatomic) IBOutlet UIView *footerView;
 @property (strong, nonatomic) IBOutlet UILabel *livesLabel;
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (nonatomic, strong) UIButton *pauseButton;
+@property (nonatomic, strong) UIView *transitionFader;
+@property (nonatomic, strong) UILabel *scoreGainedFader;
+@property (nonatomic, strong) UILabel *lifeFader;
+
+// Misc
+@property (nonatomic) CGRect scoreFaderFrame;
+@property (nonatomic) CGRect lifeFaderFrame;
 
 // Timer related
 @property (nonatomic, strong) YLProgressBar *progressBar;

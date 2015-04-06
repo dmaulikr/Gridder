@@ -9,7 +9,7 @@
 #import "GRDGameOverScreen.h"
 #import "GRDMenu.h"
 #import <QuartzCore/QuartzCore.h>
-
+/*
 @interface GRDGameOverScreen ()
 
 @end
@@ -89,4 +89,4 @@
 	if (delegate.soundIsActive) [delegate.soundPlayer.menuThemePlayer play];
 	[self performSegueWithIdentifier:@"returnToMenu" sender:nil];
 }
-@end
+@end*/

@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GRDPrimeViewController.h"
 
 @interface GRDAnimator : NSObject
 
 + (void)animateMatch;
 + (void)animatePulse:(UIView *)transitionFader;
++ (void)animatePointsGained:(GRDPrimeViewController *)vc;
 
 @end

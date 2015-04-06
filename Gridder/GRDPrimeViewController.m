@@ -12,18 +12,6 @@
 
 @interface GRDPrimeViewController ()
 
-@property (nonatomic) CGRect scoreFaderFrame;
-@property (nonatomic) CGRect lifeFaderFrame;
-
-// Views
-@property (nonatomic, strong) UIButton *pauseButton;
-@property (nonatomic, strong) UIView *transitionFader;
-@property (nonatomic, strong) UILabel *scoreGainedFader;
-@property (nonatomic, strong) UILabel *lifeFader;
-
-// Achievements
-
-
 @end
 
 @implementation GRDPrimeViewController
@@ -279,28 +267,6 @@
 #pragma mark ANIMATIONS
 #pragma mark -
 
-- (void)gainPoints {
-	int pointsGained;
-	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) pointsGained = (500 / (self.timeUntilNextPulse + 1)) + 5 + ([GRDWizard sharedInstance].rounds * 2);
-	else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelMedium)pointsGained = (2000 / (self.timeUntilNextPulse + 1)) + 10 + ([GRDWizard sharedInstance].rounds * 2);
-	else pointsGained = (4000 / (self.timeUntilNextPulse + 1)) + 20;
-
-	self.scoreGainedFader.text = [NSString stringWithFormat:@"+%d!", pointsGained];
-	self.scoreGainedFader.alpha = 1.0f;
-	[self.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score + [self.scoreGainedFader.text intValue]]];
-	
-	[UIView beginAnimations:@"ScrollPointsGainedAnimation" context:nil];
-	[UIView setAnimationDelegate: self];
-	[UIView setAnimationDuration: 1.5];
-	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
-	self.scoreGainedFader.frame = CGRectMake(self.scoreGainedFader.frame.origin.x, self.scoreGainedFader.frame.origin.y - 100, self.scoreGainedFader.frame.size.width, self.scoreGainedFader.frame.size.height);
-	[UIView commitAnimations];
-	
-	[UIView animateWithDuration:1.5 animations:^{ self.scoreGainedFader.alpha = 0.0f;} completion:^(BOOL finished) {
-		self.scoreGainedFader.frame = self.scoreFaderFrame;
-	}];
-}
-
 - (void)loseALife {
 	[GRDWizard sharedInstance].lives--;
 	
@@ -417,7 +383,7 @@
 	
 	if (successful) {
 		[[GRDSoundPlayer sharedInstance].menuBlip2SoundPlayer play];
-		[self gainPoints];
+		[GRDWizard gainPoints:self];
 		[GRDWizard sharedInstance].streak++;
 		if ([GRDWizard sharedInstance].streak % 10 == 0) [self gainALife];
 

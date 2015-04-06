@@ -9,7 +9,7 @@
 #import "GRDCredits.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GRDMenu.h"
-
+/*
 @interface GRDCredits ()
 
 @end
@@ -48,4 +48,4 @@
 	return UIStatusBarStyleLightContent;
 }
 
-@end
+@end*/

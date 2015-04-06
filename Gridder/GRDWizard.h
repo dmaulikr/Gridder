@@ -22,7 +22,8 @@ typedef enum : int {
 
 @end
 
-@class GRDViewController;
+@class GRDPrimeViewController;
+
 @interface GRDWizard : NSObject
 
 @property (weak, nonatomic) id<GRDWizardProtocol> delegate;
@@ -43,17 +44,20 @@ typedef enum : int {
 
 + (GRDWizard *)sharedInstance;
 - (void)startNewGame;
++ (void)gainPoints:(GRDPrimeViewController *)vc;
 
-+ (void)addBlurToView:(UIView *)view;
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid;
 + (GRDSquare *)squareForPosition:(NSInteger)pos fromGrid:(NSMutableArray *)grid;
++ (void)populateAdjacentAllSquares:(NSMutableArray *)squares;
++ (void)populateStraightAdjacentSquares:(NSMutableArray *)squares;
+
+/*
 + (void)gainALife:(GRDViewController *)grdVC;
 + (void)loseALife:(GRDViewController *)grdVC;
 + (void)gainStreak:(GRDViewController *)grdVC;
 + (void)gainPoints:(GRDViewController *)grdVC;
 + (void)gainTime:(GRDSquare *)square withGrdVC:(GRDViewController *)grdVC;
-+ (void)styleButtonAsASquare:(UIButton *)button;
-+ (void)populateAdjacentAllSquares:(NSMutableArray *)squares;
-+ (void)populateStraightAdjacentSquares:(NSMutableArray *)squares;
++ (void)styleButtonAsASquare:(UIButton *)button;*/
+
 
 @end

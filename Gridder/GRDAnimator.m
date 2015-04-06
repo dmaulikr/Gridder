@@ -109,4 +109,18 @@
 	 ];
 }
 
++ (void)animatePointsGained:(GRDPrimeViewController *)vc {
+	[UIView beginAnimations:@"ScrollPointsGainedAnimation" context:nil];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1.5];
+	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
+	vc.scoreGainedFader.frame = CGRectMake(vc.scoreGainedFader.frame.origin.x, vc.scoreGainedFader.frame.origin.y - 100, vc.scoreGainedFader.frame.size.width, vc.scoreGainedFader.frame.size.height);
+	[UIView commitAnimations];
+	
+	[UIView animateWithDuration:1.5 animations:^{ vc.scoreGainedFader.alpha = 0.0f;} completion:^(BOOL finished) {
+		vc.scoreGainedFader.frame = vc.scoreFaderFrame;
+	}];
+}
+
+
 @end

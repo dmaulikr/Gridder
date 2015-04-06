@@ -8,6 +8,7 @@
 
 #import "GRDWizard.h"
 #import "GRDAppDelegate.h"
+#import "GRDAnimator.h"
 
 @implementation GRDWizard
 
@@ -71,24 +72,76 @@
 	}
 }
 
-+ (void)addBlurToView:(UIView *)view {
-	UIView *blurView = nil;
++ (void)gainPoints:(GRDPrimeViewController *)vc {
+	int pointsGained;
+	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) pointsGained = (500 / (vc.timeUntilNextPulse + 1)) + 5 + ([GRDWizard sharedInstance].rounds * 2);
+	else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelMedium)pointsGained = (2000 / (vc.timeUntilNextPulse + 1)) + 10 + ([GRDWizard sharedInstance].rounds * 2);
+	else pointsGained = (4000 / (vc.timeUntilNextPulse + 1)) + 20;
 	
-	if([UIBlurEffect class]) { // iOS 8
-		UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-		blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-		blurView.frame = view.frame;
+	vc.scoreGainedFader.text = [NSString stringWithFormat:@"+%d!", pointsGained];
+	vc.scoreGainedFader.alpha = 1.0f;
+	[vc.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score + [vc.scoreGainedFader.text intValue]]];
+	
+	[GRDAnimator animatePointsGained:vc];
+}
+
+/*- (void)loseALife {
+	[GRDWizard sharedInstance].lives--;
+	
+	[[GRDSoundPlayer sharedInstance].pulseFailSoundPlayer play];
+	
+	if ([GRDWizard sharedInstance].lives == 0) {
+		[self.pulseTimer invalidate];
+		self.pulseTimer = nil;
+		[[GRDWizard sharedInstance] startNewGame];
 		
-	} else { // workaround for iOS 7
-		blurView = [[UIToolbar alloc] initWithFrame:view.bounds];
+		[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+		[self.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score]];
+		
+		
+		[self randomiseLesserGrid];
+		[[GRDSoundPlayer sharedInstance].gameThemePlayer stop];
+		
+		return;
 	}
 	
-	[blurView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
 	
-	[view addSubview:blurView];
-	[view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[blurView]|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(blurView)]];
-	[view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[blurView]|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(blurView)]];
+	[self.lifeFader setText:@"-1"];
+	[self fadeLife];
 }
+
+- (void)gainALife {
+	[GRDWizard sharedInstance].lives++;
+	
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+	[self.lifeFader setText:@"+1"];
+	
+	[self fadeLife];
+}
+
+- (void)fadeLife {
+	self.lifeFader.alpha = 1.0f;
+	
+	[UIView beginAnimations:@"ScrollLifeAnimation" context:nil];
+	[UIView setAnimationDelegate: self];
+	[UIView setAnimationDuration: 1.5];
+	[UIView setAnimationCurve: UIViewAnimationCurveLinear];
+	self.lifeFader.frame = CGRectMake(self.lifeFader.frame.origin.x, self.lifeFader.frame.origin.y - 100, self.lifeFader.frame.size.width, self.lifeFader.frame.size.height);
+	[UIView commitAnimations];
+	
+	[UIView animateWithDuration:1.5 animations:^{ self.lifeFader.alpha = 0.0f; } completion:^(BOOL finished) {
+		self.lifeFader.frame = self.lifeFaderFrame;
+	}];
+	
+}
+
+*/
+
+
+
+
+
 
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid {
 	
@@ -111,6 +164,7 @@
 	return nil;
 }
 
+/*
 + (void)gainALife:(GRDViewController *)grdVC {
 	GRDAppDelegate *delegate = (GRDAppDelegate *)[[UIApplication sharedApplication] delegate];
 
@@ -249,6 +303,7 @@
 	button.layer.borderColor = [UIColor blackColor].CGColor;
 	button.layer.borderWidth = 3.0;
 }
+ */
 
 /*
  

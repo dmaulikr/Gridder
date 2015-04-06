@@ -9,7 +9,7 @@
 #import "GRDHowToPlay.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GRDMenu.h"
-
+/*
 @interface GRDHowToPlay ()
 
 @end
@@ -131,3 +131,4 @@
 
 
 @end
+*/

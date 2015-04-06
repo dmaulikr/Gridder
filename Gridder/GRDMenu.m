@@ -9,7 +9,7 @@
 #import "GRDMenu.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GRDViewController.h"
-
+/*
 @interface GRDMenu () 
 
 @end
@@ -63,7 +63,7 @@
 	
 	[GKAchievement loadAchievementsWithCompletionHandler: ^(NSArray *scores, NSError *error)
 	{
-		if(error != NULL) { /* error handling */ }
+		if(error != NULL) {  }
 		for (GKAchievement* achievement in scores) {
 			if ([achievement.identifier isEqual:kAchievementIceBreaker]) {
 				NSInteger achievementProgress = achievement.percentComplete;
@@ -310,10 +310,7 @@ compare:v options:NSNumericSearch] == NSOrderedAscending)
     if (SYSTEM_VERSION_LESS_THAN(@"6.0"))
     {
         // ios 5.x and below
-        /*[localPlayer authenticateWithCompletionHandler:^(NSError *error)
-         {
-             [self checkLocalPlayer];
-         }];*/
+ 
     }
     else
     {
@@ -338,11 +335,9 @@ compare:v options:NSNumericSearch] == NSOrderedAscending)
     
     if (localPlayer.isAuthenticated)
     {
-        /* Perform additional tasks for the authenticated player here */
     }
     else
     {
-        /* Perform additional tasks for the non-authenticated player here */
     }
 }
 
@@ -350,4 +345,4 @@ compare:v options:NSNumericSearch] == NSOrderedAscending)
 	return UIStatusBarStyleLightContent;
 }
 
-@end
+@end*/
