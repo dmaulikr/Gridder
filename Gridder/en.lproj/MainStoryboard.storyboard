@@ -515,7 +515,7 @@ You should also watch out for ice... </string>
                         <viewControllerLayoutGuide type="top" id="Nsu-Sp-FjE"/>
                         <viewControllerLayoutGuide type="bottom" id="fuC-8D-dHq"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="P6l-MS-VRZ">
+                    <view key="view" contentMode="scaleToFill" id="P6l-MS-VRZ" customClass="GRDParticleEmitter">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -580,6 +580,7 @@ You should also watch out for ice... </string>
                         <outlet property="greaterGrid" destination="Od2-sf-Ook" id="BG3-NX-R4a"/>
                         <outlet property="lesserGrid" destination="ZUP-OK-aex" id="xEA-YU-Zlw"/>
                         <outlet property="livesLabel" destination="NdC-68-NMu" id="TVG-rJ-EMe"/>
+                        <outlet property="particleEmitter" destination="P6l-MS-VRZ" id="OOc-9o-E4Q"/>
                         <outlet property="scoreLabel" destination="Uq8-hM-9h3" id="JMi-RX-NLX"/>
                     </connections>
                 </viewController>

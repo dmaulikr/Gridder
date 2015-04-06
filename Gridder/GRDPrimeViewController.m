@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
+	
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"active"]];
 	self.footerView.backgroundColor = self.view.backgroundColor;
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
@@ -46,10 +47,22 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self didTouchesMoved:touches withEvent:event];
+	
+	[self.particleEmitter setEmitterPositionFromTouch: [touches anyObject]];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self didEndTouching:touches withEvent:event];
+	
+	[self.particleEmitter setIsEmitting:NO];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self.particleEmitter setIsEmitting:YES];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self.particleEmitter setIsEmitting:NO];
 }
 
 #pragma mark -

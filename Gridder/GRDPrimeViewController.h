@@ -10,6 +10,7 @@
 #import <YLProgressBar.h>
 #import "GRDSquare.h"
 #import "GRDWizard.h"
+#import "GRDParticleEmitter.h"
 
 #define LESSERGRID_SQUARE_SIZE 9
 #define GREATERGRID_SQUARE_SIZE 4
@@ -18,6 +19,7 @@
 @interface GRDPrimeViewController : UIViewController <GRDSquareProtocol, GRDWizardProtocol>
 
 // Views
+@property (strong, nonatomic) IBOutlet GRDParticleEmitter *particleEmitter;
 @property (strong, nonatomic) IBOutlet UIView *greaterGrid;
 @property (strong, nonatomic) IBOutlet UIView *lesserGrid;
 @property (strong, nonatomic) IBOutlet UIView *footerView;

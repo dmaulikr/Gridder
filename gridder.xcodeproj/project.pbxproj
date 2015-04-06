@@ -84,6 +84,8 @@
 		FA93E8211ACF4802008F5806 /* pop2.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8201ACF4802008F5806 /* pop2.wav */; };
 		FA93E8231ACF4943008F5806 /* match.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA93E8221ACF4943008F5806 /* match.wav */; };
 		FA93E8291AD2A67C008F5806 /* GRDAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = FA93E8281AD2A67C008F5806 /* GRDAnimator.m */; };
+		FA93E82C1AD2EBA0008F5806 /* GRDParticleEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA93E82B1AD2EBA0008F5806 /* GRDParticleEmitter.m */; };
+		FA93E82E1AD2ED63008F5806 /* v3_particle.png in Resources */ = {isa = PBXBuildFile; fileRef = FA93E82D1AD2ED63008F5806 /* v3_particle.png */; };
 		FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */; };
 		FAF687041ABDDFED00915381 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF687031ABDDFED00915381 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -186,6 +188,9 @@
 		FA93E8221ACF4943008F5806 /* match.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = match.wav; sourceTree = "<group>"; };
 		FA93E8271AD2A67C008F5806 /* GRDAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDAnimator.h; sourceTree = "<group>"; };
 		FA93E8281AD2A67C008F5806 /* GRDAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDAnimator.m; sourceTree = "<group>"; };
+		FA93E82A1AD2EBA0008F5806 /* GRDParticleEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDParticleEmitter.h; sourceTree = "<group>"; };
+		FA93E82B1AD2EBA0008F5806 /* GRDParticleEmitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDParticleEmitter.m; sourceTree = "<group>"; };
+		FA93E82D1AD2ED63008F5806 /* v3_particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_particle.png; sourceTree = "<group>"; };
 		FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDSquare.xib; sourceTree = "<group>"; };
 		FAF687031ABDDFED00915381 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FE242326784D7FA49E14EF52 /* Pods-gridder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.release.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.release.xcconfig"; sourceTree = "<group>"; };
@@ -391,6 +396,8 @@
 				FA07DE30180002CC0021F2F7 /* GRDGlassSquare.m */,
 				FA1BABC8178DE20900FEC33A /* GRDSquare.h */,
 				FA1BABC9178DE20900FEC33A /* GRDSquare.m */,
+				FA93E82A1AD2EBA0008F5806 /* GRDParticleEmitter.h */,
+				FA93E82B1AD2EBA0008F5806 /* GRDParticleEmitter.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -419,6 +426,7 @@
 		FA93E8111AC207B3008F5806 /* 3.0 */ = {
 			isa = PBXGroup;
 			children = (
+				FA93E82D1AD2ED63008F5806 /* v3_particle.png */,
 				FA13D1DF17FD6CDE0009AFE9 /* v3_icon_score.png */,
 				FA1BABCD178F4F0300FEC33A /* v3_icon_lives.png */,
 				FA93E8161AC20F08008F5806 /* v3_inactive.png */,
@@ -543,6 +551,7 @@
 				FA93E8151AC20CC1008F5806 /* v3_bg.png in Resources */,
 				FA1BAC361791AE6A00FEC33A /* inactive@2X.png in Resources */,
 				FA1BAC3D1791C7CB00FEC33A /* gridder1.png in Resources */,
+				FA93E82E1AD2ED63008F5806 /* v3_particle.png in Resources */,
 				FA1BAC3E1791C7CB00FEC33A /* gridder2.png in Resources */,
 				FA1BAC3F1791C7CB00FEC33A /* gridder3.png in Resources */,
 				FA1BAC401791C7CB00FEC33A /* gridder4.png in Resources */,
@@ -618,6 +627,7 @@
 				FA1BABE817905F2200FEC33A /* GRDGameOverScreen.m in Sources */,
 				FA03797A1791CA7600BF5251 /* GRDHowToPlay.m in Sources */,
 				FA03797D1791E03F00BF5251 /* GRDCredits.m in Sources */,
+				FA93E82C1AD2EBA0008F5806 /* GRDParticleEmitter.m in Sources */,
 				FA0379801791E19400BF5251 /* GRDHighScores.m in Sources */,
 				FA13D1DC17FAC2D90009AFE9 /* GRDWizard.m in Sources */,
 				FA07DE31180002CC0021F2F7 /* GRDGlassSquare.m in Sources */,
