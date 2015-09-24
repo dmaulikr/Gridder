@@ -12,8 +12,10 @@
 #import "GRDWizard.h"
 #import "GRDParticleEmitter.h"
 
-#define LESSERGRID_SQUARE_SIZE 9
-#define GREATERGRID_SQUARE_SIZE 4
+#define GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY 4
+#define GREATERGRID_GAP_SIZE 2
+#define LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY 4
+#define LESSERGRID_GAP_SIZE 2
 
 
 @interface GRDPrimeViewController : UIViewController <GRDSquareProtocol, GRDWizardProtocol>
@@ -29,6 +31,9 @@
 @property (nonatomic, strong) UIView *transitionFader;
 @property (nonatomic, strong) UILabel *scoreGainedFader;
 @property (nonatomic, strong) UILabel *lifeFader;
+@property (strong, nonatomic) IBOutlet UIView *tempView;
+@property (strong, nonatomic) IBOutlet UIView *lifeBox;
+@property (strong, nonatomic) IBOutlet UIView *scoreBox;
 
 // Misc
 @property (nonatomic) CGRect scoreFaderFrame;

@@ -23,13 +23,16 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"active"]];
-	self.footerView.backgroundColor = self.view.backgroundColor;
+    self.footerView.backgroundColor = self.view.backgroundColor;
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
 	
+    self.tempView.alpha = 0;
+    
 	[GRDWizard sharedInstance].delegate = self;
+    
+    [GRDWizard sharedInstance].gridColour = self.tempView.backgroundColor;
+    
 	[[GRDWizard sharedInstance] startNewGame];
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
@@ -99,6 +102,14 @@
 	
 	[self populateFooterView];
 	[self randomiseLesserGrid];
+    
+    self.scoreBox.backgroundColor = [GRDWizard sharedInstance].gridColour;
+    self.lifeBox.backgroundColor = [GRDWizard sharedInstance].gridColour;
+    self.scoreBox.alpha = 0.3f;
+    self.lifeBox.alpha = 0.3f;
+    self.scoreBox.frame = CGRectMake(self.scoreBox.frame.origin.x, self.lesserGrid.frame.origin.y + (self.lesserGrid.frame.size.height / 2), (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE);
+    self.lifeBox.frame = CGRectMake(self.lifeBox.frame.origin.x, self.lesserGrid.frame.origin.y + (self.lesserGrid.frame.size.height / 2), (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE);
+
 	
 	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
 	[GRDAnimator animatePulse:self.transitionFader];
@@ -106,7 +117,7 @@
 
 - (void)populateFooterView {
 	self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake((self.footerView.frame.size.width / 2) - 47, 0, 100, self.footerView.frame.size.height)];
-	self.pauseButton.layer.cornerRadius = 3.0f;
+	//self.pauseButton.layer.cornerRadius = 3.0f;
 	[self.pauseButton setTitle:@"PAUSE" forState:UIControlStateNormal];
 	[self.pauseButton setBackgroundColor:[GRDWizard sharedInstance].gridColour];
 	[self.footerView addSubview:self.pauseButton];
@@ -125,7 +136,7 @@
 													   owner:self
 													 options:nil] lastObject];
 	
-	square.frame = CGRectMake(0 + xOffset, yOffset, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE) - 15, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_SIZE) - 15);
+	square.frame = CGRectMake(0 + xOffset, yOffset, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE);
 
 	square.layer.masksToBounds = NO;
 	square.tag = count;
@@ -135,18 +146,19 @@
 	square.isActive = NO;
 	square.isGreaterSquare = YES;
 	square.userInteractionEnabled = YES;
-	square.layer.cornerRadius = 3.0f;
+	//square.layer.cornerRadius = 3.0f;
 	
 	[self.greaterGrid addSubview:square];
 	[[GRDWizard sharedInstance].greaterGridSquares addObject:square];
+    
 	if (count % 4 == 0) {
 		if (count >= 16) return;
 		yOffset += square.bounds.size.height;
-		[self generateGreaterGridWithXOffset:0 withYOffset:yOffset + 15 fromCount:count + 1];
+		[self generateGreaterGridWithXOffset:0 withYOffset:yOffset + GREATERGRID_GAP_SIZE fromCount:count + 1];
 		return;
 	}
 	
-	[self generateGreaterGridWithXOffset:(xOffset + self.greaterGrid.bounds.size.width / 4) + 5 withYOffset:yOffset fromCount:count + 1];
+	[self generateGreaterGridWithXOffset:(xOffset + self.greaterGrid.bounds.size.width / 4) + (GREATERGRID_GAP_SIZE - 2) withYOffset:yOffset fromCount:count + 1];
 }
 
 - (void)generateLesserGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
@@ -154,7 +166,7 @@
 													   owner:self
 													 options:nil] lastObject];
 	
-	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / 4) - 10, (self.lesserGrid.frame.size.width / 4) - 10);
+	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - LESSERGRID_GAP_SIZE, (self.lesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - LESSERGRID_GAP_SIZE);
 	square.tag = count;
 	square.backgroundColor = [GRDWizard sharedInstance].gridColour;
 	square.alpha = 0.3f;
@@ -162,7 +174,7 @@
 	square.adjacentAllSquares = [[NSMutableArray alloc] init];
 	square.adjacentStraightSquares = [[NSMutableArray alloc] init];
 	square.isGreaterSquare = NO;
-	square.layer.cornerRadius = 3.0f;
+	//square.layer.cornerRadius = 3.0f;
 
 	[self.lesserGrid addSubview:square];
 	[[GRDWizard sharedInstance].lesserGridSquares addObject:square];
@@ -170,11 +182,11 @@
 	if (count % 4 == 0) {
 		if (count >= 16) return;
 		yOffset += square.bounds.size.height;
-		[self generateLesserGridWithXOffset:0 withYOffset:yOffset + 10 fromCount:count + 1];
+		[self generateLesserGridWithXOffset:0 withYOffset:yOffset + LESSERGRID_GAP_SIZE fromCount:count + 1];
 		return;
 	}
 	
-	[self generateLesserGridWithXOffset:xOffset + (self.lesserGrid.frame.size.width / 4) + 5 withYOffset:yOffset fromCount:count + 1];
+	[self generateLesserGridWithXOffset:xOffset + (self.lesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) + (LESSERGRID_GAP_SIZE - 2) withYOffset:yOffset fromCount:count + 1];
 }
 
 - (BOOL)prefersStatusBarHidden{
@@ -188,7 +200,7 @@
 - (void)setupTimer {
 	self.progressBar = [[YLProgressBar alloc] init];
 	self.progressBar.type = YLProgressBarTypeRounded;
-	self.progressBar.customCornerRadius = [NSNumber numberWithInt:3];
+	//self.progressBar.customCornerRadius = [NSNumber numberWithInt:3];
 	self.progressBar.hideStripes = YES;
 	self.progressBar.hideTrack = YES;
 	self.progressBar.hideGloss = YES;
@@ -223,7 +235,6 @@
 #pragma mark -
 
 - (void)squareTouch:(NSSet *)touches withEvent:(UIEvent *)event {
-	
 	GRDSquare *touchedSquare;
 	UITouch *touch = [touches anyObject];
 	CGPoint firstTouch = [touch locationInView:self.greaterGrid];

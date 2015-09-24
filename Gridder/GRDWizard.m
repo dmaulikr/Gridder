@@ -21,7 +21,7 @@
 		_sharedInstance.greaterGridSquares = [[NSMutableArray alloc] init];
 		_sharedInstance.lesserGridSquares = [[NSMutableArray alloc] init];
 		
-		_sharedInstance.gridColour = [UIColor orangeColor];
+		//_sharedInstance.gridColour = [UIColor orangeColor];
 		_sharedInstance.gridTransitionColour = [UIColor purpleColor];
 		
 	});
@@ -59,7 +59,7 @@
 			break;
 		case DifficultyLevelEasy:
 		default:
-			self.gridColour = [UIColor orangeColor];
+			//self.gridColour = [UIColor orangeColor];
 			self.gridTransitionColour = [UIColor purpleColor];
 			break;
 	}
