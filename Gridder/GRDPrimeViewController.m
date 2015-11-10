@@ -28,20 +28,28 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"GRDPrimeView"
+                                                      owner:self
+                                                    options:nil];
+    
+    self.primeView = [nibViews objectAtIndex:0];
+        
+    self.view = self.primeView;
 
-    self.footerView.backgroundColor = self.view.backgroundColor;
-	self.lesserGrid.backgroundColor = [UIColor clearColor];
-	self.greaterGrid.backgroundColor = [UIColor clearColor];
-    self.tempView.alpha = 0;
+   // self.primeView.primeFooterView footerView.backgroundColor = self.view.backgroundColor;
+	self.primeView.primeLesserGrid.backgroundColor = [UIColor clearColor];
+	self.primeView.primeGreaterGrid.backgroundColor = [UIColor clearColor];
+    self.primeView.primeTempView.alpha = 0;
     
 	[GRDCore sharedInstance].delegate = self;
     
-    [GRDCore sharedInstance].gridColour = self.tempView.backgroundColor;
+    [GRDCore sharedInstance].gridColour = self.primeView.primeTempView.backgroundColor;
     
 	[[GRDCore sharedInstance] startNewGame];
 	
-	[self.view bringSubviewToFront:self.greaterGrid];
-	[self.view bringSubviewToFront:self.lesserGrid];
+	[self.primeView bringSubviewToFront:self.primeView.primeGreaterGrid];
+	[self.primeView bringSubviewToFront:self.primeView.primeLesserGrid];
 
     self.isTutorialMode = YES;
 
@@ -88,8 +96,8 @@
 	[self.view addSubview:self.transitionFader];
 	[self.view bringSubviewToFront:self.transitionFader];
 	
-	self.scoreFaderFrame = CGRectMake(self.scoreBox.frame.origin.x - 25, self.scoreBox.frame.origin.y - 20, 100, 50);
-	self.lifeFaderFrame = CGRectMake(self.lifeBox.frame.origin.x - 25, self.lifeBox.frame.origin.y - 20, 100, 50);
+	self.scoreFaderFrame = CGRectMake(self.primeView.primeScoreBox.frame.origin.x - 25, self.primeView.primeScoreBox.frame.origin.y - 20, 100, 50);
+	self.lifeFaderFrame = CGRectMake(self.primeView.primeLifeBox.frame.origin.x - 25, self.primeView.primeLifeBox.frame.origin.y - 20, 100, 50);
 
 	self.scoreGainedFader = [[UILabel alloc] initWithFrame:self.scoreFaderFrame];
 	self.scoreGainedFader.backgroundColor = [UIColor clearColor];
@@ -98,7 +106,7 @@
 	self.scoreGainedFader.font = [UIFont systemFontOfSize:SCROLLING_TEXT_SIZE];
 	self.scoreGainedFader.alpha = 0.0f;
     
-    [self.scoreLabel setTextColor:[GRDCore sharedInstance].gridColour];
+    [self.primeView.primeScoreLabel setTextColor:[GRDCore sharedInstance].gridColour];
     
 	[self.view addSubview:self.scoreGainedFader];
 	
@@ -111,28 +119,28 @@
 	self.lifeFader.alpha = 0.0f;
 	[self.view addSubview:self.lifeFader];
 	
-	[self populateFooterView];
+	//[self populateFooterView];
 	[self randomiseLesserGrid];
     
-    self.scoreBox.backgroundColor = [GRDCore sharedInstance].gridColour;
-    self.lifeBox.backgroundColor = [GRDCore sharedInstance].gridColour;
+    self.primeView.primeScoreBox.backgroundColor = [GRDCore sharedInstance].gridColour;
+    self.primeView.primeLifeBox.backgroundColor = [GRDCore sharedInstance].gridColour;
     
     
-    self.pauseBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
-    self.lifeBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
-    self.scoreBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
+    self.primeView.primePauseBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
+    self.primeView.primeLifeBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
+    self.primeView.primeScoreBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
 	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
+	//[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
 	[GRDAnimator animatePulse:self.transitionFader];
 }
 
-- (void)populateFooterView {
-	self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake((self.footerView.frame.size.width / 2) - 47, 0, 100, self.footerView.frame.size.height)];
-	//self.pauseButton.layer.cornerRadius = 3.0f;
-	[self.pauseButton setTitle:@"PAUSE" forState:UIControlStateNormal];
-	[self.pauseButton setBackgroundColor:[GRDCore sharedInstance].gridColour];
-	[self.footerView addSubview:self.pauseButton];
-}
+//- (void)populateFooterView {
+//	self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake((self.footerView.frame.size.width / 2) - 47, 0, 100, self.footerView.frame.size.height)];
+//	//self.pauseButton.layer.cornerRadius = 3.0f;
+//	[self.pauseButton setTitle:@"PAUSE" forState:UIControlStateNormal];
+//	[self.pauseButton setBackgroundColor:[GRDCore sharedInstance].gridColour];
+//	[self.footerView addSubview:self.pauseButton];
+//}
 
 - (void)generateGrids {
 	[self generateGreaterGridWithXOffset:0 withYOffset:0 fromCount:1];
@@ -147,7 +155,7 @@
 													   owner:self
 													 options:nil] lastObject];
 	
-	square.frame = CGRectMake(0 + xOffset, yOffset, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE);
+	square.frame = CGRectMake(0 + xOffset, yOffset, (self.primeView.primeGreaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE, (self.primeView.primeGreaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE);
 
 	square.layer.masksToBounds = NO;
 	square.tag = count;
@@ -159,7 +167,7 @@
 	square.userInteractionEnabled = YES;
 	square.layer.cornerRadius = 1.0f;
 	
-	[self.greaterGrid addSubview:square];
+	[self.primeView.primeGreaterGrid addSubview:square];
 	[[GRDCore sharedInstance].greaterGridSquares addObject:square];
     
 	if (count % 4 == 0) {
@@ -169,7 +177,7 @@
 		return;
 	}
 	
-	[self generateGreaterGridWithXOffset:(xOffset + self.greaterGrid.bounds.size.width / 4) + (GREATERGRID_GAP_SIZE - 2) withYOffset:yOffset fromCount:count + 1];
+	[self generateGreaterGridWithXOffset:(xOffset + self.primeView.primeGreaterGrid.bounds.size.width / 4) + (GREATERGRID_GAP_SIZE - 2) withYOffset:yOffset fromCount:count + 1];
 }
 
 - (void)generateLesserGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
@@ -177,7 +185,7 @@
 													   owner:self
 													 options:nil] lastObject];
 	
-	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - LESSERGRID_GAP_SIZE, (self.lesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - LESSERGRID_GAP_SIZE);
+	square.frame = CGRectMake(0 + xOffset, yOffset, (self.primeView.primeLesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - LESSERGRID_GAP_SIZE, (self.primeView.primeLesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - LESSERGRID_GAP_SIZE);
 	square.tag = count;
 	square.backgroundColor = [GRDCore sharedInstance].gridColour;
 	square.alpha = ALPHA_LEVEL;
@@ -187,7 +195,7 @@
 	square.isGreaterSquare = NO;
 	//square.layer.cornerRadius = 3.0f;
 
-	[self.lesserGrid addSubview:square];
+	[self.primeView.primeLesserGrid addSubview:square];
 	[[GRDCore sharedInstance].lesserGridSquares addObject:square];
 	
 	if (count % 4 == 0) {
@@ -197,7 +205,7 @@
 		return;
 	}
 	
-	[self generateLesserGridWithXOffset:xOffset + (self.lesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) + (LESSERGRID_GAP_SIZE - 2) withYOffset:yOffset fromCount:count + 1];
+	[self generateLesserGridWithXOffset:xOffset + (self.primeView.primeLesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) + (LESSERGRID_GAP_SIZE - 2) withYOffset:yOffset fromCount:count + 1];
 }
 
 - (BOOL)prefersStatusBarHidden{
@@ -218,16 +226,16 @@
 	self.progressBar.progressTintColor = tintColour;
 	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:tintColour, nil];
 	self.progressBar.trackTintColor = self.view.backgroundColor;
-	self.progressBar.center = self.pauseBox.center;
-	self.progressBar.frame = CGRectMake(1, 4, self.pauseBox.frame.size.width - 3, self.pauseBox.frame.size.height - 3);
+	self.progressBar.center = self.primeView.primePauseBox.center;
+	self.progressBar.frame = CGRectMake(1, 4, self.primeView.primePauseBox.frame.size.width - 3, self.primeView.primePauseBox.frame.size.height - 3);
 	self.maximumTimeAllowed = 800;
 	self.pulseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
 
     self.progressBar.transform = CGAffineTransformMakeRotation(3 * M_PI_2);
 
-	[self.pauseBox addSubview:self.progressBar];
+	[self.primeView.primePauseBox addSubview:self.progressBar];
     
-    [self.pauseBox bringSubviewToFront:self.pauseboxIcon];
+    [self.primeView.primePauseBox bringSubviewToFront:self.primeView.primePauseBoxIcon];
 }
 
 - (void)timerFireMethod:(NSTimer *)theTimer {
@@ -252,7 +260,7 @@
 - (void)squareTouch:(NSSet *)touches withEvent:(UIEvent *)event {
 	GRDSquare *touchedSquare;
 	UITouch *touch = [touches anyObject];
-	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
+	CGPoint firstTouch = [touch locationInView:self.primeView.primeGreaterGrid];
 	for (GRDSquare *square in [GRDCore sharedInstance].greaterGridSquares) {
 		if (CGRectContainsPoint(square.frame, firstTouch)) {
 			touchedSquare = square;
@@ -374,7 +382,7 @@
 	} else {
 		[self randomiseLesserGrid];
 		
-        [GRDAnimator animateBox:self.pauseBox];
+        [GRDAnimator animateBox:self.primeView.primePauseBox];
 
 		[GRDCore sharedInstance].streak = 0;
 		if (self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
@@ -454,49 +462,49 @@
 #pragma mark -
 #pragma mark TUTORIAL
 #pragma mark -
-
-- (void)setIsTutorialMode:(BOOL)isTutorialMode {
-    _isTutorialMode = isTutorialMode;
-    
-    if (isTutorialMode) {
-        if (!self.tutorialTransitionView) {
-            [self tutorialSetupGui];
-        } else {
-            [self.view addSubview:self.tutorialTransitionView];
-            [self.view bringSubviewToFront:self.tutorialTransitionView];
-        }
-    } else {
-        if (self.tutorialTransitionView) {
-            [self.tutorialTransitionView removeFromSuperview];
-        }
-    }
-}
-
-- (void)tutorialSetupGui {
-    self.tutorialTransitionView = [[UIView alloc] initWithFrame:self.view.frame];
-    self.tutorialTransitionView.backgroundColor = [UIColor darkGrayColor];
-    self.tutorialTransitionView.alpha = ALPHA_LEVEL;
-    self.tutorialTransitionView.userInteractionEnabled = YES;
-    
-    UITapGestureRecognizer *dismissTutorialGestureRecogniser = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tutorialDismiss)];
-    
-    dismissTutorialGestureRecogniser.numberOfTapsRequired = 1;
-    
-    [self.tutorialTransitionView addGestureRecognizer:dismissTutorialGestureRecogniser];
-    
-    UILabel *tapHereText = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2, self.greaterGrid.frame.size.height / 2, self.view.frame.size.width, 60)];
-    
-    [tapHereText setText:@"TAP HERE"];
-    
-    [self.tutorialTransitionView addSubview:tapHereText];
-    
-    [self.view addSubview:self.tutorialTransitionView];
-    [self.view bringSubviewToFront:self.tutorialTransitionView];
-}
-
-- (void)tutorialDismiss {
-    self.isTutorialMode = NO;
-}
+//
+//- (void)setIsTutorialMode:(BOOL)isTutorialMode {
+//    _isTutorialMode = isTutorialMode;
+//    
+//    if (isTutorialMode) {
+//        if (!self.tutorialTransitionView) {
+//            [self tutorialSetupGui];
+//        } else {
+//            [self.view addSubview:self.tutorialTransitionView];
+//            [self.view bringSubviewToFront:self.tutorialTransitionView];
+//        }
+//    } else {
+//        if (self.tutorialTransitionView) {
+//            [self.tutorialTransitionView removeFromSuperview];
+//        }
+//    }
+//}
+//
+//- (void)tutorialSetupGui {
+//    self.tutorialTransitionView = [[UIView alloc] initWithFrame:self.view.frame];
+//    self.tutorialTransitionView.backgroundColor = [UIColor darkGrayColor];
+//    self.tutorialTransitionView.alpha = ALPHA_LEVEL;
+//    self.tutorialTransitionView.userInteractionEnabled = YES;
+//    
+//    UITapGestureRecognizer *dismissTutorialGestureRecogniser = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tutorialDismiss)];
+//    
+//    dismissTutorialGestureRecogniser.numberOfTapsRequired = 1;
+//    
+//    [self.tutorialTransitionView addGestureRecognizer:dismissTutorialGestureRecogniser];
+//    
+//    UILabel *tapHereText = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2, self.primeView.primeGreaterGrid.frame.size.height / 2, self.view.frame.size.width, 60)];
+//    
+//    [tapHereText setText:@"TAP HERE"];
+//    
+//    [self.tutorialTransitionView addSubview:tapHereText];
+//    
+//    [self.view addSubview:self.tutorialTransitionView];
+//    [self.view bringSubviewToFront:self.tutorialTransitionView];
+//}
+//
+//- (void)tutorialDismiss {
+//    self.isTutorialMode = NO;
+//}
 
 
 @end

@@ -514,98 +514,14 @@ You should also watch out for ice... </string>
                         <viewControllerLayoutGuide type="top" id="Nsu-Sp-FjE"/>
                         <viewControllerLayoutGuide type="bottom" id="fuC-8D-dHq"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="P6l-MS-VRZ">
+                    <view key="view" contentMode="scaleToFill" id="P6l-MS-VRZ" customClass="GRDPrimeView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Od2-sf-Ook" userLabel="Greater Grid">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FYG-9x-wqG" userLabel="TempView">
-                                <rect key="frame" x="10" y="10" width="5" height="5"/>
-                                <color key="backgroundColor" red="0.25625620695163537" green="0.55523081126859375" blue="0.79397490530303028" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUP-OK-aex" userLabel="Lesser Grid">
-                                <rect key="frame" x="96" y="263" width="128" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="Qge-NU-lst"/>
-                                    <constraint firstAttribute="width" constant="128" id="uvr-Fl-dxT"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZ5-Oc-9xM" userLabel="LIFEBOX">
-                                <rect key="frame" x="10" y="298" width="59" height="62"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="v3_icon_lives.png" translatesAutoresizingMaskIntoConstraints="NO" id="p2w-ZA-zsr">
-                                        <rect key="frame" x="14" y="15" width="31" height="31"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="wu1-ul-kkG"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfa-tH-sSV" userLabel="SCOREBOX">
-                                <rect key="frame" x="251" y="298" width="59" height="62"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uq8-hM-9h3" userLabel="scoreLabel">
-                                        <rect key="frame" x="0.0" y="20" width="59" height="21"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="7gd-cS-UXc"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="twt-d5-lZn" userLabel="PAUSEBOX">
-                                <rect key="frame" x="131" y="410" width="59" height="62"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clock" translatesAutoresizingMaskIntoConstraints="NO" id="aVb-Nq-6I2">
-                                        <rect key="frame" x="14" y="15" width="31" height="31"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="62" id="LRv-UI-g9b"/>
-                                    <constraint firstAttribute="width" constant="59" id="qfe-7m-4EB"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" red="0.87594580919489007" green="0.87594580919489007" blue="0.87594580919489007" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="top" secondItem="Od2-sf-Ook" secondAttribute="bottom" constant="33" id="4lu-Ij-xgf"/>
-                            <constraint firstItem="Od2-sf-Ook" firstAttribute="top" secondItem="Nsu-Sp-FjE" secondAttribute="bottom" id="5Mt-wd-g8p"/>
-                            <constraint firstItem="twt-d5-lZn" firstAttribute="top" secondItem="ZUP-OK-aex" secondAttribute="bottom" constant="19" id="Atf-xq-BEx"/>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="Od2-sf-Ook" secondAttribute="centerX" id="Ic4-us-0LH"/>
-                            <constraint firstItem="Od2-sf-Ook" firstAttribute="leading" secondItem="P6l-MS-VRZ" secondAttribute="leading" id="JrU-Vn-y6h"/>
-                            <constraint firstAttribute="centerX" secondItem="twt-d5-lZn" secondAttribute="centerX" constant="-0.5" id="MWF-1o-bWd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vfa-tH-sSV" secondAttribute="trailing" constant="-6" id="Y0f-oZ-GAm"/>
-                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="twt-d5-lZn" secondAttribute="bottom" constant="8" id="Zej-o1-Mzu"/>
-                            <constraint firstItem="fuC-8D-dHq" firstAttribute="top" secondItem="ZUP-OK-aex" secondAttribute="bottom" constant="89" id="jHH-de-rWz"/>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="leading" secondItem="xZ5-Oc-9xM" secondAttribute="trailing" constant="27" id="l14-KT-yiF"/>
-                            <constraint firstItem="xZ5-Oc-9xM" firstAttribute="top" secondItem="Od2-sf-Ook" secondAttribute="bottom" constant="68" id="nI0-h0-Ypa"/>
-                            <constraint firstItem="vfa-tH-sSV" firstAttribute="top" secondItem="Od2-sf-Ook" secondAttribute="bottom" constant="68" id="nR9-Jy-aKY"/>
-                            <constraint firstItem="ZUP-OK-aex" firstAttribute="centerX" secondItem="P6l-MS-VRZ" secondAttribute="centerX" id="qTW-41-c08"/>
-                            <constraint firstItem="xZ5-Oc-9xM" firstAttribute="leading" secondItem="P6l-MS-VRZ" secondAttribute="leadingMargin" constant="-6" id="tp7-6t-b1p"/>
-                            <constraint firstItem="vfa-tH-sSV" firstAttribute="leading" secondItem="ZUP-OK-aex" secondAttribute="trailing" constant="27" id="vHA-yn-uxp"/>
-                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="greaterGrid" destination="Od2-sf-Ook" id="BG3-NX-R4a"/>
-                        <outlet property="lesserGrid" destination="ZUP-OK-aex" id="xEA-YU-Zlw"/>
-                        <outlet property="lifeBox" destination="xZ5-Oc-9xM" id="DbX-Jj-iXn"/>
-                        <outlet property="lifeboxIcon" destination="p2w-ZA-zsr" id="64c-I2-WA4"/>
-                        <outlet property="particleEmitter" destination="P6l-MS-VRZ" id="OOc-9o-E4Q"/>
-                        <outlet property="pauseBox" destination="twt-d5-lZn" id="50M-Mt-13s"/>
-                        <outlet property="pauseboxIcon" destination="aVb-Nq-6I2" id="qni-Sb-qLU"/>
-                        <outlet property="scoreBox" destination="vfa-tH-sSV" id="Bp7-5R-Zp5"/>
-                        <outlet property="scoreLabel" destination="Uq8-hM-9h3" id="JMi-RX-NLX"/>
-                        <outlet property="tempView" destination="FYG-9x-wqG" id="yXv-JM-Ad8"/>
+                        <outlet property="primeView" destination="P6l-MS-VRZ" id="Lbc-rh-c4E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r45-rh-ykh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -973,7 +889,6 @@ TESTING Ed Walters</string>
     <resources>
         <image name="arrow-big-01.png" width="30" height="30"/>
         <image name="chess-castle.png" width="29" height="30"/>
-        <image name="clock" width="29" height="30"/>
         <image name="email.png" width="30" height="30"/>
         <image name="graduation-cap.png" width="30" height="30"/>
         <image name="gridder1.png" width="275" height="272"/>
@@ -982,7 +897,6 @@ TESTING Ed Walters</string>
         <image name="rank.png" width="30" height="30"/>
         <image name="speaker-on.png" width="30" height="30"/>
         <image name="star.png" width="30" height="30"/>
-        <image name="v3_icon_lives.png" width="256" height="256"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

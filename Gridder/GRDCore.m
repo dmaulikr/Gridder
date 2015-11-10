@@ -94,16 +94,16 @@
     
 	vc.scoreGainedFader.text = [NSString stringWithFormat:@"+%ld", pointsGained];
 	vc.scoreGainedFader.alpha = 1.0f;
-	[vc.scoreLabel setText:[NSString stringWithFormat:@"%ld", [GRDCore sharedInstance].score]];
+	[vc.primeView.primeScoreLabel setText:[NSString stringWithFormat:@"%ld", [GRDCore sharedInstance].score]];
     
-    [GRDAnimator animateBox:vc.scoreBox];
+    [GRDAnimator animateBox:vc.primeView.primeScoreBox];
 	[GRDAnimator animatePointsGained:vc];
 }
 
 + (void)loseALife:(GRDPrimeViewController *)vc {
 	[GRDCore sharedInstance].lives--;
 	
-    [GRDAnimator animateBox:vc.lifeBox];
+    [GRDAnimator animateBox:vc.primeView.primeLifeBox];
     
 	[[GRDSoundPlayer sharedInstance].pulseFailSoundPlayer play];
 	
@@ -112,8 +112,8 @@
 		vc.pulseTimer = nil;
 		[[GRDCore sharedInstance] startNewGame];
 		
-		[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
-		[vc.scoreLabel setText:[NSString stringWithFormat:@"%ld", [GRDCore sharedInstance].score]];
+		//[vc.primeView.primeLivesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
+		[vc.primeView.primeScoreLabel setText:[NSString stringWithFormat:@"%ld", [GRDCore sharedInstance].score]];
 		
 		[vc randomiseLesserGrid];
 		[[GRDSoundPlayer sharedInstance].gameThemePlayer stop];
@@ -121,7 +121,7 @@
 		return;
 	}
 	
-	[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
+	//[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
 	
 	[vc.lifeFader setText:@"-1"];
 	
@@ -131,9 +131,9 @@
 + (void)gainALife:(GRDPrimeViewController *)vc {
 	[GRDCore sharedInstance].lives++;
 	
-    [GRDAnimator animateBox:vc.lifeBox];
+    [GRDAnimator animateBox:vc.primeView.primeScoreBox];
 
-	[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
+	//[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
 	[vc.lifeFader setText:@"+1"];
 	
 	[GRDAnimator animateLifeFade:vc];
@@ -141,7 +141,6 @@
 
 
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid {
-	
 	for (int x = 1; x < 16; x++) {
 		if ([GRDCore squareForPosition:x fromGrid:greaterGrid].isActive != [GRDCore squareForPosition:x fromGrid:lesserGrid].isActive) {
 			return NO;

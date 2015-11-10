@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		28E8ED6E1BBC8110009FED2A /* GRDTutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E8ED6D1BBC8110009FED2A /* GRDTutorialView.xib */; };
 		28EBB9AA1BF24E18006B5DB0 /* GRDPrimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */; };
+		28EBB9AD1BF24ECF006B5DB0 /* GRDPrimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBB9AC1BF24ECF006B5DB0 /* GRDPrimeView.m */; };
 		F89B68A39FF57B3CF89BBDEE /* libPods-gridder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB863B65DEC5C08C1A35807 /* libPods-gridder.a */; };
 		FA03797A1791CA7600BF5251 /* GRDHowToPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0379791791CA7600BF5251 /* GRDHowToPlay.m */; };
 		FA03797D1791E03F00BF5251 /* GRDCredits.m in Sources */ = {isa = PBXBuildFile; fileRef = FA03797C1791E03F00BF5251 /* GRDCredits.m */; };
@@ -78,6 +79,8 @@
 /* Begin PBXFileReference section */
 		28E8ED6D1BBC8110009FED2A /* GRDTutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDTutorialView.xib; sourceTree = "<group>"; };
 		28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDPrimeView.xib; sourceTree = "<group>"; };
+		28EBB9AB1BF24ECF006B5DB0 /* GRDPrimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDPrimeView.h; sourceTree = "<group>"; };
+		28EBB9AC1BF24ECF006B5DB0 /* GRDPrimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDPrimeView.m; sourceTree = "<group>"; };
 		7EB863B65DEC5C08C1A35807 /* libPods-gridder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gridder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECE1021212F5277F5E10819C /* Pods-gridder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.debug.xcconfig"; sourceTree = "<group>"; };
 		FA0379781791CA7500BF5251 /* GRDHowToPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDHowToPlay.h; sourceTree = "<group>"; };
@@ -369,6 +372,8 @@
 				FA1BABC9178DE20900FEC33A /* GRDSquare.m */,
 				FA93E82A1AD2EBA0008F5806 /* GRDParticleEmitter.h */,
 				FA93E82B1AD2EBA0008F5806 /* GRDParticleEmitter.m */,
+				28EBB9AB1BF24ECF006B5DB0 /* GRDPrimeView.h */,
+				28EBB9AC1BF24ECF006B5DB0 /* GRDPrimeView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -586,6 +591,7 @@
 				FA93E82C1AD2EBA0008F5806 /* GRDParticleEmitter.m in Sources */,
 				FA0379801791E19400BF5251 /* GRDHighScores.m in Sources */,
 				FA13D1DC17FAC2D90009AFE9 /* GRDCore.m in Sources */,
+				28EBB9AD1BF24ECF006B5DB0 /* GRDPrimeView.m in Sources */,
 				FA07DE31180002CC0021F2F7 /* GRDGlassSquare.m in Sources */,
 				FA93E80C1ABEEA8C008F5806 /* GRDPrimeViewController.m in Sources */,
 				FA7D5AD41801141C004011D4 /* GRDSoundPlayer.m in Sources */,
