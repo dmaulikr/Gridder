@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <YLProgressBar.h>
 #import "GRDSquare.h"
-#import "GRDWizard.h"
+#import "GRDCore.h"
 #import "GRDParticleEmitter.h"
 
 #define GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY 4
@@ -34,6 +34,10 @@
 @property (strong, nonatomic) IBOutlet UIView *tempView;
 @property (strong, nonatomic) IBOutlet UIView *lifeBox;
 @property (strong, nonatomic) IBOutlet UIView *scoreBox;
+@property (strong, nonatomic) IBOutlet UIView *pauseBox;
+@property (strong, nonatomic) IBOutlet UIImageView *lifeboxIcon;
+@property (strong, nonatomic) IBOutlet UIImageView *scoreboxIcon;
+@property (strong, nonatomic) IBOutlet UIImageView *pauseboxIcon;
 
 // Misc
 @property (nonatomic) CGRect scoreFaderFrame;
@@ -41,7 +45,7 @@
 
 // Timer related
 @property (nonatomic, strong) YLProgressBar *progressBar;
-@property (nonatomic) NSInteger timeUntilNextPulse;
+@property (nonatomic) NSInteger timeElapsed;
 @property (nonatomic) NSInteger maximumTimeAllowed;
 @property (nonatomic, strong) NSTimer *pulseTimer;
 

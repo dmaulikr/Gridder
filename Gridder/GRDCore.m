@@ -6,21 +6,25 @@
 //  Copyright (c) 2013 Joshua James. All rights reserved.
 //
 
-#import "GRDWizard.h"
+#import "GRDCore.h"
 #import "GRDAppDelegate.h"
 #import "GRDAnimator.h"
 
-@implementation GRDWizard
+#define POINT_MOD_EASY 10
+#define POINT_MOD_MEDIUM 20
+#define POINT_MOD_HARD 30
+#define BUFFER_THRESHOLD 1
 
-+ (GRDWizard *)sharedInstance {
-	static GRDWizard *_sharedInstance = nil;
+@implementation GRDCore
+
++ (GRDCore *)sharedInstance {
+	static GRDCore *_sharedInstance = nil;
 	static dispatch_once_t oncePredicate;
 	dispatch_once(&oncePredicate, ^{
-		_sharedInstance = [[GRDWizard alloc] init];
+		_sharedInstance = [[GRDCore alloc] init];
 		
 		_sharedInstance.greaterGridSquares = [[NSMutableArray alloc] init];
 		_sharedInstance.lesserGridSquares = [[NSMutableArray alloc] init];
-		
 		//_sharedInstance.gridColour = [UIColor orangeColor];
 		_sharedInstance.gridTransitionColour = [UIColor purpleColor];
 		
@@ -64,39 +68,52 @@
 			break;
 	}
 	
-	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
+	for (GRDSquare *square in [GRDCore sharedInstance].greaterGridSquares) {
 		square.backgroundColor = self.gridColour;
 	}
-	for (GRDSquare *square in [GRDWizard sharedInstance].lesserGridSquares) {
+	for (GRDSquare *square in [GRDCore sharedInstance].lesserGridSquares) {
 		square.backgroundColor = self.gridColour;
 	}
 }
 
+
 + (void)gainPoints:(GRDPrimeViewController *)vc {
-	int pointsGained;
-	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) pointsGained = (500 / (vc.timeUntilNextPulse + 1)) + 5 + ([GRDWizard sharedInstance].rounds * 2);
-	else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelMedium)pointsGained = (2000 / (vc.timeUntilNextPulse + 1)) + 10 + ([GRDWizard sharedInstance].rounds * 2);
-	else pointsGained = (4000 / (vc.timeUntilNextPulse + 1)) + 20;
-	
-	vc.scoreGainedFader.text = [NSString stringWithFormat:@"+%d!", pointsGained];
+    long pointsGained;
+    
+    long timeLeft = ((vc.maximumTimeAllowed - vc.timeElapsed) / 100) + BUFFER_THRESHOLD;
+    
+    if ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelEasy) {
+        pointsGained = timeLeft * POINT_MOD_EASY;
+    } else if ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelMedium) {
+        pointsGained = timeLeft * POINT_MOD_MEDIUM;
+    } else {
+        pointsGained = timeLeft * POINT_MOD_HARD;
+    }
+    
+    [GRDCore sharedInstance].score = [GRDCore sharedInstance].score + pointsGained;
+    
+	vc.scoreGainedFader.text = [NSString stringWithFormat:@"+%ld", pointsGained];
 	vc.scoreGainedFader.alpha = 1.0f;
-	[vc.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score + [vc.scoreGainedFader.text intValue]]];
-	
+	[vc.scoreLabel setText:[NSString stringWithFormat:@"%ld", [GRDCore sharedInstance].score]];
+    
+    [GRDAnimator animateBox:vc.scoreBox];
 	[GRDAnimator animatePointsGained:vc];
 }
 
 + (void)loseALife:(GRDPrimeViewController *)vc {
-	[GRDWizard sharedInstance].lives--;
+	[GRDCore sharedInstance].lives--;
 	
+    [GRDAnimator animateBox:vc.lifeBox];
+    
 	[[GRDSoundPlayer sharedInstance].pulseFailSoundPlayer play];
 	
-	if ([GRDWizard sharedInstance].lives == 0) {
+	if ([GRDCore sharedInstance].lives == 0) {
 		[vc.pulseTimer invalidate];
 		vc.pulseTimer = nil;
-		[[GRDWizard sharedInstance] startNewGame];
+		[[GRDCore sharedInstance] startNewGame];
 		
-		[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
-		[vc.scoreLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].score]];
+		[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
+		[vc.scoreLabel setText:[NSString stringWithFormat:@"%ld", [GRDCore sharedInstance].score]];
 		
 		[vc randomiseLesserGrid];
 		[[GRDSoundPlayer sharedInstance].gameThemePlayer stop];
@@ -104,7 +121,7 @@
 		return;
 	}
 	
-	[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+	[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
 	
 	[vc.lifeFader setText:@"-1"];
 	
@@ -112,9 +129,11 @@
 }
 
 + (void)gainALife:(GRDPrimeViewController *)vc {
-	[GRDWizard sharedInstance].lives++;
+	[GRDCore sharedInstance].lives++;
 	
-	[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+    [GRDAnimator animateBox:vc.lifeBox];
+
+	[vc.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
 	[vc.lifeFader setText:@"+1"];
 	
 	[GRDAnimator animateLifeFade:vc];
@@ -124,7 +143,7 @@
 + (BOOL)gridComparisonMatches:(NSMutableArray *)greaterGrid compareWith:(NSMutableArray *)lesserGrid {
 	
 	for (int x = 1; x < 16; x++) {
-		if ([GRDWizard squareForPosition:x fromGrid:greaterGrid].isActive != [GRDWizard squareForPosition:x fromGrid:lesserGrid].isActive) {
+		if ([GRDCore squareForPosition:x fromGrid:greaterGrid].isActive != [GRDCore squareForPosition:x fromGrid:lesserGrid].isActive) {
 			return NO;
 		}
 	}

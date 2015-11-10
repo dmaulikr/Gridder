@@ -10,7 +10,13 @@
 #import "GRDAppDelegate.h"
 #import "GRDAnimator.h"
 
+#define ALPHA_LEVEL 0.3
+#define SCROLLING_TEXT_SIZE 15
+
 @interface GRDPrimeViewController ()
+
+@property (nonatomic) BOOL isTutorialMode;
+@property (strong, nonatomic) UIView *tutorialTransitionView;
 
 @end
 
@@ -26,17 +32,19 @@
     self.footerView.backgroundColor = self.view.backgroundColor;
 	self.lesserGrid.backgroundColor = [UIColor clearColor];
 	self.greaterGrid.backgroundColor = [UIColor clearColor];
-	
     self.tempView.alpha = 0;
     
-	[GRDWizard sharedInstance].delegate = self;
+	[GRDCore sharedInstance].delegate = self;
     
-    [GRDWizard sharedInstance].gridColour = self.tempView.backgroundColor;
+    [GRDCore sharedInstance].gridColour = self.tempView.backgroundColor;
     
-	[[GRDWizard sharedInstance] startNewGame];
+	[[GRDCore sharedInstance] startNewGame];
 	
 	[self.view bringSubviewToFront:self.greaterGrid];
 	[self.view bringSubviewToFront:self.lesserGrid];
+
+    self.isTutorialMode = YES;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,21 +59,21 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self didTouchesMoved:touches withEvent:event];
 	
-	[self.particleEmitter setEmitterPositionFromTouch: [touches anyObject]];
+//	[self.particleEmitter setEmitterPositionFromTouch: [touches anyObject]];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self didEndTouching:touches withEvent:event];
 	
-	[self.particleEmitter setIsEmitting:NO];
+	//[self.particleEmitter setIsEmitting:NO];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self.particleEmitter setIsEmitting:YES];
+//	[self.particleEmitter setIsEmitting:YES];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self.particleEmitter setIsEmitting:NO];
+//	[self.particleEmitter setIsEmitting:NO];
 }
 
 #pragma mark -
@@ -80,38 +88,41 @@
 	[self.view addSubview:self.transitionFader];
 	[self.view bringSubviewToFront:self.transitionFader];
 	
-	self.scoreFaderFrame = CGRectMake(self.footerView.frame.size.width - 60, self.footerView.frame.origin.y - 20, 100, 50);
-	self.lifeFaderFrame = CGRectMake(self.footerView.frame.origin.x - 15, self.footerView.frame.origin.y - 20, 100, 50);
+	self.scoreFaderFrame = CGRectMake(self.scoreBox.frame.origin.x - 25, self.scoreBox.frame.origin.y - 20, 100, 50);
+	self.lifeFaderFrame = CGRectMake(self.lifeBox.frame.origin.x - 25, self.lifeBox.frame.origin.y - 20, 100, 50);
 
 	self.scoreGainedFader = [[UILabel alloc] initWithFrame:self.scoreFaderFrame];
 	self.scoreGainedFader.backgroundColor = [UIColor clearColor];
 	self.scoreGainedFader.textAlignment = NSTextAlignmentCenter;
-	self.scoreGainedFader.textColor = [GRDWizard sharedInstance].gridColour;
-	self.scoreGainedFader.font = [UIFont systemFontOfSize:30];
+	self.scoreGainedFader.textColor = [GRDCore sharedInstance].gridColour;
+	self.scoreGainedFader.font = [UIFont systemFontOfSize:SCROLLING_TEXT_SIZE];
 	self.scoreGainedFader.alpha = 0.0f;
+    
+    [self.scoreLabel setTextColor:[GRDCore sharedInstance].gridColour];
+    
 	[self.view addSubview:self.scoreGainedFader];
 	
 	
 	self.lifeFader = [[UILabel alloc] initWithFrame:self.lifeFaderFrame];
 	self.lifeFader.backgroundColor = [UIColor clearColor];
 	self.lifeFader.textAlignment = NSTextAlignmentCenter;
-	self.lifeFader.textColor = [GRDWizard sharedInstance].gridColour;
-	self.lifeFader.font = [UIFont systemFontOfSize:30];
+	self.lifeFader.textColor = [GRDCore sharedInstance].gridColour;
+	self.lifeFader.font = [UIFont systemFontOfSize:SCROLLING_TEXT_SIZE];
 	self.lifeFader.alpha = 0.0f;
 	[self.view addSubview:self.lifeFader];
 	
 	[self populateFooterView];
 	[self randomiseLesserGrid];
     
-    self.scoreBox.backgroundColor = [GRDWizard sharedInstance].gridColour;
-    self.lifeBox.backgroundColor = [GRDWizard sharedInstance].gridColour;
-    self.scoreBox.alpha = 0.3f;
-    self.lifeBox.alpha = 0.3f;
-    self.scoreBox.frame = CGRectMake(self.scoreBox.frame.origin.x, self.lesserGrid.frame.origin.y + (self.lesserGrid.frame.size.height / 2), (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE);
-    self.lifeBox.frame = CGRectMake(self.lifeBox.frame.origin.x, self.lesserGrid.frame.origin.y + (self.lesserGrid.frame.size.height / 2), (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE, (self.greaterGrid.bounds.size.width / GREATERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - GREATERGRID_GAP_SIZE);
-
+    self.scoreBox.backgroundColor = [GRDCore sharedInstance].gridColour;
+    self.lifeBox.backgroundColor = [GRDCore sharedInstance].gridColour;
+    
+    
+    self.pauseBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
+    self.lifeBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
+    self.scoreBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
 	
-	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDWizard sharedInstance].lives]];
+	[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];
 	[GRDAnimator animatePulse:self.transitionFader];
 }
 
@@ -119,7 +130,7 @@
 	self.pauseButton = [[UIButton alloc] initWithFrame:CGRectMake((self.footerView.frame.size.width / 2) - 47, 0, 100, self.footerView.frame.size.height)];
 	//self.pauseButton.layer.cornerRadius = 3.0f;
 	[self.pauseButton setTitle:@"PAUSE" forState:UIControlStateNormal];
-	[self.pauseButton setBackgroundColor:[GRDWizard sharedInstance].gridColour];
+	[self.pauseButton setBackgroundColor:[GRDCore sharedInstance].gridColour];
 	[self.footerView addSubview:self.pauseButton];
 }
 
@@ -127,8 +138,8 @@
 	[self generateGreaterGridWithXOffset:0 withYOffset:0 fromCount:1];
 	[self generateLesserGridWithXOffset:0 withYOffset:0 fromCount:1];
 	
-	[GRDWizard populateAdjacentAllSquares:[GRDWizard sharedInstance].lesserGridSquares];
-	[GRDWizard populateStraightAdjacentSquares:[GRDWizard sharedInstance].lesserGridSquares];
+	[GRDCore populateAdjacentAllSquares:[GRDCore sharedInstance].lesserGridSquares];
+	[GRDCore populateStraightAdjacentSquares:[GRDCore sharedInstance].lesserGridSquares];
 }
 
 - (void)generateGreaterGridWithXOffset:(NSInteger)xOffset withYOffset:(NSInteger)yOffset fromCount:(NSInteger)count {
@@ -140,16 +151,16 @@
 
 	square.layer.masksToBounds = NO;
 	square.tag = count;
-	square.backgroundColor = [GRDWizard sharedInstance].gridColour;
-	square.alpha = 0.3f;
+	square.backgroundColor = [GRDCore sharedInstance].gridColour;
+	square.alpha = ALPHA_LEVEL;
 	square.delegate = self;
 	square.isActive = NO;
 	square.isGreaterSquare = YES;
 	square.userInteractionEnabled = YES;
-	//square.layer.cornerRadius = 3.0f;
+	square.layer.cornerRadius = 1.0f;
 	
 	[self.greaterGrid addSubview:square];
-	[[GRDWizard sharedInstance].greaterGridSquares addObject:square];
+	[[GRDCore sharedInstance].greaterGridSquares addObject:square];
     
 	if (count % 4 == 0) {
 		if (count >= 16) return;
@@ -168,8 +179,8 @@
 	
 	square.frame = CGRectMake(0 + xOffset, yOffset, (self.lesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - LESSERGRID_GAP_SIZE, (self.lesserGrid.frame.size.width / LESSERGRID_SQUARE_OFFSET_TO_DIVIDE_BY) - LESSERGRID_GAP_SIZE);
 	square.tag = count;
-	square.backgroundColor = [GRDWizard sharedInstance].gridColour;
-	square.alpha = 0.3f;
+	square.backgroundColor = [GRDCore sharedInstance].gridColour;
+	square.alpha = ALPHA_LEVEL;
 	square.isActive = NO;
 	square.adjacentAllSquares = [[NSMutableArray alloc] init];
 	square.adjacentStraightSquares = [[NSMutableArray alloc] init];
@@ -177,7 +188,7 @@
 	//square.layer.cornerRadius = 3.0f;
 
 	[self.lesserGrid addSubview:square];
-	[[GRDWizard sharedInstance].lesserGridSquares addObject:square];
+	[[GRDCore sharedInstance].lesserGridSquares addObject:square];
 	
 	if (count % 4 == 0) {
 		if (count >= 16) return;
@@ -199,20 +210,24 @@
 
 - (void)setupTimer {
 	self.progressBar = [[YLProgressBar alloc] init];
-	self.progressBar.type = YLProgressBarTypeRounded;
-	//self.progressBar.customCornerRadius = [NSNumber numberWithInt:3];
+	self.progressBar.type = YLProgressBarTypeFlat;
 	self.progressBar.hideStripes = YES;
 	self.progressBar.hideTrack = YES;
 	self.progressBar.hideGloss = YES;
-	self.progressBar.progressTintColor = [GRDWizard sharedInstance].gridColour;
-	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:[GRDWizard sharedInstance].gridColour, nil];
+    UIColor *tintColour = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:1.0f];
+	self.progressBar.progressTintColor = tintColour;
+	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:tintColour, nil];
 	self.progressBar.trackTintColor = self.view.backgroundColor;
-	self.progressBar.center = self.view.center;
-	self.progressBar.frame = CGRectMake(10, 20, self.view.frame.size.width - 20, 30);
+	self.progressBar.center = self.pauseBox.center;
+	self.progressBar.frame = CGRectMake(1, 4, self.pauseBox.frame.size.width - 3, self.pauseBox.frame.size.height - 3);
 	self.maximumTimeAllowed = 800;
 	self.pulseTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
 
-	[self.view addSubview:self.progressBar];
+    self.progressBar.transform = CGAffineTransformMakeRotation(3 * M_PI_2);
+
+	[self.pauseBox addSubview:self.progressBar];
+    
+    [self.pauseBox bringSubviewToFront:self.pauseboxIcon];
 }
 
 - (void)timerFireMethod:(NSTimer *)theTimer {
@@ -221,13 +236,13 @@
 		[[GRDSoundPlayer sharedInstance].gameThemePlayer play];
 	}
 	
-	self.timeUntilNextPulse += 10;
-	if (self.timeUntilNextPulse >= self.maximumTimeAllowed) {
-		self.timeUntilNextPulse = 0;
+	self.timeElapsed += 10;
+	if (self.timeElapsed >= self.maximumTimeAllowed) {
+		self.timeElapsed = 0;
 		[self pulseWithSuccessfulMatch:NO];
 	}
 	
-	[self.progressBar setProgress:((float)self.timeUntilNextPulse / self.maximumTimeAllowed) animated:YES];
+	[self.progressBar setProgress:((float)self.timeElapsed / self.maximumTimeAllowed) animated:YES];
 }
 
 #pragma mark -
@@ -238,7 +253,7 @@
 	GRDSquare *touchedSquare;
 	UITouch *touch = [touches anyObject];
 	CGPoint firstTouch = [touch locationInView:self.greaterGrid];
-	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
+	for (GRDSquare *square in [GRDCore sharedInstance].greaterGridSquares) {
 		if (CGRectContainsPoint(square.frame, firstTouch)) {
 			touchedSquare = square;
 		}
@@ -252,7 +267,7 @@
 				touchedSquare.isActive = NO;
 			}
 			
-			if ([GRDWizard gridComparisonMatches:[GRDWizard sharedInstance].greaterGridSquares compareWith:[GRDWizard sharedInstance].lesserGridSquares]) {
+			if ([GRDCore gridComparisonMatches:[GRDCore sharedInstance].greaterGridSquares compareWith:[GRDCore sharedInstance].lesserGridSquares]) {
 				[self pulseWithSuccessfulMatch:YES];
 			}
 		}
@@ -270,7 +285,7 @@
 }
 
 - (void)didEndTouching:(NSSet *)touches withEvent:(UIEvent *)event {
-	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
+	for (GRDSquare *square in [GRDCore sharedInstance].greaterGridSquares) {
 		square.isBeingTouchDragged = NO;
 	}
 }
@@ -293,11 +308,11 @@
 #pragma mark -
 
 - (void)wizardDidAdjustDifficultyLevel:(DifficultyLevel)difficultyLevel {
-	self.pauseButton.backgroundColor = [GRDWizard sharedInstance].gridColour;
-	self.scoreGainedFader.textColor = [GRDWizard sharedInstance].gridColour;
-	self.lifeFader.textColor = [GRDWizard sharedInstance].gridColour;
-	self.progressBar.progressTintColor = [GRDWizard sharedInstance].gridColour;
-	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:[GRDWizard sharedInstance].gridColour, nil];
+	self.pauseButton.backgroundColor = [GRDCore sharedInstance].gridColour;
+	self.scoreGainedFader.textColor = [GRDCore sharedInstance].gridColour;
+	self.lifeFader.textColor = [GRDCore sharedInstance].gridColour;
+	self.progressBar.progressTintColor = [GRDCore sharedInstance].gridColour;
+	self.progressBar.progressTintColors = [[NSArray alloc] initWithObjects:[GRDCore sharedInstance].gridColour, nil];
 }
 
 #pragma mark - 
@@ -307,24 +322,23 @@
 - (void)pulse {
 	[self randomiseLesserGrid];
 	
-	if ([GRDWizard sharedInstance].lives == 1) {
-		[GRDWizard sharedInstance].onTheEdgeStreak++;
-		if ([GRDWizard sharedInstance].onTheEdgeStreak == 10) {
+	if ([GRDCore sharedInstance].lives == 1) {
+		[GRDCore sharedInstance].onTheEdgeStreak++;
+		if ([GRDCore sharedInstance].onTheEdgeStreak == 10) {
 			//[delegate.menuVC.gameCenterManager submitAchievement:kAchievementOnTheEdge percentComplete:100];
 		}
 	} else {
-		[GRDWizard sharedInstance].onTheEdgeStreak = 0;
+		[GRDCore sharedInstance].onTheEdgeStreak = 0;
 	}
-	
+    
 	//delegate.soundPlayer.pulseSuccessSoundPlayer.currentTime = 0;
 	//if (delegate.soundIsActive) [delegate.soundPlayer.pulseSuccessSoundPlayer play];
+
 	
-	
-	
-	if ([GRDWizard sharedInstance].rounds > 30) {
-		[GRDWizard sharedInstance].difficultyLevel = DifficultyLevelHard;
-	} else if ([GRDWizard sharedInstance].rounds > 10) {
-		[GRDWizard sharedInstance].difficultyLevel = DifficultyLevelMedium;
+	if ([GRDCore sharedInstance].rounds > 30) {
+		[GRDCore sharedInstance].difficultyLevel = DifficultyLevelHard;
+	} else if ([GRDCore sharedInstance].rounds > 10) {
+		[GRDCore sharedInstance].difficultyLevel = DifficultyLevelMedium;
 	}
 	
 	//if (glassLevel < 3) {
@@ -334,11 +348,11 @@
 	//if(delegate.currentStreak > delegate.highestStreak) delegate.highestStreak++;
 	
 	
-	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) {
+	if ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelEasy) {
 		if (self.maximumTimeAllowed > 300) self.maximumTimeAllowed -= 30;
-	} else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelMedium) {
+	} else if ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelMedium) {
 		if (self.maximumTimeAllowed > 280) self.maximumTimeAllowed -= 30;
-	} else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelHard) {
+	} else if ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelHard) {
 		if (self.maximumTimeAllowed > 250) self.maximumTimeAllowed -= 30;
 	}
 }
@@ -348,70 +362,71 @@
 		[self setupTimer];
 	}
 	
-	[GRDWizard sharedInstance].rounds++;
-	self.timeUntilNextPulse = 0;
-	
 	if (successful) {
 		[[GRDSoundPlayer sharedInstance].menuBlip2SoundPlayer play];
-		[GRDWizard gainPoints:self];
-		[GRDWizard sharedInstance].streak++;
-		if ([GRDWizard sharedInstance].streak % 10 == 0) [GRDWizard gainALife:self];
+		[GRDCore gainPoints:self];
+		[GRDCore sharedInstance].streak++;
+		if ([GRDCore sharedInstance].streak % 10 == 0) [GRDCore gainALife:self];
 
 		[GRDAnimator animateMatch];
 		
 		[self performSelector:@selector(pulse) withObject:nil afterDelay:0.4f];
 	} else {
-		
 		[self randomiseLesserGrid];
 		
-		[GRDWizard sharedInstance].streak = 0;
+        [GRDAnimator animateBox:self.pauseBox];
+
+		[GRDCore sharedInstance].streak = 0;
 		if (self.maximumTimeAllowed < 600) self.maximumTimeAllowed += 40;
-		[GRDWizard loseALife:self];
+		[GRDCore loseALife:self];
 		
 		[GRDAnimator animatePulse:self.transitionFader];
 	}
+    
+    [GRDCore sharedInstance].rounds++;
+    self.timeElapsed = 0;
 }
 
 - (void)randomiseLesserGrid {
-	for (GRDSquare *square in [GRDWizard sharedInstance].lesserGridSquares) {
+	for (GRDSquare *square in [GRDCore sharedInstance].lesserGridSquares) {
 		square.isActive = NO;
 	}
 	
 	int activeMax = 5;
-	if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelEasy) {
+	if ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelEasy) {
 		activeMax = 5;
-	} else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelMedium) {
+	} else if ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelMedium) {
 		activeMax = 6;
-	} else if ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelHard) {
+	} else if ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelHard) {
 		activeMax = 5;
 	}
 
 	for (int i = 0; i <= activeMax; i++) {
 		// Clear active flag
-		for (GRDSquare *square in [GRDWizard sharedInstance].lesserGridSquares) {
+		for (GRDSquare *square in [GRDCore sharedInstance].lesserGridSquares) {
 			square.isActive = NO;
 		}
 		int activeCount = 0;
 		
 		// Select random start point
-		GRDSquare *randomlyChosenSquare = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:arc4random_uniform(15)];
+		GRDSquare *randomlyChosenSquare = [[GRDCore sharedInstance].lesserGridSquares objectAtIndex:arc4random_uniform(15)];
 		if (randomlyChosenSquare) { randomlyChosenSquare.isActive = YES; }
 		activeCount++;
 		
 		// New algorithm
 		while (activeCount < activeMax) {
 			// Determine candidate squares
-			[GRDWizard sharedInstance].activationCandidates = [[NSMutableArray alloc] init];
-			for (unsigned int x = 0; x < [[GRDWizard sharedInstance].lesserGridSquares count]; x++) {
+			[GRDCore sharedInstance].activationCandidates = [[NSMutableArray alloc] init];
+			for (unsigned int x = 0; x < [[GRDCore sharedInstance].lesserGridSquares count]; x++) {
 				// If the square isn't already active...
-				GRDSquare *square = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:x];
+				GRDSquare *square = [[GRDCore sharedInstance].lesserGridSquares objectAtIndex:x];
 				if (!square.isActive) {
 					// But one of its adjacent squares is...
-					for (unsigned int y = 0; y < ([GRDWizard sharedInstance].difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares count] : [square.adjacentStraightSquares count]); y++) {
-						GRDSquare *adjacentSquare = [GRDWizard sharedInstance].difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares objectAtIndex:y] : [square.adjacentStraightSquares objectAtIndex:y];
+					for (unsigned int y = 0; y < ([GRDCore sharedInstance].difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares count] : [square.adjacentStraightSquares count]); y++) {
+						GRDSquare *adjacentSquare = [GRDCore sharedInstance].difficultyLevel == DifficultyLevelHard ? [square.adjacentAllSquares objectAtIndex:y] : [square.adjacentStraightSquares objectAtIndex:y];
 						if (adjacentSquare.isActive) {
 							// It's a candidate
-							[[GRDWizard sharedInstance].activationCandidates addObject:[NSNumber numberWithInt:x]];
+							[[GRDCore sharedInstance].activationCandidates addObject:[NSNumber numberWithInt:x]];
 					
 							break;
 						}
@@ -420,22 +435,68 @@
 			}
 			
 			// Activate a random candidate
-			unsigned int idx = arc4random_uniform([[GRDWizard sharedInstance].activationCandidates count]);
+			u_int32_t idx = arc4random_uniform((u_int32_t)[[GRDCore sharedInstance].activationCandidates count]);
 			
-			GRDSquare *square = [[GRDWizard sharedInstance].lesserGridSquares objectAtIndex:[((NSNumber *)[[GRDWizard sharedInstance].activationCandidates objectAtIndex:idx]) intValue]];
+			GRDSquare *square = [[GRDCore sharedInstance].lesserGridSquares objectAtIndex:[((NSNumber *)[[GRDCore sharedInstance].activationCandidates objectAtIndex:idx]) intValue]];
 			square.isActive = true;
 			++activeCount;
 		}
 		
 	}
 	
-	for (GRDSquare *square in [GRDWizard sharedInstance].greaterGridSquares) {
+	for (GRDSquare *square in [GRDCore sharedInstance].greaterGridSquares) {
 		square.isActive = NO;
 	}
-	[GRDWizard sharedInstance].activationCandidates = nil;
+	[GRDCore sharedInstance].activationCandidates = nil;
 	
 }
 
+#pragma mark -
+#pragma mark TUTORIAL
+#pragma mark -
+
+- (void)setIsTutorialMode:(BOOL)isTutorialMode {
+    _isTutorialMode = isTutorialMode;
+    
+    if (isTutorialMode) {
+        if (!self.tutorialTransitionView) {
+            [self tutorialSetupGui];
+        } else {
+            [self.view addSubview:self.tutorialTransitionView];
+            [self.view bringSubviewToFront:self.tutorialTransitionView];
+        }
+    } else {
+        if (self.tutorialTransitionView) {
+            [self.tutorialTransitionView removeFromSuperview];
+        }
+    }
+}
+
+- (void)tutorialSetupGui {
+    self.tutorialTransitionView = [[UIView alloc] initWithFrame:self.view.frame];
+    self.tutorialTransitionView.backgroundColor = [UIColor darkGrayColor];
+    self.tutorialTransitionView.alpha = ALPHA_LEVEL;
+    self.tutorialTransitionView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *dismissTutorialGestureRecogniser = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tutorialDismiss)];
+    
+    dismissTutorialGestureRecogniser.numberOfTapsRequired = 1;
+    
+    [self.tutorialTransitionView addGestureRecognizer:dismissTutorialGestureRecogniser];
+    
+    UILabel *tapHereText = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2, self.greaterGrid.frame.size.height / 2, self.view.frame.size.width, 60)];
+    
+    [tapHereText setText:@"TAP HERE"];
+    
+    [self.tutorialTransitionView addSubview:tapHereText];
+    
+    [self.view addSubview:self.tutorialTransitionView];
+    [self.view bringSubviewToFront:self.tutorialTransitionView];
+}
+
+- (void)tutorialDismiss {
+    self.isTutorialMode = NO;
+}
 
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28E8ED6E1BBC8110009FED2A /* GRDTutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E8ED6D1BBC8110009FED2A /* GRDTutorialView.xib */; };
+		28EBB9AA1BF24E18006B5DB0 /* GRDPrimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */; };
 		F89B68A39FF57B3CF89BBDEE /* libPods-gridder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EB863B65DEC5C08C1A35807 /* libPods-gridder.a */; };
 		FA03797A1791CA7600BF5251 /* GRDHowToPlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0379791791CA7600BF5251 /* GRDHowToPlay.m */; };
 		FA03797D1791E03F00BF5251 /* GRDCredits.m in Sources */ = {isa = PBXBuildFile; fileRef = FA03797C1791E03F00BF5251 /* GRDCredits.m */; };
@@ -17,7 +19,7 @@
 		FA07DE31180002CC0021F2F7 /* GRDGlassSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = FA07DE30180002CC0021F2F7 /* GRDGlassSquare.m */; };
 		FA07DE3418000A9A0021F2F7 /* shatter.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA07DE3218000A9A0021F2F7 /* shatter.wav */; };
 		FA07DE3518000A9A0021F2F7 /* bump.wav in Resources */ = {isa = PBXBuildFile; fileRef = FA07DE3318000A9A0021F2F7 /* bump.wav */; };
-		FA13D1DC17FAC2D90009AFE9 /* GRDWizard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA13D1DB17FAC2D90009AFE9 /* GRDWizard.m */; };
+		FA13D1DC17FAC2D90009AFE9 /* GRDCore.m in Sources */ = {isa = PBXBuildFile; fileRef = FA13D1DB17FAC2D90009AFE9 /* GRDCore.m */; };
 		FA13D1DE17FD52330009AFE9 /* menutheme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FA13D1DD17FD52330009AFE9 /* menutheme.mp3 */; };
 		FA13D1E017FD6CDE0009AFE9 /* v3_icon_score.png in Resources */ = {isa = PBXBuildFile; fileRef = FA13D1DF17FD6CDE0009AFE9 /* v3_icon_score.png */; };
 		FA13D1E217FD6CE60009AFE9 /* hammer.png in Resources */ = {isa = PBXBuildFile; fileRef = FA13D1E117FD6CE60009AFE9 /* hammer.png */; };
@@ -74,6 +76,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28E8ED6D1BBC8110009FED2A /* GRDTutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDTutorialView.xib; sourceTree = "<group>"; };
+		28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDPrimeView.xib; sourceTree = "<group>"; };
 		7EB863B65DEC5C08C1A35807 /* libPods-gridder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-gridder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECE1021212F5277F5E10819C /* Pods-gridder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gridder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-gridder/Pods-gridder.debug.xcconfig"; sourceTree = "<group>"; };
 		FA0379781791CA7500BF5251 /* GRDHowToPlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDHowToPlay.h; sourceTree = "<group>"; };
@@ -89,8 +93,8 @@
 		FA07DE30180002CC0021F2F7 /* GRDGlassSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDGlassSquare.m; sourceTree = "<group>"; };
 		FA07DE3218000A9A0021F2F7 /* shatter.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shatter.wav; sourceTree = "<group>"; };
 		FA07DE3318000A9A0021F2F7 /* bump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bump.wav; sourceTree = "<group>"; };
-		FA13D1DA17FAC2D90009AFE9 /* GRDWizard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDWizard.h; sourceTree = "<group>"; };
-		FA13D1DB17FAC2D90009AFE9 /* GRDWizard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDWizard.m; sourceTree = "<group>"; };
+		FA13D1DA17FAC2D90009AFE9 /* GRDCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDCore.h; sourceTree = "<group>"; };
+		FA13D1DB17FAC2D90009AFE9 /* GRDCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDCore.m; sourceTree = "<group>"; };
 		FA13D1DD17FD52330009AFE9 /* menutheme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = menutheme.mp3; sourceTree = "<group>"; };
 		FA13D1DF17FD6CDE0009AFE9 /* v3_icon_score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_icon_score.png; sourceTree = "<group>"; };
 		FA13D1E117FD6CE60009AFE9 /* hammer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hammer.png; sourceTree = "<group>"; };
@@ -182,6 +186,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28EBB9A71BF24DC3006B5DB0 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FA1BABBB178D857000FEC33A /* MainStoryboard.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		28EBB9A81BF24DD6006B5DB0 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */,
+				28E8ED6D1BBC8110009FED2A /* GRDTutorialView.xib */,
+				28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */,
+			);
+			name = XIBs;
+			sourceTree = "<group>";
+		};
 		7659906D45E6A3BF2A10CBBF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,8 +329,6 @@
 			children = (
 				FA5D28F419A0F0F600075314 /* GRDAppDelegate.h */,
 				FA5D28F519A0F0F600075314 /* GRDAppDelegate.m */,
-				FA1BABBB178D857000FEC33A /* MainStoryboard.storyboard */,
-				FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */,
 				FA1BABA0178D856F00FEC33A /* Gridder.app */,
 			);
 			name = Application;
@@ -329,8 +349,8 @@
 			children = (
 				FA93E8271AD2A67C008F5806 /* GRDAnimator.h */,
 				FA93E8281AD2A67C008F5806 /* GRDAnimator.m */,
-				FA13D1DA17FAC2D90009AFE9 /* GRDWizard.h */,
-				FA13D1DB17FAC2D90009AFE9 /* GRDWizard.m */,
+				FA13D1DA17FAC2D90009AFE9 /* GRDCore.h */,
+				FA13D1DB17FAC2D90009AFE9 /* GRDCore.m */,
 				FA7D5AD21801141C004011D4 /* GRDSoundPlayer.h */,
 				FA7D5AD31801141C004011D4 /* GRDSoundPlayer.m */,
 				FA7D5AD7180509B6004011D4 /* AppSpecificValues.h */,
@@ -365,6 +385,8 @@
 		FA1EF90818F2FB20007B8E72 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				28EBB9A71BF24DC3006B5DB0 /* Storyboards */,
+				28EBB9A81BF24DD6006B5DB0 /* XIBs */,
 				FA1BABF017909F5500FEC33A /* Audio */,
 				FA1BABA2178D856F00FEC33A /* Frameworks */,
 				FA1BABEF17909F2000FEC33A /* Graphics */,
@@ -486,11 +508,13 @@
 				FA1BAC231791ADB300FEC33A /* press.wav in Resources */,
 				FA1BAC241791ADB300FEC33A /* pulse.wav in Resources */,
 				FADB43A21ABDC63E003E8C88 /* GRDSquare.xib in Resources */,
+				28EBB9AA1BF24E18006B5DB0 /* GRDPrimeView.xib in Resources */,
 				FA1BAC2D1791AE2A00FEC33A /* pause.png in Resources */,
 				FA93E8191AC49FC2008F5806 /* Podfile in Resources */,
 				FA1BAC2E1791AE2A00FEC33A /* play.png in Resources */,
 				FA93E82E1AD2ED63008F5806 /* v3_particle.png in Resources */,
 				FA13D1DE17FD52330009AFE9 /* menutheme.mp3 in Resources */,
+				28E8ED6E1BBC8110009FED2A /* GRDTutorialView.xib in Resources */,
 				FAF687041ABDDFED00915381 /* Images.xcassets in Resources */,
 				FA13D1E017FD6CDE0009AFE9 /* v3_icon_score.png in Resources */,
 				FA13D1E217FD6CE60009AFE9 /* hammer.png in Resources */,
@@ -561,7 +585,7 @@
 				FA03797D1791E03F00BF5251 /* GRDCredits.m in Sources */,
 				FA93E82C1AD2EBA0008F5806 /* GRDParticleEmitter.m in Sources */,
 				FA0379801791E19400BF5251 /* GRDHighScores.m in Sources */,
-				FA13D1DC17FAC2D90009AFE9 /* GRDWizard.m in Sources */,
+				FA13D1DC17FAC2D90009AFE9 /* GRDCore.m in Sources */,
 				FA07DE31180002CC0021F2F7 /* GRDGlassSquare.m in Sources */,
 				FA93E80C1ABEEA8C008F5806 /* GRDPrimeViewController.m in Sources */,
 				FA7D5AD41801141C004011D4 /* GRDSoundPlayer.m in Sources */,

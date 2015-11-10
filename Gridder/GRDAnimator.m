@@ -7,26 +7,39 @@
 //
 
 #import "GRDAnimator.h"
-#import "GRDWizard.h"
+#import "GRDCore.h"
 #import "GRDSquare.h"
 
 @implementation GRDAnimator
 
++ (void)animateBox:(UIView *)boxToWiggle {
+    [UIView animateWithDuration:0.2f animations:^{
+        boxToWiggle.transform = CGAffineTransformMakeRotation(-270);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2f animations:^{
+            boxToWiggle.transform = CGAffineTransformMakeRotation(270);
+        } completion:^(BOOL finished) {
+            boxToWiggle.transform = CGAffineTransformMakeRotation(0);
+            
+        }];
+    }];
+}
+
 + (void)animateMatch {
-	for (GRDSquare *greaterSquare in [GRDWizard sharedInstance].greaterGridSquares) {
+	for (GRDSquare *greaterSquare in [GRDCore sharedInstance].greaterGridSquares) {
 		if (greaterSquare.isActive) {
 			[UIView animateWithDuration:0.2
 								  delay:0.0
 								options:UIViewAnimationOptionCurveEaseIn
 							 animations:^{
-								 greaterSquare.backgroundColor = [GRDWizard sharedInstance].gridTransitionColour;
+								 greaterSquare.backgroundColor = [GRDCore sharedInstance].gridTransitionColour;
 							 }
 							 completion:^(BOOL finished){
 								 [UIView animateWithDuration:0.2
 													   delay:0.0
 													 options: UIViewAnimationOptionCurveEaseIn
 												  animations:^{
-													  greaterSquare.backgroundColor = [GRDWizard sharedInstance].gridColour;
+													  greaterSquare.backgroundColor = [GRDCore sharedInstance].gridColour;
 												  }
 												  completion:^(BOOL finished) {
 													  
@@ -53,20 +66,20 @@
 		}
 	}
 	
-	for (GRDSquare *lesserSquare in [GRDWizard sharedInstance].lesserGridSquares) {
+	for (GRDSquare *lesserSquare in [GRDCore sharedInstance].lesserGridSquares) {
 		if (lesserSquare.isActive) {
 			[UIView animateWithDuration:0.2
 								  delay:0.0
 								options: UIViewAnimationOptionCurveEaseIn
 							 animations:^{
-								 lesserSquare.backgroundColor = [GRDWizard sharedInstance].gridTransitionColour;
+								 lesserSquare.backgroundColor = [GRDCore sharedInstance].gridTransitionColour;
 							 }
 							 completion:^(BOOL finished) {
 								 [UIView animateWithDuration:0.2
 													   delay:0.0
 													 options: UIViewAnimationOptionCurveEaseIn
 												  animations:^{
-													  lesserSquare.backgroundColor = [GRDWizard sharedInstance].gridColour;
+													  lesserSquare.backgroundColor = [GRDCore sharedInstance].gridColour;
 												  }
 												  completion:^(BOOL finished) {
 												  }];

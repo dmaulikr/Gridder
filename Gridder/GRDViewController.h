@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GRDSquare.h"
 #import "GRDAppDelegate.h"
-#import "GRDWizard.h"
+#import "GRDCore.h"
 #import "GRDGlassSquare.h"
 
 @class GRDAppDelegate;

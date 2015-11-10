@@ -24,7 +24,7 @@ typedef enum : int {
 
 @class GRDPrimeViewController;
 
-@interface GRDWizard : NSObject
+@interface GRDCore : NSObject
 
 @property (weak, nonatomic) id<GRDWizardProtocol> delegate;
 
@@ -35,7 +35,7 @@ typedef enum : int {
 @property (nonatomic, strong) UIColor *gridColour;
 @property (nonatomic, strong) UIColor *gridTransitionColour;
 
-@property (nonatomic) int score;
+@property (nonatomic) long score;
 @property (nonatomic) int rounds;
 @property (nonatomic) int lives;
 @property (nonatomic) int streak;
@@ -46,7 +46,7 @@ typedef enum : int {
 - (void)startNewGame;
 
 // Static methods
-+ (GRDWizard *)sharedInstance;
++ (GRDCore *)sharedInstance;
 + (void)gainPoints:(GRDPrimeViewController *)vc;
 + (void)loseALife:(GRDPrimeViewController *)vc;
 + (void)gainALife:(GRDPrimeViewController *)vc;
@@ -54,14 +54,5 @@ typedef enum : int {
 + (GRDSquare *)squareForPosition:(NSInteger)pos fromGrid:(NSMutableArray *)grid;
 + (void)populateAdjacentAllSquares:(NSMutableArray *)squares;
 + (void)populateStraightAdjacentSquares:(NSMutableArray *)squares;
-
-/*
-+ (void)gainALife:(GRDViewController *)grdVC;
-+ (void)loseALife:(GRDViewController *)grdVC;
-+ (void)gainStreak:(GRDViewController *)grdVC;
-+ (void)gainPoints:(GRDViewController *)grdVC;
-+ (void)gainTime:(GRDSquare *)square withGrdVC:(GRDViewController *)grdVC;
-+ (void)styleButtonAsASquare:(UIButton *)button;*/
-
 
 @end

@@ -11,6 +11,7 @@
 
 @interface GRDAnimator : NSObject
 
++ (void)animateBox:(UIView *)boxToWiggle;
 + (void)animateMatch;
 + (void)animatePulse:(UIView *)transitionFader;
 + (void)animatePointsGained:(GRDPrimeViewController *)vc;
