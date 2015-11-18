@@ -29,14 +29,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
     
-    NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"GRDPrimeView"
-                                                      owner:self
-                                                    options:nil];
+    [self setupNibs];
     
-    self.primeView = [nibViews objectAtIndex:0];
-        
-    self.view = self.primeView;
-
    // self.primeView.primeFooterView footerView.backgroundColor = self.view.backgroundColor;
 	self.primeView.primeLesserGrid.backgroundColor = [UIColor clearColor];
 	self.primeView.primeGreaterGrid.backgroundColor = [UIColor clearColor];
@@ -88,6 +82,21 @@
 #pragma mark GUI
 #pragma mark -
 
+- (void)setupNibs {
+    NSArray *primeViewNibArray = [[NSBundle mainBundle] loadNibNamed:@"GRDPrimeView"
+                                                      owner:self
+                                                    options:nil];
+    
+    self.primeView = [primeViewNibArray objectAtIndex:0];
+    self.view = self.primeView;
+    
+    NSArray *lifeBoxNibArray = [[NSBundle mainBundle] loadNibNamed:@"GRDLifeBox"
+                                                               owner:self
+                                                             options:nil];
+    
+    self.primeView.primeLifeBox = [lifeBoxNibArray objectAtIndex:0];
+}
+
 - (void)drawGUI {
 	[self generateGrids];
 	self.transitionFader = [[UIView alloc] initWithFrame:self.view.frame];
@@ -123,11 +132,9 @@
 	[self randomiseLesserGrid];
     
     self.primeView.primeScoreBox.backgroundColor = [GRDCore sharedInstance].gridColour;
-    self.primeView.primeLifeBox.backgroundColor = [GRDCore sharedInstance].gridColour;
     
     
     self.primeView.primePauseBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
-    self.primeView.primeLifeBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
     self.primeView.primeScoreBox.backgroundColor = [[GRDCore sharedInstance].gridColour colorWithAlphaComponent:ALPHA_LEVEL];
 	
 	//[self.livesLabel setText:[NSString stringWithFormat:@"%d", [GRDCore sharedInstance].lives]];

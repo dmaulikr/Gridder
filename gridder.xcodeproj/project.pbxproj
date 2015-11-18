@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2832D37C1BF27B7E007E235A /* GRDLifeBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2832D37B1BF27B7E007E235A /* GRDLifeBox.xib */; };
+		2832D37E1BF27B8B007E235A /* GRDScoreBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2832D37D1BF27B8B007E235A /* GRDScoreBox.xib */; };
+		2832D3801BF27BB4007E235A /* GRDTimeBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2832D37F1BF27BB4007E235A /* GRDTimeBox.xib */; };
+		2832D3861BF27BFD007E235A /* GRDFunctionBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 2832D3851BF27BFD007E235A /* GRDFunctionBox.m */; };
 		28E8ED6E1BBC8110009FED2A /* GRDTutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E8ED6D1BBC8110009FED2A /* GRDTutorialView.xib */; };
 		28EBB9AA1BF24E18006B5DB0 /* GRDPrimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */; };
 		28EBB9AD1BF24ECF006B5DB0 /* GRDPrimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBB9AC1BF24ECF006B5DB0 /* GRDPrimeView.m */; };
@@ -77,6 +81,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2832D37B1BF27B7E007E235A /* GRDLifeBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDLifeBox.xib; sourceTree = "<group>"; };
+		2832D37D1BF27B8B007E235A /* GRDScoreBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDScoreBox.xib; sourceTree = "<group>"; };
+		2832D37F1BF27BB4007E235A /* GRDTimeBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDTimeBox.xib; sourceTree = "<group>"; };
+		2832D3841BF27BFD007E235A /* GRDFunctionBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDFunctionBox.h; sourceTree = "<group>"; };
+		2832D3851BF27BFD007E235A /* GRDFunctionBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRDFunctionBox.m; sourceTree = "<group>"; };
 		28E8ED6D1BBC8110009FED2A /* GRDTutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDTutorialView.xib; sourceTree = "<group>"; };
 		28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRDPrimeView.xib; sourceTree = "<group>"; };
 		28EBB9AB1BF24ECF006B5DB0 /* GRDPrimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRDPrimeView.h; sourceTree = "<group>"; };
@@ -200,9 +209,12 @@
 		28EBB9A81BF24DD6006B5DB0 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */,
 				FADB43A11ABDC63E003E8C88 /* GRDSquare.xib */,
 				28E8ED6D1BBC8110009FED2A /* GRDTutorialView.xib */,
-				28EBB9A91BF24E18006B5DB0 /* GRDPrimeView.xib */,
+				2832D37B1BF27B7E007E235A /* GRDLifeBox.xib */,
+				2832D37D1BF27B8B007E235A /* GRDScoreBox.xib */,
+				2832D37F1BF27BB4007E235A /* GRDTimeBox.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -374,6 +386,8 @@
 				FA93E82B1AD2EBA0008F5806 /* GRDParticleEmitter.m */,
 				28EBB9AB1BF24ECF006B5DB0 /* GRDPrimeView.h */,
 				28EBB9AC1BF24ECF006B5DB0 /* GRDPrimeView.m */,
+				2832D3841BF27BFD007E235A /* GRDFunctionBox.h */,
+				2832D3851BF27BFD007E235A /* GRDFunctionBox.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -506,6 +520,7 @@
 				FA1BAC14179165FE00FEC33A /* gameover.wav in Resources */,
 				FA1BAC161791660400FEC33A /* clocknoise.wav in Resources */,
 				FA93E81C1ACF37E8008F5806 /* pop.wav in Resources */,
+				2832D3801BF27BB4007E235A /* GRDTimeBox.xib in Resources */,
 				FA1BAC181791694600FEC33A /* menubeep2.wav in Resources */,
 				FA1BAC1A17916ADE00FEC33A /* inverseMode.png in Resources */,
 				FA1BAC211791ADB300FEC33A /* negativebeep.wav in Resources */,
@@ -523,8 +538,10 @@
 				FAF687041ABDDFED00915381 /* Images.xcassets in Resources */,
 				FA13D1E017FD6CDE0009AFE9 /* v3_icon_score.png in Resources */,
 				FA13D1E217FD6CE60009AFE9 /* hammer.png in Resources */,
+				2832D37E1BF27B8B007E235A /* GRDScoreBox.xib in Resources */,
 				FA13D1E417FD93BE0009AFE9 /* race-flag.png in Resources */,
 				FA07DE2417FE5C100021F2F7 /* arrow-big-01.png in Resources */,
+				2832D37C1BF27B7E007E235A /* GRDLifeBox.xib in Resources */,
 				FA07DE2617FEB1EC0021F2F7 /* rank.png in Resources */,
 				FA07DE2817FFAD000021F2F7 /* speaker-off.png in Resources */,
 				FA07DE3418000A9A0021F2F7 /* shatter.wav in Resources */,
@@ -584,6 +601,7 @@
 				FA1BABC0178D857000FEC33A /* GRDViewController.m in Sources */,
 				FA93E8291AD2A67C008F5806 /* GRDAnimator.m in Sources */,
 				FA1BABCA178DE20900FEC33A /* GRDSquare.m in Sources */,
+				2832D3861BF27BFD007E235A /* GRDFunctionBox.m in Sources */,
 				FA1BABE11790478B00FEC33A /* GRDMenu.m in Sources */,
 				FA1BABE817905F2200FEC33A /* GRDGameOverScreen.m in Sources */,
 				FA03797A1791CA7600BF5251 /* GRDHowToPlay.m in Sources */,

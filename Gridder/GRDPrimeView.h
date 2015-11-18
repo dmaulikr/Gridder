@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GRDParticleEmitter.h"
+#import "GRDFunctionBox.h"
 
 @interface GRDPrimeView : UIView
 
@@ -16,9 +17,9 @@
 @property (strong, nonatomic) IBOutlet UIView *primeLesserGrid;
 @property (strong, nonatomic) IBOutlet UIView *primeFooterView;
 @property (strong, nonatomic) IBOutlet UIView *primeTempView;
-@property (strong, nonatomic) IBOutlet UIView *primeLifeBox;
-@property (strong, nonatomic) IBOutlet UIView *primeScoreBox;
-@property (strong, nonatomic) IBOutlet UIView *primePauseBox;
+@property (strong, nonatomic) IBOutlet GRDFunctionBox *primeLifeBox;
+@property (strong, nonatomic) IBOutlet GRDFunctionBox *primeScoreBox;
+@property (strong, nonatomic) IBOutlet GRDFunctionBox *primePauseBox;
 @property (strong, nonatomic) IBOutlet UIImageView *primeLifeBoxIcon;
 @property (strong, nonatomic) IBOutlet UIImageView *primeScoreBoxIcon;
 @property (strong, nonatomic) IBOutlet UIImageView *primePauseBoxIcon;

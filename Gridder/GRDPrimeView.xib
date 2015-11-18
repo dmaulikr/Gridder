@@ -31,13 +31,8 @@
                         <constraint firstAttribute="width" constant="128" id="kfR-mw-kwH"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z4m-am-Vvl" userLabel="LIFEBOX">
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z4m-am-Vvl" userLabel="LIFEBOX" customClass="GRDFunctionBox">
                     <rect key="frame" x="10" y="377" width="59" height="62"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="v3_icon_lives.png" translatesAutoresizingMaskIntoConstraints="NO" id="gvO-LU-nhZ">
-                            <rect key="frame" x="14" y="15" width="31" height="31"/>
-                        </imageView>
-                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGV-rO-VCF" userLabel="SCOREBOX">
@@ -89,7 +84,6 @@
                 <outlet property="primeGreaterGrid" destination="zc3-qY-gbU" id="SOW-8b-gSb"/>
                 <outlet property="primeLesserGrid" destination="zp0-WT-4eF" id="3VD-eQ-vlF"/>
                 <outlet property="primeLifeBox" destination="z4m-am-Vvl" id="Tiy-de-rEV"/>
-                <outlet property="primeLifeBoxIcon" destination="gvO-LU-nhZ" id="7rQ-Je-dfV"/>
                 <outlet property="primePauseBox" destination="in2-6m-DVL" id="VKO-TS-bKS"/>
                 <outlet property="primePauseBoxIcon" destination="Dlh-Xy-DV1" id="24X-T7-qt2"/>
                 <outlet property="primeScoreBox" destination="rGV-rO-VCF" id="gh1-EY-i67"/>
@@ -100,6 +94,5 @@
     </objects>
     <resources>
         <image name="clock" width="29" height="30"/>
-        <image name="v3_icon_lives.png" width="256" height="256"/>
     </resources>
 </document>
